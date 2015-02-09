@@ -75,7 +75,7 @@
                     <div class="input_line">
                         <div class="input_container full">
                             <label for="exemplo">Exemplo de Resposta</label>
-                            <input name="Pergunta-exemplo" type="text" id="exemplo" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('exemplo').'"' : ''?>>
+                            <input name="Pergunta-exemplo" type="text" id="exemplo"<?=$status == "UPDATING" ? ' value="'.$obj->get('exemplo').'"' : ''?>>
                         </div>
                     </div>
 
