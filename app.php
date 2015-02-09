@@ -13,7 +13,7 @@
     include_once("model/GenericClass.php");
     include_once("model/Blacklist.php");
     include_once("model/Request.php");
-    include_once("model/Usuario.php");
+    // include_once("model/Usuario.php");
     
     include_once("dao/GenericDAO.php");
     include_once("dao/BlacklistDAO.php");

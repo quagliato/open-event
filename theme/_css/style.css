@@ -46,9 +46,26 @@ a:hover{ text-decoration: underline; }
 /******************************************************************************/
 /* INPUTS */
 .input_line { display: block; height: auto; margin: 0 0 10px 0; overflow: hidden; position: relative; width: 100%; }
+.input_line.edital { margin-bottom: 30px; }
 
-.input_container { display: inline-block; float: left; height: auto; padding: 0 10px 0 0; position: relative; text-align: left;}
-.input_container.last { padding: 0; }
+.input_container.edital label{
+    color: #000000;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.input_container.edital input,
+.input_container.edital select,
+.input_container.edital textarea{
+    border: none;
+    border-left: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+    margin-top: 10px;
+}
+
+.input_container { display: inline-block; float: left; height: auto; margin: 0 10px 0 0; position: relative; text-align: left;}
+.input_container.last { margin: 0; }
 .input_container.button { display: inline-block; line-height: 53px; }
 .input_container.button button { vertical-align: bottom; }
 .input_container input[type=text],
@@ -64,17 +81,19 @@ a:hover{ text-decoration: underline; }
 .input_container input,
 .input_container select,
 .input_container textarea{
+    border: 1px solid #CCCCCC;
     color: #000000;
     font-size: 14px;
     height: 34px;
-    max-width: 500px;
     outline: none;
     padding: 0px 5px;
     vertical-align: middle;
     width: 100%;
 }
 
-.input_container textarea{ height: 120px; }
+.input_container textarea.s{ height: 60px; }
+.input_container textarea.m{ height: 120px; }
+.input_container textarea.l{ height: 180px; }
 
 .input_container input[type="checkbox"],
 .input_container input[type="radio"]{
@@ -90,18 +109,50 @@ a:hover{ text-decoration: underline; }
     width: 100%;
 }
 
+.input_container ul.checkbox {
+    margin-top: 5px;
+}
+
+.input_container ul.checkbox li{
+    line-height: 18px;
+    list-style: none;
+    margin: 2px 0px;
+    padding: 0px;
+    vertical-align: middle;
+    width: 100%;
+}
+.input_container ul.checkbox li input[type="checkbox"]{
+    height: 20px;
+    vertical-align: middle;
+}
+
+.input_container ul.checkbox li label{
+    color: #000000;
+    font-size: 14px;
+    font-style: normal;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.input_container #slider{
+    margin: 10px;
+}
+
 .submit_line { margin-top: 25px; }
 
-.full       { width: 100.0%; }
-.half       { width:  50.0%; }
-.third      { width:  33.0%; }
-.third.last { width:  34.0%; }
-.fourth     { width:  25.0%; }
-.fifth      { width:  20.0%; }
-.sixth      { width:  16.6%; }
-.sixth.last { width:  17.0%; }
-.eighth     { width:  12.5%; }
-.tenth      { width:  10.0%; }
+.full          { width: 100.0%; }
+.half          { width:  49.0%; }
+.third         { width:  32.0%; }
+.third.last    { width:  33.0%; }
+.fourth        { width:  24.0%; }
+.fifth         { width:  20.0%; }
+.sixth         { width:  16.6%; }
+.sixth.last    { width:  17.0%; }
+.eighth        { width:  12.5%; }
+.tenth         { width:  10.0%; }
+
+.two-thirds    { width:  66.0%; }
+.three-fourths { width:  73.0%; }
 
 /******************************************************************************/
 /* LOGIN */
@@ -119,7 +170,7 @@ form.login{
 
 .menu_block .fa{
     color: #81DB2C;
-    font-size: 40px;
+    font-size: 25px;
 }
 
 /******************************************************************************/
@@ -164,12 +215,22 @@ main h6{
 }
 
 /******************************************************************************/
+/* CUSTOM HEADINGS */
+
+main h1{
+    color: #17365D;
+    font-size: 32px;
+    margin: 30px 0 10px 0;
+}
+
+/******************************************************************************/
 /* BUTTONS */
 
-input[type=submit].negative,
-button.negative { background-color: #FE938F; color: #000000 !important;}
-input[type=submit].positive,
-button.positive { background-color: #98F678; color: #000000 !important;}
+.negative { background-color: #FE938F !important; color: #000000 !important; }
+.positive { background-color: #98F678 !important; color: #000000 !important; }
+
+.f-negative { color: #FE938F !important; }
+.f-positive { color: #98F678 !important; }
 
 input[type=submit]{
     background-color: #2B243C;
@@ -203,16 +264,18 @@ button.submit{
 
 a.submit,
 a.submit:visited,
-a.submit:hover,{
+a.submit:hover{
     background-color: #2B243C;
     border: none;
     border-radius: 2px 2px;
     color: #FFFFFF;
+    display: inline-block;
     font-weight: bold;
     height: 40px;
     line-height: 40px;
     padding: 0 10px;
     text-align: center;
+    text-decoration: none;
     text-transform: uppercase;
     vertical-align: middle;
     width: auto;
@@ -375,6 +438,12 @@ header #topbanner{
     z-index: 9999;
 }
 
+.notification a,
+.notification a:hover,
+.notification a:visited{
+    color: inherit;
+}
+
 .error {
     background-color: #FE938F;
     border-color: #FF0000;
@@ -452,5 +521,35 @@ header #topbanner{
 #lightbox #content{
     height: 100%;
     padding: 10px;
+    width: 100%;
+}
+
+/******************************************************************************/
+/* Edital */
+#edital_info{
+    color: #333333;
+    display: block;
+    height: auto;
+    margin: 0 auto;
+    min-height: 80px;
+    width: 634px; /* TODO: Corrigir essa implementação. */
+}
+
+#edital_info .metric_info{
+    margin: 20px 0 0 0;
+}
+
+ul#edital_list{
+    margin-top: 10px;
+}
+
+ul#edital_list li{
+    border-bottom: 1px solid #CCCCCC;
+    display: block;
+    font-size: 18px;
+    height: 50px;
+    line-height: 50px;
+    text-transform: uppercase;
+    vertical-align: middle;
     width: 100%;
 }

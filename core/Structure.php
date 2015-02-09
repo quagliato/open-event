@@ -21,18 +21,37 @@ class Structure {
         return "<a href=\"".APP_URL."/dashboard\">$text</a>";
     }
 
-    public static function verifySession() {
+    public static function verifySession($where2go = false, $values = false, $verbose = true) {
         if (!isset($_SESSION)) {
             session_start();
         }
 
         if (!isset($_SESSION['user_id'])) {
-            Structure::redirWithMessage("Usuario nao logado.", '/'); //TODO: Adicionar acento
+            if ($where2go) {
+                $where2goAux = $where2go."?";
+                if ($values) {
+                    foreach($_GET as $key => $value) {
+                        $where2goAux .= "$key=$value";
+                    }
+                }
+                
+                $_SESSION['OPENEVENT_goto'] = $where2goAux;
+            }
+            if ($verbose) {
+                Structure::redirWithMessage("Não se esqueça de fazer login ou se cadastrar.", '/');
+            } else {
+                Structure::redir('/');
+            }
         } else {
             $usuario_dao = new UsuarioDAO;
             $usuario = $usuario_dao->getUserById($_SESSION['user_id']);
             if (!$usuario) {
-                Structure::redirWithMessage("Usuario nao encontrado no sistema.","/"); //TODO: Adicionar acento
+                
+                if ($verbose) {
+                    Structure::redirWithMessage("Você não foi encontrado no sistema.","/");
+                } else {
+                    Structure::redir('/');
+                }
             } else {
                 return $usuario;
             }
@@ -46,7 +65,7 @@ class Structure {
             return $usuario;
         }
 
-        Structure::redirWithMessage("Area restrita.", "/"); //TODO: Adicionar acento
+        Structure::redirWithMessage("Área restrita.", "/");
     }
 
 

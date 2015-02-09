@@ -23,10 +23,17 @@
             $usuario->set('dt_ultimo_login', $strdate);
             $usuario_dao->updateWithFields($usuario, array('dt_ultimo_login'), ("id = ".$usuario->get('id')));
 
-            $return[] = array(
-                'Action' => 'Redir',
-                'Redir' => '/dashboard'
-            );
+            if (array_key_exists("OPENEVENT_goto", $_SESSION) && isset($_SESSION["OPENEVENT_goto"]) && !is_null($_SESSION["OPENEVENT_goto"])) {
+                $return[] = array(
+                    'Action' => 'Redir',
+                    'Redir' => $_SESSION["OPENEVENT_goto"]
+                );
+            } else {
+                $return[] = array(
+                    'Action' => 'Redir',
+                    'Redir' => '/dashboard'
+                );
+            }
 
         } else {
             $return[] = array(

@@ -8,6 +8,7 @@
 function setEvents() {
     setSubmitEvents();
     setNotificationEvents();
+    setClickEvents();
  }
 
 /*
@@ -88,7 +89,7 @@ function setNotificationEvents() {
         closeLightbox();
     });
 
-    $('input[type=submit].cancel').bind('click', function(event) {
+    $('.cancel').bind('click', function(event) {
         event.preventDefault();
         history.back();
     });

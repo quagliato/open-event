@@ -29,10 +29,10 @@
     define('MAX_FILESIZE', '50MB');
 
     // DB Settings
-    define('DB_HOST', '');
-    define('DB_USER', '');
-    define('DB_PASS', '');
-    define('DB_NAME', '');
+    define('DB_HOST', 'localhost');
+    define('DB_USER', 'root');
+    define('DB_PASS', '9U4gl14t03');
+    define('DB_NAME', 'open-event');
 
     // Default SQL log filename (with path, if you want).
     // ALL SQL activity is logged.

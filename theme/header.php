@@ -16,13 +16,16 @@
 
         <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/_css/reset.css" />
         <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/_css/style.css" />
-        <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/_libs/jquery-ui/jquery-ui-1.10.3.custom.min.css" />
 
         <!-- Third-party libs -->
         <script type="text/javascript" src="<?=APP_URL?>/theme/_libs/jquery-2.0.3.min.js"></script>
         <script type="text/javascript" src="<?=APP_URL?>/theme/_libs/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/_libs/jquery-ui/jquery-ui-1.10.3.custom.min.css" />
         <script type="text/javascript" src="<?=APP_URL?>/theme/_libs/jquery.easing-1.3.min.js"></script>
         <script type="text/javascript" src="<?=APP_URL?>/theme/_libs/jquery.mask.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/_libs/font-awesome-4.3.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/_libs/datetimepicker/jquery.datetimepicker.css" />
+        <script type="text/javascript" src="<?=APP_URL?>/theme/_libs/datetimepicker/jquery.datetimepicker.js"></script>
         <!-- /Third-party libs -->
 
         <script>
