@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="input_line submit_line right">
-                        <input type="submit" name="cancelar" value="Cancelar" href="<?=APP_URL?>" class="cancel negative">
+                        <a href="#" class="submit negative cancel">Cancelar</a>
                         <input type="submit" name="cadastrar" value="Cadastrar" class="positive">
                     </div>
                 </form>
