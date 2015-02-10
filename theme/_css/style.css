@@ -18,8 +18,8 @@ ul li{
     list-style: none;
 }
 
-a, a:visited{ color: #00AFEF; text-decoration: none; }
-a:hover{ text-decoration: underline; }
+a, a:visited{ color: #98F678; text-decoration: none; }
+a:hover{ text-decoration: none; }
 
 .wrapper{
     margin: 0 auto;
@@ -42,6 +42,11 @@ a:hover{ text-decoration: underline; }
 .red { background-color: #D6233B !important; }
 .lightred { background-color: #FE938F !important; }
 .lightgreen { background-color: #98F678 !important; }
+
+.thin { font-weight: 100; }
+.light { font-weight: 300; }
+.regular { font-weight: 400; }
+.bold { font-weight: 700; }
 
 /******************************************************************************/
 /* INPUTS */
@@ -85,10 +90,15 @@ a:hover{ text-decoration: underline; }
     color: #000000;
     font-size: 14px;
     height: 34px;
-    outline: none;
     padding: 0px 5px;
     vertical-align: middle;
     width: 100%;
+}
+
+.input_container input:focus,
+.input_container select:focus,
+.input_container textarea:focus{
+    outline: 1px solid #333333;
 }
 
 .input_container textarea.s{ height: 60px; }
@@ -215,59 +225,22 @@ main h6{
 }
 
 /******************************************************************************/
-/* CUSTOM HEADINGS */
-
-main h1{
-    color: #17365D;
-    font-size: 32px;
-    margin: 30px 0 10px 0;
-}
-
-/******************************************************************************/
 /* BUTTONS */
 
 .negative { background-color: #FE938F !important; color: #000000 !important; }
-.positive { background-color: #98F678 !important; color: #000000 !important; }
+/*.positive { background-color: #98F678 !important; color: #000000 !important; }*/
 
 .f-negative { color: #FE938F !important; }
-.f-positive { color: #98F678 !important; }
+.f-positive { color: #00E7EB !important; }
 
-input[type=submit]{
-    background-color: #2B243C;
-    border: none;
-    border-radius: 2px 2px;
-    color: #FFFFFF;
-    font-weight: bold;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 10px;
-    text-align: center;
-    text-transform: uppercase;
-    vertical-align: middle;
-    width: auto;
-}
-
-button.submit{
-    background-color: #2B243C;
-    border: none;
-    border-radius: 2px 2px;
-    color: #FFFFFF;
-    font-weight: bold;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 10px;
-    text-align: center;
-    text-transform: uppercase;
-    vertical-align: middle;
-    width: auto;
-}
-
+input[type=submit],
+button.submit,
 a.submit,
 a.submit:visited,
 a.submit:hover{
     background-color: #2B243C;
     border: none;
-    border-radius: 2px 2px;
+    border-radius: 2px;
     color: #FFFFFF;
     display: inline-block;
     font-weight: bold;
@@ -275,7 +248,6 @@ a.submit:hover{
     line-height: 40px;
     padding: 0 10px;
     text-align: center;
-    text-decoration: none;
     text-transform: uppercase;
     vertical-align: middle;
     width: auto;
@@ -284,7 +256,7 @@ a.submit:hover{
 button{
     background-color: #888888;
     border: none;
-    border-radius: 2px 2px;
+    border-radius: 25px;
     color: #FFFFFF;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
@@ -373,8 +345,8 @@ footer{
 /* HEADER */
 header #topline{
     background-color: #17365D;
-    border-bottom: 3px solid #81DB2C;
-    color: #ffffff;
+    border-bottom: 3px solid #98F678;
+    color: #FFFFFF;
     font-size: 16px;
     overflow: hidden;
     vertical-align: middle;
@@ -388,16 +360,16 @@ header #topline .side{
 }
 
 header #topline h1{
-    color: #ffffff;
-    font-size: 32px;
-    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 40px;
+    font-weight: 300;
     text-decoration: none;
 }
 
 header #topline h1 a,
 header #topline h1 a:hover,
 header #topline h1 a:visited {
-    color:inherit;
+    color: #FFFFFF !important;
     text-decoration: none;
 }
 
@@ -406,13 +378,14 @@ header #topline #info{
 }
 
 header #topline #info a{
-    color: #ffffff;
-    font-size: 10px;
-    text-decoration: underline;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 300;
+    text-decoration: none;
 }
 
 header #topbanner{
-    background-color: #cccccc;
+    background-color: #CCCCCC;
     color: #000000;
     height: 150px;
     line-height: 150px;
@@ -545,11 +518,85 @@ ul#edital_list{
 
 ul#edital_list li{
     border-bottom: 1px solid #CCCCCC;
+    color: #333333;
     display: block;
-    font-size: 18px;
-    height: 50px;
-    line-height: 50px;
-    text-transform: uppercase;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
     vertical-align: middle;
     width: 100%;
 }
+
+/******************************************************************************/
+/* CUSTOM */
+
+/*a, a:visited{ color: #00E7EB !important; }
+
+.input_container input:focus,
+.input_container select:focus,
+.input_container textarea:focus{
+    outline: 1px solid #00E7EB !important;
+}
+
+header #topline{
+    border-bottom: 3px solid #00E7EB !important;
+}
+
+main h1, h2, h3, h4, h5, h6{ font: "Exo", sans-serif !important; font-family: "Exo", sans-serif !important; }
+
+main h1{
+    color: #17365D;
+    font-size: 32px;
+    margin: 30px 0 10px 0;
+}
+
+.positive { background-color: #00E7EB !important; color: #000000 !important; }
+
+input[type=submit],
+button.submit,
+a.submit,
+a.submit:visited,
+a.submit:hover{
+    border-radius: 25px !important;
+    color: #FFFFFF !important;
+    font: "Exo", sans-serif !important;
+    font-family: "Exo", sans-serif !important;
+    padding: 2px 20px !important;
+}
+
+header .logo{
+    height: 87px !important;
+}
+
+#edital_info{
+    color: #656D75 !important;
+}
+
+ul#edital_list li{
+    border-bottom: 1px solid #AAB5Bf !important;
+    color: #656D75 !important;
+    font-size: 18px;
+    height: 60px;
+    line-height: 55px;
+    text-transform: uppercase !important;
+}
+
+ul#edital_list li a{
+    background-color: #00E7EB;
+    border: none;
+    border-radius: 25px;
+    color: #FFFFFF !important;
+    display: inline-block;
+    font: "Exo", sans-serif !important;
+    font-family: "Exo", sans-serif !important;
+    font-size: 14px;
+    font-weight: 600;
+    height: 40px;
+    line-height: 40px;
+    padding: 2px 20px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    width: auto;
+}*/

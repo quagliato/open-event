@@ -10,7 +10,7 @@
 </div>
 
 <div class="menu_block third fleft">
-    <h2><i class="fa fa-question"></i> Perguntas</h2>
+    <h2><!--i class="fa fa-question"></i--> Perguntas</h2>
     <ul>
         <li><a href="<?=APP_URL?>/admin/pergunta">Cadastrar</a></li>
         <li><a href="<?=APP_URL?>/admin/pergunta/action/list">Listar</a></li>
@@ -19,7 +19,7 @@
 </div>
 
 <div class="menu_block third fleft">
-    <h2><i class="fa fa-list-ol"></i> Valores Possíveis</h2>
+    <h2><!--i class="fa fa-list-ol"></i-->Valores Possíveis</h2>
     <ul>
         <li><a href="<?=APP_URL?>/admin/valor-possivel">Cadastrar</a></li>
         <li><a href="<?=APP_URL?>/admin/valor-possivel/action/list">Listar</a></li>

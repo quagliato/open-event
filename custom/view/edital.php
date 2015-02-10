@@ -25,8 +25,9 @@
                             <i class="fa fa-stop"></i>&nbsp;<?=Utils::sqlTimestamp2BrFormat($edital->get('dt_fechamento'))?>
                         </span> -->
                         <span class="fleft left">
-                            <i class="fa fa-check f-positive"></i>&nbsp;<?=Utils::sqlTimestamp2BrFormat($edital->get('dt_abertura'))?>&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-times f-negative"></i>&nbsp;<?=Utils::sqlTimestamp2BrFormat($edital->get('dt_fechamento'))?>
+                            <!-- <i class="fa fa-check f-positive"></i>&nbsp;<?=Utils::sqlTimestamp2BrFormat($edital->get('dt_abertura'))?>&nbsp;&nbsp;&nbsp; -->
+                            <!-- <i class="fa fa-times f-negative"></i>&nbsp;<?=Utils::sqlTimestamp2BrFormat($edital->get('dt_fechamento'))?> -->
+                            <strong>Fechamento deste edital:</strong> <?=Utils::sqlTimestamp2BrFormat($edital->get('dt_fechamento'))?>
                         </span>
                         <span class="fright right"><i class="fa fa-clock-o"></i> <?=$edital->get('tempo_preenchimento')?> minuto(s)</span>
                     </div>

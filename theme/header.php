@@ -40,6 +40,7 @@
         <script type="text/javascript" src="<?=APP_URL?>/theme/_js/js.js"></script>
 
         <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Exo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
         <!-- /Fonts -->
 
@@ -67,11 +68,16 @@
         <div id="topline">
             <div class="wrapper">
                 <div class="side" id="left">
-                    <?php if (isset($_SESSION['user_id']) && !is_null($_SESSION['user_id']) && "" != $_SESSION['user_id']) : ?>
-                    <h1><a href="<?=APP_URL?>/dashboard"><?=APP_TITLE?></a></h1>
-                    <?php else : ?>
-                    <h1><a href="<?=APP_URL?>"><?=APP_TITLE?></a></h1>
-                    <?php endif; ?>
+                    <?php 
+                        $link = false;
+                        if (isset($_SESSION['user_id']) && !is_null($_SESSION['user_id']) && "" != $_SESSION['user_id']) :
+                            $link = APP_URL."/dashboard";
+                        else :
+                            $link = APP_URL;
+                        endif;
+                    ?>
+                    <h1><a href="<?=$link?>"><?=APP_TITLE?></a></h1>
+                    <!-- <a href="<?=$link?>"><img class="logo" src="http://uploads.webflow.com/54b1518acb00953277474415/54ba86714bcc75081206058c_logo-nsp2015-sigla.svg"></a> -->
                 </div>
 
                 <div class="side" id="right">
@@ -82,7 +88,7 @@
                             $user = $userDAO->getUserById($_SESSION['user_id']);
                         ?>
                         <p><?=$user->get('email')?></p>
-                        <p class="fright" style="line-height:15px; vertical-align:top;">
+                        <p class="fright">
                             <a href="<?=APP_URL?>/usuario/atualizar">Alterar Cadastro</a>&nbsp;&nbsp;&nbsp;
                             <a href="<?=APP_URL?>/logout">Sair</a>
                         </p>
