@@ -8,7 +8,7 @@
 
     $edital = $genericDAO->selectAll("Edital", "id = $id");
 
-    if (!$edital) :
+    if (!$edital && $edital->get('dt_abertura') != "0000-00-00 00:00:00") :
         // error
     endif;
 
