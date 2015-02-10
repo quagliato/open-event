@@ -6,7 +6,7 @@
 ?>
         <main>
             <header class="center">
-                <h1>Usuário > Cadastrar</h1>
+                <h1>Cadastre-se</h1>
             </header>
             <section class="wrapper">
                 <form method="POST" action="<?=APP_URL?>/action/usuario/cadastrar" class="new_submit">
@@ -24,7 +24,7 @@
 
                         <div class="input_container fourth last">
                             <label for="data_nasc">Data de Nascimento</label>
-                            <input name="Usuario-data_nasc" type="text" id="data_nasc" required="required" class="datepicker date">
+                            <input name="Usuario-data_nasc" type="text" id="data_nasc" required="required" class="date">
                         </div>
                     </div>
 
@@ -120,6 +120,11 @@
                         </div>
 
                         <div class="input_container fourth">
+                            <label for="end_bairro">Bairro</label>
+                            <input name="Usuario-end_bairro" type="text" id="end_bairro" required="required">
+                        </div>
+
+                        <div class="input_container fourth">
                             <label for="end_estado">Estado</label>
                             <select id="end_estado" name="Usuario-end_estado">
                                 <option value="AC">Acre</option>
@@ -153,18 +158,13 @@
                             </select>
                         </div>
 
-                        <div class="input_container fourth">
+                        <div class="input_container fourth last">
                             <label for="end_cidade">Cidade</label>
                             <input name="Usuario-end_cidade" type="text" id="end_cidade" required="required">
                         </div>
-
-                        <div class="input_container fourth last">
-                            <label for="end_bairro">Bairro</label>
-                            <input name="Usuario-end_bairro" type="text" id="end_bairro" required="required">
-                        </div>
                     </div>
 
-                    <h2>Informações do Resposável</h2>
+                    <h2>Informações do Responsável</h2>
                     <div class="input_line">
                         <div class="input_container half">
                             <label for="responsavel_nome">Nome</label>
