@@ -8,8 +8,8 @@
 
     $edital = $genericDAO->selectAll("Edital", "id = $id");
 
-    if (!$edital && $edital->get('dt_abertura') != "0000-00-00 00:00:00") :
-        Structure::redir("/");
+    if (!$edital) :
+        Structure::redir("/dashboard");
     endif;
 
 ?>
