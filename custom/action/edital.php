@@ -82,6 +82,9 @@
             "dt_fim_resposta = '$now'");
 
         if ($inserted) {
+            if (is_array($inserted)) { // TODO: Add unique constraints on DB and remove this
+                $inserted = $inserted[0];
+            }
             $problem = false;
             foreach ($respostas as $respostaPergunta) {
                 $respostaPergunta->set("id_resposta_edital", $inserted->get('id'));
