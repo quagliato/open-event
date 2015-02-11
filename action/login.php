@@ -14,6 +14,9 @@
             'Error' => 'Seu e-mail não está cadastrado em nosso sistema.'
         );
     } else {
+        if (is_array($usuario)) { // TODO: Add unique constraints on DB and remove this
+            $usuario = $usuario[0];
+        }
         if ($usuario->get('senha') == $senha) {
 
             session_start();
