@@ -38,7 +38,7 @@
                     );
                 } else {
                     $request->set('status', 1);
-                    if (!$dao->updateWithFields($request, array('status'), ("code = '".$_GET['code']."'"))) {
+                    if (!$dao->updateWithFields($request, array('status'), ("code = '$code'"))) {
                         //TODO: Precisa mesmo dar erro quando não conseguir mudar o stats do request?
                         $return[] = array(
                             'Action' => 'Error',
