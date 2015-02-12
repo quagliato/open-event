@@ -3,11 +3,7 @@
 class Notification {
 
     public static function formatMessage($message) {
-        $message = DEFAULT_EMAIL_GREETING.$message;
-        $message .= "<p>Dúvidas? Entre em contato pelo endereço e-mail ".DEFAULT_HUMAN_EMAIL.".</p>";
-        $message .= DEFAULT_EMAIL_SIGN;
-
-        return $message;
+        return DEFAULT_EMAIL_GREETING.$message.DEFAULT_EMAIL_SIGN;
     }
 
     public function sendEmail($to, $subject, $message, $from = false) {
@@ -15,8 +11,8 @@ class Notification {
 
         $additional_headers = "MIME-Version: 1.0\n";
         $additional_headers .= "Content-type: text/html; charset=utf-8\n";
-        $additional_headers .= "From: <".APP_TITLE.">".$from;
-        $additional_headers .= "Reply-To: <".APP_TITLE.">".$from;
+        $additional_headers .= "From: ".APP_TITLE." <$from>\n";
+        $additional_headers .= "Reply-To: ".APP_TITLE." <$from>";
 
         $message = Notification::formatMessage($message);
 
