@@ -26,6 +26,7 @@
 
         "/edital" => "view/edital.php",
         "/edital/action" => "action/edital.php",
+        "/edital/confirmacao" => "view/edital_confirmacao.php",
     );
 
 ?>
