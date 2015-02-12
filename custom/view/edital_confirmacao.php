@@ -5,13 +5,11 @@
     $genericDAO = new GenericDAO;
     $editalDAO = new EditalDAO;
 
-    $id = $_GET['id'];
-    $edital = $genericDAO->selectAll("Edital", "id = $id");
+    $idEdital = $_GET['id'];
+    $edital = $genericDAO->selectAll("Edital", "id = $idEdital");
 
-    // TODO: Implementa isEditalOpen on EditalDAO
-    // if (!$edital || !$editalDAO->isEditalOpen($edital->get('id'))) {
-    if (!$edital) {
-        Structure::redir("/");
+    if (!$edital && !$editalDAO->getOpenEdital($idEdital)) {
+        Structure::redir("/dashboard");
     }
 
     $notification = new Notification;

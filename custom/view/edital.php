@@ -3,12 +3,12 @@
     Structure::header();
 
     $genericDAO = new GenericDAO;
+    $editalDAO = new EditalDAO;
 
-    $id = $_GET['id'];
+    $idEdital = $_GET['id'];
+    $edital = $genericDAO->selectAll("Edital", "id = $idEdital");
 
-    $edital = $genericDAO->selectAll("Edital", "id = $id");
-
-    if (!$edital) :
+    if (!$edital && !$editalDAO->getOpenEdital($idEdital)) :
         Structure::redir("/dashboard");
     endif;
 
