@@ -13,5 +13,22 @@ class EditalDAO extends GenericDAO {
         }
         return $this->selectAll("Edital", $where);
     }
+
+    public function countAnswersPerEdital($idEdital = false) {
+        if (!$idEdital) {
+            $auxResult = array();
+            $editais = $this->selectAll("Edital");
+            foreach ($editais as $edital) {
+                $countAnswers = $this->selectCount("RespostaEdital", "id", "id_edital = {$edital->get('id')}");
+                $auxResult[$edital->get('id')] = $countAnswers;
+            }
+            return $auxResult;
+        }
+
+        if ($idEdital !== false && $idEdital !== true) {
+            $idEdital = intval($idEdital);
+        }
+        $result = $this->selectCount("RespostaEdital", "id", "id_edita = $idEdital");
+    }
 }
 ?>
