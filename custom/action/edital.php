@@ -105,7 +105,7 @@
 
                 $return[] = array(
                     "Action" => "Redir",
-                    "Redir" => "/edital/confirmacao?id=".$editalId;
+                    "Redir" => "/edital/confirmacao?id=".$editalId
                 );
             }
         } else {

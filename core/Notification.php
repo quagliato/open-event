@@ -10,8 +10,8 @@ class Notification {
         return $message;
     }
 
-    public function sendEmail($to, $subject, $message) {
-        $from = DEFAULT_EMAIL_FROM;
+    public function sendEmail($to, $subject, $message, $from = false) {
+        if (!$from) $from = DEFAULT_EMAIL_FROM;
 
         $additional_headers = "MIME-Version: 1.0\n";
         $additional_headers .= "Content-type: text/html; charset=utf-8\n";

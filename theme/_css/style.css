@@ -48,6 +48,11 @@ a:hover{ text-decoration: none; }
 .regular { font-weight: 400; }
 .bold { font-weight: 700; }
 
+.mt10 { margin-top: 10px !important; }
+.mt20 { margin-top: 20px !important; }
+.mt40 { margin-top: 40px !important; }
+.mt80 { margin-top: 80px !important; }
+
 /******************************************************************************/
 /* INPUTS */
 .input_line { display: block; height: auto; margin: 0 0 10px 0; overflow: hidden; position: relative; width: 100%; }
