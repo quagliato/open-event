@@ -17,7 +17,7 @@
     $notification = new Notification;
     $subject = DEFAULT_EMAIL_SUBJECT." / ".$edital->get("nome")." - Confirmação de inscrição";
     $mailHTML = "";
-    $mailHTML .= "<br /><br /><h2>Parabéns! Sua submissão ao edital de {$edital->get('nome')} foi recebida.</h2>
+    $mailHTML .= "<h2>Parabéns! Sua submissão ao edital de {$edital->get('nome')} foi recebida.</h2>
         <p>Caso tenha dúvidas, entre em contato através de <a href=\"mailto:".DEFAULT_EMAIL_FROM_EDITAIS."\" alt=\"E-mail para ".DEFAULT_EMAIL_FROM_EDITAIS."\" title=\"E-mail para ".DEFAULT_EMAIL_FROM_EDITAIS."\" href=\"mailto:".DEFAULT_EMAIL_FROM_EDITAIS."\">".DEFAULT_EMAIL_FROM_EDITAIS."</a>.</p>";
 
     $mailResult = $notification->sendEmail($usuario->get('email'), $subject, $mailHTML, DEFAULT_EMAIL_FROM_EDITAIS);
