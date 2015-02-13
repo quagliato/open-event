@@ -104,7 +104,7 @@ function setNotificationEvents() {
             if ($(this).hasClass("shown")) {
                 $(this).removeClass("shown").removeClass("hidden").slideUp();
             } else {
-                $(this).addClass("shown").slideDown();
+                $(this).addClass("shown").removeClass("hidden").slideDown();
             }
         });
     });

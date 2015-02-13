@@ -51,6 +51,7 @@ ul#info .title{
 ul#info .number{
     border-bottom: 1px solid #CCCCCC;
     font-size: 40px;
+    padding-bottom: 10px;
 }
 
 /******************************************************************************/
