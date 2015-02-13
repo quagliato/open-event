@@ -4,6 +4,7 @@
 
     $genericDAO = new GenericDAO;
     $editalDAO = new EditalDAO;
+    $respostaEditalDAO = new respostaEditalDAO;
 
     $idEdital = $_GET['id'];
     $edital = $genericDAO->selectAll("Edital", "id = $idEdital");
@@ -29,7 +30,7 @@
                             <!-- <i class="fa fa-times f-negative"></i>&nbsp;<?=Utils::sqlTimestamp2BrFormat($edital->get('dt_fechamento'))?> -->
                             <strong>Fechamento deste edital:</strong> <?=Utils::sqlTimestamp2BrFormat($edital->get('dt_fechamento'))?>
                         </span>
-                        <span class="fright right"><i class="fa fa-clock-o"></i> <?=$edital->get('tempo_preenchimento')?> minuto(s)</span>
+                        <span class="fright right"><i class="fa fa-clock-o"></i> <?=$respostaEditalDAO->getAverageTime($edital->get('id')?> minuto(s)</span>
                     </div>
                 </div>
                 
