@@ -57,23 +57,6 @@
                             </select>
                         </div>
 
-                        <script>
-                        $('#tipo_resposta').change(function(){
-                            // If question type is not text, it does not show
-                            // fielts for max size and example.
-                            var typesWithSize = ["text", "textarea-s", "textarea-m", "textarea-l"];
-                            var selectedItem = $("#tipo_resposta option:selected");
-                            if (typesWithSize.indexOf(selectedItem.attr("value")) >= 0) {
-                                $("#tamanho_resposta_container").removeClass("hidden");
-                                $("#exemplo_container").removeClass("hidden");
-                            } else {
-                                console.log("This question does not need Tamanho Resposta and Exemplo.");
-                                $("#tamanho_resposta_container").addClass("hidden");
-                                $("#exemplo_container").addClass("hidden");
-                            }
-                        });
-                        </script>
-
                         <div class="input_container fourth">
                             <label for="tipo_resposta">Tipo de Resposta</label>
                             <select name="Pergunta-tipo_resposta" id="tipo_resposta">
@@ -140,4 +123,21 @@
                 <?php endif; ?>
             </section>
         </main>
+
+        <script>
+        $('#tipo_resposta').change(function(){
+            // If question type is not text, it does not show
+            // fielts for max size and example.
+            var typesWithSize = ["text", "textarea-s", "textarea-m", "textarea-l"];
+            var selectedItem = $("#tipo_resposta option:selected");
+            if (typesWithSize.indexOf(selectedItem.attr("value")) >= 0) {
+                $("#tamanho_resposta_container").removeClass("hidden");
+                $("#exemplo_container").removeClass("hidden");
+            } else {
+                console.log("This question does not need Tamanho Resposta and Exemplo.");
+                $("#tamanho_resposta_container").addClass("hidden");
+                $("#exemplo_container").addClass("hidden");
+            }
+        });
+        </script>
 <?php Structure::footer(); ?>
