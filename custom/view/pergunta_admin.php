@@ -56,48 +56,25 @@
                             ?>
                             </select>
                         </div>
-                    </div>
 
-                    <div class="input_line">
-                        <div class="input_container full">
-                            <label for="titulo">Título da Pergunta</label>
-                            <input name="Pergunta-titulo" type="text" id="titulo" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('titulo').'"' : ''?>>
-                        </div>
-                    </div>
-
-                    <div class="input_line">
-                        <div class="input_container full">
-                            <label for="descricao">Descrição</label>
-                            <textarea name="Pergunta-descricao" id="descricao" class="s"><?=$status == "UPDATING" ? $obj->get('descricao') : ''?></textarea>
-                        </div>
-                    </div>
-
-                    <div class="input_line">
-                        <div class="input_container full">
-                            <label for="exemplo">Exemplo de Resposta</label>
-                            <input name="Pergunta-exemplo" type="text" id="exemplo"<?=$status == "UPDATING" ? ' value="'.$obj->get('exemplo').'"' : ''?>>
-                        </div>
-                    </div>
-
-                    <div class="input_line">
                         <script>
                         $('#tipo_resposta').change(function(){
-                            var typesWithSize = [];
-                            typesWithSize[] = "text";
-                            typesWithSize[] = "textarea-s";
-                            typesWithSize[] = "textarea-m";
-                            typesWithSize[] = "textarea-l";
+                            var typesWithSize = ["text", "textarea-s", "textarea-m", "textarea-l"];
 
-                            var selectedItem = $(this).find("option:selected")[0];
+                            var selectedItem = false
+                            $(this).find("option").each(function(){
+                                if ($(this).is(":selected")) selectedItem = $(this);
+                            });
 
-                            if ($.inArray(selectedItem.attr("value"), typesWithSize) {
-                                $("#tamanho_resposta").removeClass("hidden");
+                            if (typesWithSize.indexOf(selectedItem.attr("value")) >= 0) {
+                                $("#tamanho_resposta_container").removeClass("hidden");
+                                $("#exemplo_container").removeClass("hidden");
                             } else {
-                                $("#tamanho_resposta").addClass("hidden");
+                                $("#tamanho_resposta_container").addClass("hidden");
+                                $("#exemplo_container").addClass("hidden");
                             }
                         });
                         </script>
-
 
                         <div class="input_container third">
                             <label for="tipo_resposta">Tipo de Resposta</label>
@@ -126,8 +103,27 @@
                                 <option value="<?=$value?>"<?=$status == "UPDATING" && $obj->get('tipo_resposta') == $value ? "selected" : ""?>><?=$title?></option>
                             </select>
                         </div>
+                    </div>
 
-                        <div id="tamanho_resposta" class="input_container third hidden">
+                    <div class="input_line">
+                        <div class="input_container half">
+                            <label for="titulo">Título da Pergunta</label>
+                            <input name="Pergunta-titulo" type="text" id="titulo" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('titulo').'"' : ''?>>
+                        </div>
+
+                        <div class="input_container half">
+                            <label for="descricao">Descrição</label>
+                            <input name="Pergunta-descricao" type="text" id="descricao"<?=$status == "UPDATING" ? ' value="'.$obj->get('descricao').'"' : ''?>>
+                        </div>
+                    </div>
+
+                    <div class="input_line">
+                        <div id="exemplo_container" class="input_container third">
+                            <label for="exemplo">Exemplo de Resposta</label>
+                            <input name="Pergunta-exemplo" type="text" id="exemplo"<?=$status == "UPDATING" ? ' value="'.$obj->get('exemplo').'"' : ''?>>
+                        </div>
+
+                        <div id="tamanho_resposta_container" class="input_container third">
                             <label for="tamanho_resposta">Tamanho máximo da resposta</label>
                             <input name="Pergunta-tamanho_resposta" type="number" id="tamanho_resposta" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('tamanho_resposta').'"' : ''?>>
                         </div>
