@@ -15,14 +15,14 @@
             $hasAnsweredEdital = $respostaEditalDAO->hasAnsweredEdital($usuario->get('id'), $edital->get('id'));
 ?>
         <li>
-            <span class="fleft left upper"><?=$edital->get('nome')?>
+            <span class="upper"><?=$edital->get('nome')?>
                 <?php if ($hasAnsweredEdital) : ?>
                 <span class="no-transform note">
                     Você respondeu esse edital há <?=Utils::getRelativeDate(new DateTime($hasAnsweredEdital->get('dt_fim_resposta')))?>.
                 </span>
                 <?php endif; ?>
             </span>
-            <span class="fright right">
+            <span class="fright">
                 <a href="<?=APP_URL?>/edital?id=<?=$edital->get('id')?>">Inscrição</a>
             </span>
         </li>
