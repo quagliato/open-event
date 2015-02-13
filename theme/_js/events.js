@@ -102,11 +102,9 @@ function setNotificationEvents() {
         var target = $($(this).attr("data-target"));
         target.each(function(){
             if ($(this).hasClass("shown")) {
-                $(this).removeClass("shown");
-                $(this).slideUp();
+                $(this).removeClass("shown").removeClass("hidden").slideUp;
             } else {
-                $(this).addClass("shown");
-                $(this).slideDown();
+                $(this).addClass("shown").slideDown;
             }
         });
     });
