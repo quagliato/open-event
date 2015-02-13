@@ -1,0 +1,507 @@
+/* darkblue: #17365D */
+/* lightblue: #00AFEF */
+/* green: #81DB2C */
+
+body{
+    background-color: #FFFFFF;
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 14px;
+    padding-bottom: 100px;
+    position: relative;
+}
+
+fieldset{
+    border: none;
+}
+
+ul li{
+    list-style: none;
+}
+
+a, a:visited{ color: #98F678; text-decoration: none; }
+a:hover{ text-decoration: none; }
+
+.wrapper{
+    margin: 0 auto;
+    width: 960px;
+}
+
+.hidden{ display: none !important; }
+
+.fnone{ float: none !important;}
+.fleft{ float: left;}
+.fright{ float: right; }
+
+.center{ text-align: center; }
+.left { text-align: left;}
+.right { text-align: right;}
+
+.bn{ border: none; }
+
+.gray { background-color: #888888 !important; }
+.red { background-color: #D6233B !important; }
+.lightred { background-color: #FE938F !important; }
+.lightgreen { background-color: #98F678 !important; }
+
+.thin { font-weight: 100; }
+.light { font-weight: 300; }
+.regular { font-weight: 400; }
+.bold { font-weight: 700; }
+
+.mt10 { margin-top: 10px !important; }
+.mt20 { margin-top: 20px !important; }
+.mt40 { margin-top: 40px !important; }
+.mt80 { margin-top: 80px !important; }
+
+.upper { text-transform: uppercase !important; }
+.lower { text-transform: lowercase !important; }
+.no-transform { text-transform: none !important; }
+
+/******************************************************************************/
+/* INPUTS */
+.input_line { display: block; height: auto; margin: 0 0 10px 0; overflow: hidden; position: relative; width: 100%; }
+.input_line.edital { margin-bottom: 30px; }
+
+.input_container.edital label{
+    color: #000000;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.input_container.edital input,
+.input_container.edital select,
+.input_container.edital textarea{
+    border: none;
+    border-left: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+    margin-top: 10px;
+}
+
+.input_container { display: inline-block; float: left; height: auto; margin: 0 10px 0 0; position: relative; text-align: left;}
+.input_container.last { margin: 0; }
+.input_container.button { display: inline-block; line-height: 53px; }
+.input_container.button button { vertical-align: bottom; }
+.input_container input[type=text],
+.input_container input[type=email],
+.input_container input[type=password],
+.input_container input[type=number],
+.input_container input[type=date],
+.input_container input[type=datetime],
+.input_container input[type=file],
+.input_container select,
+.input_container textarea{ width: 100%; }
+
+.input_container input,
+.input_container select,
+.input_container textarea{
+    border: 1px solid #CCCCCC;
+    color: #000000;
+    font-size: 14px;
+    height: 34px;
+    padding: 0px 5px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.input_container input:focus,
+.input_container select:focus,
+.input_container textarea:focus{
+    outline: 1px solid #333333;
+}
+
+.input_container textarea.s{ height: 60px; }
+.input_container textarea.m{ height: 120px; }
+.input_container textarea.l{ height: 180px; }
+
+.input_container input[type="checkbox"],
+.input_container input[type="radio"]{
+    margin: 0 5px 0 0;
+    width: auto;
+}
+
+.input_container label{
+    color: #666666;
+    font-size: 13px;
+    text-align: left;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.input_container ul.checkbox {
+    margin-top: 5px;
+}
+
+.input_container ul.checkbox li{
+    line-height: 18px;
+    list-style: none;
+    margin: 2px 0px;
+    padding: 0px;
+    vertical-align: middle;
+    width: 100%;
+}
+.input_container ul.checkbox li input[type="checkbox"]{
+    height: 20px;
+    vertical-align: middle;
+}
+
+.input_container ul.checkbox li label{
+    color: #000000;
+    font-size: 14px;
+    font-style: normal;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.input_container #slider{
+    margin: 10px;
+}
+
+.submit_line { margin-top: 25px; }
+
+.full          { width: 100.0%; }
+.half          { width:  49.0%; }
+.third         { width:  32.0%; }
+.third.last    { width:  33.0%; }
+.fourth        { width:  24.0%; }
+.fifth         { width:  20.0%; }
+.sixth         { width:  16.6%; }
+.sixth.last    { width:  17.0%; }
+.eighth        { width:  12.5%; }
+.tenth         { width:  10.0%; }
+
+.two-thirds    { width:  66.0%; }
+.three-fourths { width:  73.0%; }
+
+/******************************************************************************/
+/* LOGIN */
+
+form.login{
+    margin: 0 auto;
+    width: 400px;
+}f
+
+/******************************************************************************/
+/* MENU */
+.menu_block{
+    position: relative;
+}
+
+.menu_block .fa{
+    color: #81DB2C;
+    font-size: 25px;
+}
+
+/******************************************************************************/
+/* HEADINGS */
+
+main h1, h2, h3, h4, h5, h6{ font-weight: bold; }
+
+main h1{
+    color: #17365D;
+    font-size: 32px;
+    margin: 20px 0 10px 0;
+}
+
+main h2{
+    color: #312D44;;
+    font-size: 24px;
+    margin: 10px 0 0 0;
+}
+
+main h3{
+    color: #222222;
+    font-size: 16px;
+    margin: 10px 0 0 0
+}
+
+main h4{
+    color: #17365D;
+    font-size: 14px;
+    margin: 10px 0 0 0;
+}
+
+main h5{
+    color: #17365D;
+    font-size: 12px;
+    margin: 10px 0 0 0;
+}
+
+main h6{
+    color: #17365D;
+    font-size: 10px;
+    margin: 10px 0 0 0;
+}
+
+/******************************************************************************/
+/* BUTTONS */
+
+.negative { background-color: #FE938F !important; color: #000000 !important; }
+.positive { background-color: #98F678 !important; color: #000000 !important; }
+
+.f-negative { color: #FE938F !important; }
+.f-positive { color: #00E7EB !important; }
+
+input[type=submit],
+button.submit,
+a.submit,
+a.submit:visited,
+a.submit:hover{
+    background-color: #2B243C;
+    border: none;
+    border-radius: 2px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    width: auto;
+}
+
+button{
+    background-color: #888888;
+    border: none;
+    border-radius: 25px;
+    color: #FFFFFF;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 14px;
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: top;
+    width: auto;
+}
+
+hr{
+    border-top: 1px solid #666666;
+    height: 1px;
+    margin: 20px 0 20px 0;
+    width: 100%;
+}
+
+table{
+    border: none;
+    margin: 10px 0 0 0;
+    table-layout: fixed;
+    text-align: left;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+table thead{
+    font-weight: bold;
+}
+
+table td,
+table th{
+    border: solid 1px #000000;
+    padding: 0 5px 0 5px;
+}
+
+table.inputs{
+    margin: 0px;
+}
+
+table.inputs tr,
+table.inputs td{
+    border: none;
+    padding: 0px;
+    vertical-align: top;
+}
+
+table .center{
+    text-align: center;
+}
+
+table .left{
+    text-align: left;
+}
+
+table .right{
+    text-align: right;
+}
+
+
+section p.inscrevase,
+section p.isencao{
+    margin: 10px 0 0 0;
+}
+
+footer{
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 5px;
+    bottom: 0;
+    font-size: 10px;
+    margin: 0 15px 0 0;
+    padding: 5px;
+    right: 0;
+    position: fixed;
+    text-align: right;
+}
+
+.note{
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+/******************************************************************************/
+/* HEADER */
+header #topline{
+    background-color: #17365D;
+    border-bottom: 3px solid #98F678;
+    color: #FFFFFF;
+    font-size: 16px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 100%;
+}
+
+header #topline .side{
+    display: inline-block;
+    vertical-align: middle;
+    width: 49%;
+}
+
+header #topline h1{
+    color: #FFFFFF;
+    font-size: 40px;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+header #topline h1 a,
+header #topline h1 a:hover,
+header #topline h1 a:visited {
+    color: #FFFFFF !important;
+    text-decoration: none;
+}
+
+header #topline #info{
+    color: #FFFFFF;
+}
+
+header #topline #info a{
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+header #topbanner{
+    background-color: #CCCCCC;
+    color: #000000;
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/******************************************************************************/
+/* NOTIFICATIONS */
+
+.notification {  
+    border-top: 3px solid #000000;
+    bottom: 0;
+    color: #000000;
+    display: none;
+    font-size: 12px;
+    line-height: 30px;
+    padding: 0 10px;
+    position: fixed;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    z-index: 9999;
+}
+
+.notification a,
+.notification a:hover,
+.notification a:visited{
+    color: inherit;
+}
+
+.error {
+    background-color: #FE938F;
+    border-color: #FF0000;
+}
+
+.message {
+    background-color: #98F678;
+    border-color: #0C6C03;
+}
+
+#notification_content{
+    display: inline-block;
+    max-width: 960px;
+}
+
+#notification_content a,
+#notification_content a:hover,
+#notification_content a:visited{
+    text-decoration: underline
+}
+
+#close_btn {
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    right: 10px;
+    position: absolute;
+}
+
+/******************************************************************************/
+/* LIGHTBOX */
+
+#lightbox_overlay{
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 99;
+}
+
+#lightbox{
+    background: #FFFFFF;
+    display: none;
+    height: 500px;
+    left: 50%;
+    margin: -250px 0px 0px -450px;
+    position: fixed;
+    top: 50%;
+    width: 900px;
+    z-index: 100;
+}
+
+#lightbox #close{
+    background-color: #000000;
+    border: 1px solid #FFFFFF;
+    border-radius: 30px;
+    color: #FFFFFF;
+    display: block;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    z-index: 101;
+}
+
+#lightbox #content{
+    height: 100%;
+    padding: 10px;
+    width: 100%;
+}

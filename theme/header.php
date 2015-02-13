@@ -15,7 +15,8 @@
         <link rel="shortcut icon" type="image/png" href="_images/favicon.png" />
 
         <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/_css/reset.css" />
-        <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/_css/style.css" />
+        <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/_css/noisy-cricket.css" />
+        <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/_css/custom.css" />
 
         <!-- Third-party libs -->
         <script type="text/javascript" src="<?=APP_URL?>/theme/_libs/jquery-2.0.3.min.js"></script>
