@@ -8,8 +8,8 @@
     $idEdital = $_GET['id'];
     $edital = $genericDAO->selectAll("Edital", "id = $idEdital");
 
-    if (!$edital && !$editalDAO->getOpenEdital($idEdital)) {
-        Structure::redir("/dashboard");
+    if (!$edital || !$editalDAO->getOpenEdital($idEdital)) {
+        Structure::redirWithMessage("O edital requisitado não existe ou está fechado.", "/dashboard");
     }
 
     $notification = new Notification;
