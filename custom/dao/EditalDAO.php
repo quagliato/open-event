@@ -28,7 +28,7 @@ class EditalDAO extends GenericDAO {
         if ($idEdital !== false && $idEdital !== true) {
             $idEdital = intval($idEdital);
         }
-        $result = $this->selectCount("RespostaEdital", "id", "id_edita = $idEdital");
+        $result = $this->selectCount("RespostaEdital", "id", "id_edital = $idEdital");
     }
 }
 ?>
