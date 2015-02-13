@@ -28,6 +28,11 @@ ul#edital_list li{
     width: 100%;
 }
 
+ul#edital_list li .note{
+    font-size: 12px;
+    margin-left: 30px;
+}
+
 /******************************************************************************/
 /* CUSTOM */
 

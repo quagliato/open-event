@@ -14,7 +14,7 @@
         foreach ($editais as $edital) :
             $hasAnsweredEdital = $respostaEditalDAO->hasAnsweredEdital($usuario->get('id'), $edital->get('id'));
 ?>
-        <li><span class="fleft left upper"><?=$edital->get('nome')?></span> <span class="fright right"><span class="no-transform note"><?=$hasAnsweredEdital ? "Você respondeu esse edital há ".Utils::getRelativeDate(new DateTime($hasAnsweredEdital->get('dt_fim_resposta'))) : ''?></span><a href="<?=APP_URL?>/edital?id=<?=$edital->get('id')?>">Inscrição</a></span></li>
+        <li><span class="fleft left upper"><?=$edital->get('nome')?><span class="no-transform note"><?=$hasAnsweredEdital ? "Você respondeu esse edital há ".Utils::getRelativeDate(new DateTime($hasAnsweredEdital->get('dt_fim_resposta'))) : ''?></span></span> <span class="fright right"><a href="<?=APP_URL?>/edital?id=<?=$edital->get('id')?>">Inscrição</a></span></li>
 <?php
         endforeach;
 ?>
