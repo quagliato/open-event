@@ -13,8 +13,8 @@
         <ul id="info">
             <?php foreach ($editais as $edital) : ?>
             <li class="fifth fleft">
-                <p class="title center bold"><?=$edital->get('nome')?></p>
-                <p class="number center thin"><?=$editalDAO->countAnswersPerEdital($edital->get('id'))?></p>
+                <p class="title center upper thin"><?=$edital->get('nome')?></p>
+                <p class="number center light"><?=$editalDAO->countAnswersPerEdital($edital->get('id'))?></p>
             </li>
             <?php endforeach; ?>
         </ul>
