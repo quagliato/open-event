@@ -4,6 +4,7 @@
 
   include_once("dao/EditalDAO.php");
   include_once("dao/PerguntaDAO.php");
+  include_once("dao/RespostaEditalDAO.php");
   include_once("dao/ValorPossivelDAO.php");
 
   include_once("model/Edital.php");

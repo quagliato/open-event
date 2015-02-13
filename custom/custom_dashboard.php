@@ -1,6 +1,7 @@
 <h2>Editais abertos</h2>
 <?php
     $editalDAO = new editalDAO;
+    $respostaEditalDAO = new RespostaEditalDAO;
     $editais = $editalDAO->getOpenEdital();
     if ($editais) :
 ?>
@@ -11,8 +12,9 @@
           $editais = array($editais);
         endif;
         foreach ($editais as $edital) :
+            $hasAnsweredEdital = $respostaEditalDAO->hasAnsweredEdital($usuario->get('id'), $edital->get('id'));
 ?>
-        <li><span class="desc fleft left"><?=$edital->get('nome')?></span> <span class="desc fright right"><a href="<?=APP_URL?>/edital?id=<?=$edital->get('id')?>">Inscrição</a></span></li>
+        <li><span class="desc fleft left"><?=$edital->get('nome')?></span> <span class="desc fright right"><?=$hasAnsweredEdital ? "Você respondeu esse edital há ".Utils::getRelativeDate(new DateTime($hasAnsweredEdital->get('dt_fim_resposta'))) : ''?><a href="<?=APP_URL?>/edital?id=<?=$edital->get('id')?>">Inscrição</a></span></li>
 <?php
         endforeach;
 ?>

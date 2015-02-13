@@ -2,6 +2,32 @@
 
 class Utils {
 
+    // name      : getRelativeDate
+    // params    : DateTime $dateTime
+    // desc      : Calculates the diff between $dateTime and now and returns it
+    //             as a relative date.
+    public static function getRelativeDate($dateTime) {
+        $now = new DateTime("now");
+
+        $diff = $now->diff($dateTime);
+
+        if ($diff) {
+            if (intval($diff->format("%d")) > 1) {
+                return intval($diff->forma("%d"))." dias";
+            }
+            if (intval($diff->format("%h")) > 1) {
+                return intval($diff->forma("%h"))." horas";
+            }
+            if (intval($diff->format("%i")) > 1) {
+                return intval($diff->forma("%i"))." minutos";
+            }
+
+            return intval($diff->format("s%"))." segundos";
+        }
+
+        return false;
+    }
+
     // name      : defineLanguage
     // params    : array $__GET
     // desc      : Verify index 'lang' on $__GET and sets a $_SESSSION for it.
