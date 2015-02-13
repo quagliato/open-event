@@ -3,7 +3,7 @@
     <header>
         <h2 class="clickable fade-block" data-target="#info .content">Info</h2>
     </header>
-    <div class="content shown">
+    <div class="content hidden">
         <?php
             $editalDAO = new EditalDAO;
             $editais = $editalDAO->selectAll("Edital", NULL);
