@@ -70,13 +70,14 @@
                                 $("#tamanho_resposta_container").removeClass("hidden");
                                 $("#exemplo_container").removeClass("hidden");
                             } else {
+                                console.log("This question does not need Tamanho Resposta and Exemplo.");
                                 $("#tamanho_resposta_container").addClass("hidden");
                                 $("#exemplo_container").addClass("hidden");
                             }
                         });
                         </script>
 
-                        <div class="input_container third">
+                        <div class="input_container quarter">
                             <label for="tipo_resposta">Tipo de Resposta</label>
                             <select name="Pergunta-tipo_resposta" id="tipo_resposta">
                                 <?php $value = "text"; $title = "Texto - Uma linha"; ?>
@@ -103,6 +104,11 @@
                                 <option value="<?=$value?>"<?=$status == "UPDATING" && $obj->get('tipo_resposta') == $value ? "selected" : ""?>><?=$title?></option>
                             </select>
                         </div>
+
+                        <div class="input_container quarter last">
+                            <label for="ordem_exibicao">Ordem de Exibição</label>
+                            <input name="Pergunta-ordem_exibicao" type="number" id="ordem_exibicao" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('ordem_exibicao').'"' : ''?>>
+                        </div>
                     </div>
 
                     <div class="input_line">
@@ -126,11 +132,6 @@
                         <div id="tamanho_resposta_container" class="input_container third">
                             <label for="tamanho_resposta">Tamanho máximo da resposta</label>
                             <input name="Pergunta-tamanho_resposta" type="number" id="tamanho_resposta" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('tamanho_resposta').'"' : ''?>>
-                        </div>
-
-                        <div class="input_container third last">
-                            <label for="ordem_exibicao">Ordem de Exibição</label>
-                            <input name="Pergunta-ordem_exibicao" type="number" id="ordem_exibicao" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('ordem_exibicao').'"' : ''?>>
                         </div>
                     </div>
 
