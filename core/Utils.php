@@ -13,13 +13,13 @@ class Utils {
 
         if ($diff) {
             if (intval($diff->format("%d")) > 1) {
-                return intval($diff->forma("%d"))." dias";
+                return intval($diff->format("%d"))." dias";
             }
             if (intval($diff->format("%h")) > 1) {
-                return intval($diff->forma("%h"))." horas";
+                return intval($diff->format("%h"))." horas";
             }
             if (intval($diff->format("%i")) > 1) {
-                return intval($diff->forma("%i"))." minutos";
+                return intval($diff->format("%i"))." minutos";
             }
 
             return intval($diff->format("s%"))." segundos";
