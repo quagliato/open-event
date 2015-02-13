@@ -5,7 +5,7 @@
 
     $pergunta = DataBinder::bind($_POST, "Pergunta");
 
-    if (in_array($pergunta->get('tipo_resposta', Pergunta::getTypesWithSize()))) {
+    if (!in_array($pergunta->get('tipo_resposta'), Pergunta::getTypesWithSize())) {
         $pergunta->set('tamanho_resposta', 0);
         $pergunta->set('exemplo', NULL);
     }

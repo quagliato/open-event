@@ -20,6 +20,21 @@ class PerguntaDAO extends GenericDAO {
 
         return $this->selectAll("Pergunta", "id_edital = $idEdital ORDER BY ordem_exibicao");
     }
-    
+
+    public function maxOrdemExibicaoByEdital($idEdital) {
+        if (!isset($idEdital) || !$idEdital) {
+            return 1;
+        }
+
+        $respostasPegunta = $this->selectAll("Pergunta", "id_edital = $idEdital ORDER BY ordem_exibicao DESC");
+        if ($respostasPegunta) {
+            if (!is_array($respostasPegunta)) {
+                return $respostasPegunta->get('ordem_exibicao') + 1;
+            }
+            return $respostasPegunta[0]->get('ordem_exibicao') + 1;
+        }
+
+        return 1;
+    }
 }
 ?>

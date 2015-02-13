@@ -17,6 +17,7 @@
         "/admin/pergunta/action/update" => "action/pergunta_02_update.php",
         "/admin/pergunta/action/delete" => "action/pergunta_03_delete.php",
         "/admin/pergunta/action/list" => "action/pergunta_04_list.php",
+        "/admin/pergunta/action/max-ordem_exibicao" => "action/pergunta_05_max-ordem_exibicao.php",
 
         "/admin/valor-possivel" => "view/valor-possivel_admin.php",
         "/admin/valor-possivel/action/insert" => "action/valor-possivel_01_insert.php",

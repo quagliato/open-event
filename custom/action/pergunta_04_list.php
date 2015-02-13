@@ -31,8 +31,13 @@
                     </thead>
                     <?php
                         $count = 0;
+                        $lastIdEdital = -1;
+                        $edital = false;
                         foreach ($perguntas as $pergunta) :
-                            $edital = $genericDAO->selectAll("Edital", "id = ".$pergunta->get('id_edital'));
+                            if ($lastIdEdital != $pergunta->get('id_edital')) {
+                                $lastIdEdital = $pergunta->get('id_edital');
+                                $edital = $genericDAO->selectAll("Edital", "id = ".$pergunta->get('id_edital'));
+                            }
                     ?>
                         <tr <?php if ($count % 2 == 0) { echo 'style="background-color: #CCCCCC;"'; } ?>>
                             <td style="text-align:center;"><?=$pergunta->get('id')?></td>

@@ -3,6 +3,7 @@
     Structure::header();
 
     $genericDAO = new GenericDAO;
+    $perguntaDAO = new PerguntaDAO;
 
     $status = "INSERTING";
     $action = APP_URL."/admin/pergunta/action/insert";
@@ -41,6 +42,7 @@
                             <label for="id_edital">Edital</label>
                             <select name="Pergunta-id_edital" id="id_edital">
                             <?php
+                            $firstEdital = false;
                             $editais = $genericDAO->selectAll("Edital", NULL);
                             if ($editais) :
                                 if (!is_array($editais)) :
@@ -48,6 +50,9 @@
                                 endif;
 
                                 foreach ($editais as $edital) :
+                                    if (!$firstEdital) {
+                                        $firstEdital = $edital;
+                                    }
                             ?>
                                 <option value="<?=$edital->get('id')?>"<?=($status == "UPDATING" && $edital->get('id') == $obj->get('id_edital')) || (array_key_exists("edital", $_GET) && $edital->get('id') == $_GET['edital'] ) ? " selected" : ""?>><?=$edital->get('id')?> - <?=$edital->get('nome')?></option>
                             <?php
@@ -86,8 +91,18 @@
                         </div>
 
                         <div class="input_container fourth last">
+                            <?php 
+                                $ordemExibicao = false;
+                                if ($status == "UPDATING") {
+                                    $ordemExibicao = $obj->get('ordem_exibicao');
+                                } elseif (array_key_exists("edital", $_GET)) {
+                                    $ordemExibicao = $perguntaDAO->maxOrdemExibicaoByEdital($_GET['edital']);
+                                } else {
+                                    $ordemExibicao = $perguntaDAO->maxOrdemExibicaoByEdital($firstEdital->get('id'));
+                                }
+                            ?>
                             <label for="ordem_exibicao">Ordem de Exibição</label>
-                            <input name="Pergunta-ordem_exibicao" type="number" id="ordem_exibicao" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('ordem_exibicao').'"' : ''?>>
+                            <input name="Pergunta-ordem_exibicao" type="number" id="ordem_exibicao" required="required"<?=$ordemExibicao !== false ? "value=\"$ordemExibicao\"" : ""?>>
                         </div>
                     </div>
 
@@ -111,7 +126,7 @@
 
                         <div id="tamanho_resposta_container" class="input_container third">
                             <label for="tamanho_resposta">Tamanho máximo da resposta</label>
-                            <input name="Pergunta-tamanho_resposta" type="number" id="tamanho_resposta" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('tamanho_resposta').'"' : ''?>>
+                            <input name="Pergunta-tamanho_resposta" type="number" id="tamanho_resposta" <?=$status == "UPDATING" ? ' value="'.$obj->get('tamanho_resposta').'"' : ''?>>
                         </div>
                     </div>
 
@@ -138,6 +153,24 @@
                 $("#tamanho_resposta_container").addClass("hidden");
                 $("#exemplo_container").addClass("hidden");
             }
+        });
+        $('#id_edital').change(function(){
+            var edital = false;
+            edital = $(this).children('option:selected')[0];
+            edital = $(edital).attr("value");
+
+            console.log(edital);
+
+            var action = "<?=APP_URL?>/admin/pergunta/action/max-ordem_exibicao";
+            var values = {};
+            values["edital"] = edital;
+
+            var success = function(data) {
+                console.log(data);
+                $('#ordem_exibicao').val(data);
+            };
+
+            $.post(action, values, success);
         });
         </script>
 <?php Structure::footer(); ?>
