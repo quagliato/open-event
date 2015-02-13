@@ -1,9 +1,31 @@
 <h1 class="center">Admin</h1>
+<section id="info">
+    <header>
+        <h2 class="clickable fade-block" data-target="#info .content">Info</h2>
+    </header>
+    <div class="content shown">
+        <?php
+            $editalDAO = new EditalDAO;
+            $editais = $editalDAO->selectAll("Edital", NULL);
+            if ($editais) :
+                if (!is_array($editais)) $editais = array($editais);
+        ?>
+        <ul id="info">
+            <?php foreach ($editais as $edital) : ?>
+            <li class="fifth fleft">
+                <p class="title center bold"><?=$edital->get('nome')?></p>
+                <p class="number center thin"><?=$editalDAO->countAnswersPerEdital($edital->get('id'))?></p>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+    </div>
+</section>
 <section id="cadastros">
     <header>
         <h2 class="clickable fade-block" data-target="#cadastros .content">Cadastros</h2>
     </header>
-    <div class="content shown">
+    <div class="content hidden">
         <div class="menu_block third fleft">
             <h3>Editais</h3>
             <ul>

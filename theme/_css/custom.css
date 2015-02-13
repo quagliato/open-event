@@ -34,6 +34,19 @@ ul#edital_list li .note{
 }
 
 /******************************************************************************/
+/* INFO */
+ul#info li{
+}
+
+ul#info .title{
+    font-size: 16px;
+}
+
+ul#info .number{
+    font-size: 40px;
+}
+
+/******************************************************************************/
 /* CUSTOM */
 
 /*a, a:visited{ color: #00E7EB !important; }
