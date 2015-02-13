@@ -62,20 +62,18 @@
                             ?>
 
                             <label for="<?=$id?>"><?=$pergunta->get('titulo')?> <?=$pergunta ? "<em>($descricao)</em>" : ""?></label>
+                            <?php $tamanhoResposta = $pergunta->get('tamanho_resposta'); ?>
                             <?php if ($tipoResposta == "text") : ?>
-                                <?php $tamanhoResposta = $pergunta->get('tamanho_resposta'); ?>
                                 <input name="<?=$name?>" type="text" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="$tamanhoResposta" ' : ''?>placeholder="<?=$pergunta->get('exemplo')?>">
 
                             <?php elseif ($tipoResposta == "textarea-s") : ?>
-                                <?php $tamanhoResposta = $pergunta->get('tamanho_resposta'); ?>
                                 <textarea name="<?=$name?>" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="$tamanhoResposta" ' : ''?> placeholder="<?=$pergunta->get('exemplo')?>" class="s"></textarea>
 
                             <?php elseif ($tipoResposta == "textarea-m") : ?>
-                                <?php $tamanhoResposta = $pergunta->get('tamanho_resposta'); ?>
                                 <textarea name="<?=$name?>" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="$tamanhoResposta" ' : ''?> placeholder="<?=$pergunta->get('exemplo')?>" class="m"></textarea>
 
                             <?php elseif ($tipoResposta == "textarea-l") : ?>
-                                <?php $tamanhoResposta = $pergunta->get('tamanho_resposta'); ?>
+                                
                                 <textarea name="<?=$name?>" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="$tamanhoResposta" ' : ''?> placeholder="<?=$pergunta->get('exemplo')?>" class="l"></textarea>
 
                             <?php elseif ($tipoResposta == "number") : ?>
