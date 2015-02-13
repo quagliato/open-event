@@ -111,7 +111,7 @@
                             <input name="Pergunta-titulo" type="text" id="titulo" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('titulo').'"' : ''?>>
                         </div>
 
-                        <div class="input_container half">
+                        <div class="input_container half last">
                             <label for="descricao">Descrição</label>
                             <input name="Pergunta-descricao" type="text" id="descricao"<?=$status == "UPDATING" ? ' value="'.$obj->get('descricao').'"' : ''?>>
                         </div>
