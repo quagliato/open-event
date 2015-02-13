@@ -59,13 +59,10 @@
 
                         <script>
                         $('#tipo_resposta').change(function(){
+                            // If question type is not text, it does not show
+                            // fielts for max size and example.
                             var typesWithSize = ["text", "textarea-s", "textarea-m", "textarea-l"];
-
-                            var selectedItem = false
-                            $(this).find("option").each(function(){
-                                if ($(this).is(":selected")) selectedItem = $(this);
-                            });
-
+                            var selectedItem = $("#tipo_resposta option:selected");
                             if (typesWithSize.indexOf(selectedItem.attr("value")) >= 0) {
                                 $("#tamanho_resposta_container").removeClass("hidden");
                                 $("#exemplo_container").removeClass("hidden");
@@ -77,7 +74,7 @@
                         });
                         </script>
 
-                        <div class="input_container quarter">
+                        <div class="input_container fourth">
                             <label for="tipo_resposta">Tipo de Resposta</label>
                             <select name="Pergunta-tipo_resposta" id="tipo_resposta">
                                 <?php $value = "text"; $title = "Texto - Uma linha"; ?>
@@ -105,7 +102,7 @@
                             </select>
                         </div>
 
-                        <div class="input_container quarter last">
+                        <div class="input_container fourth last">
                             <label for="ordem_exibicao">Ordem de Exibição</label>
                             <input name="Pergunta-ordem_exibicao" type="number" id="ordem_exibicao" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('ordem_exibicao').'"' : ''?>>
                         </div>
