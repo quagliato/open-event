@@ -63,7 +63,7 @@
 
                             ?>
 
-                            <label for="<?=$id?>"><?=$pergunta->get('titulo')?> <?=$pergunta ? "<em>($descricao)</em>" : ""?></label>
+                            <label for="<?=$id?>"><?=$pergunta->get('titulo')?> <?=$descricao ? "<em>($descricao)</em>" : ""?></label>
                             <?php $tamanhoResposta = $pergunta->get('tamanho_resposta'); ?>
                             <?php if ($tipoResposta == "text") : ?>
                                 <input name="<?=$name?>" type="text" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="'.$tamanhoResposta.'" ' : ''?>placeholder="<?=$pergunta->get('exemplo')?>">
