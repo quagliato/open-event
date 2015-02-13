@@ -24,6 +24,10 @@ class Pergunta extends GenericClass{
         'ordem_exibicao' => 'int',
     );
 
+    public static function getTypesWithSize() {
+        return array("text", "textarea-s", "textarea-m", "textarea-l");
+    }
+
     // protected static $createSQL = "
     //     CREATE TABLE IF NOT EXISTS ".self::sys_tablename." (
     //         id INT NOT NULL AUTO_INCREMENT,

@@ -5,6 +5,8 @@
 
     $pergunta = DataBinder::bind($_POST, "Pergunta");
 
+    if (in_array($pergunta->get('tipo_resposta', Pergunta::getTypesWithSize()))) $pergunta->set('tamanho_resposta', 0);
+
     if ($genericDAO->update($pergunta, array("id"), "id = ".$pergunta->get('id'))) :
         $return[] = array(
             "Action" => "Message",

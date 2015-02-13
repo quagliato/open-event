@@ -80,6 +80,25 @@
                     </div>
 
                     <div class="input_line">
+                        <script>
+                        $('#tipo_resposta').change(function(){
+                            var typesWithSize = [];
+                            typesWithSize[] = "text";
+                            typesWithSize[] = "textarea-s";
+                            typesWithSize[] = "textarea-m";
+                            typesWithSize[] = "textarea-l";
+
+                            var selectedItem = $(this).find("option:selected")[0];
+
+                            if ($.inArray(selectedItem.attr("value"), typesWithSize) {
+                                $("#tamanho_resposta").removeClass("hidden");
+                            } else {
+                                $("#tamanho_resposta").addClass("hidden");
+                            }
+                        });
+                        </script>
+
+
                         <div class="input_container third">
                             <label for="tipo_resposta">Tipo de Resposta</label>
                             <select name="Pergunta-tipo_resposta" id="tipo_resposta">
@@ -108,7 +127,7 @@
                             </select>
                         </div>
 
-                        <div class="input_container third">
+                        <div id="tamanho_resposta" class="input_container third hidden">
                             <label for="tamanho_resposta">Tamanho máximo da resposta</label>
                             <input name="Pergunta-tamanho_resposta" type="number" id="tamanho_resposta" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('tamanho_resposta').'"' : ''?>>
                         </div>
