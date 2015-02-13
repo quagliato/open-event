@@ -1,9 +1,9 @@
 <h1 class="center">Admin</h1>
 <section id="cadastros">
     <header>
-        <h2 class="clickable" data-target="#cadastros .content">Cadastros</h2>
+        <h2 class="clickable fade-block" data-target="#cadastros .content">Cadastros</h2>
     </header>
-    <div class="content">
+    <div class="content shown">
         <div class="menu_block third fleft">
             <h3>Editais</h3>
             <ul>
@@ -32,15 +32,3 @@
         </div>
     </div>
 </section>
-
-<script>
-$('.clickable').bind('click', function(event){
-    event.preventDefault();
-    var target = $(this).attr("data-target");
-    if (target.hasClass("hidden")) {
-        target.removeClass("hidden");
-    } else {
-        target.addClass("hidden");
-    }
-});
-</script>

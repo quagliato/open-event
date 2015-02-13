@@ -57,6 +57,8 @@ a:hover{ text-decoration: none; }
 .lower { text-transform: lowercase !important; }
 .no-transform { text-transform: none !important; }
 
+.clickable { cursor: pointer; }
+
 /******************************************************************************/
 /* INPUTS */
 .input_line { display: block; height: auto; margin: 0 0 10px 0; overflow: hidden; position: relative; width: 100%; }
