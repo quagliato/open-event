@@ -35,7 +35,7 @@ class RespostaEditalDAO extends GenericDAO {
                 $end = new DateTime($respostaEdital->get('dt_fim_resposta'));
 
                 $diff = $end->diff($begin);
-                if (intval($diff->format("%h")) > 1) $answeringTime += intval($diff->format("%h") * 60;
+                if (intval($diff->format("%h")) > 1) $answeringTime += (intval($diff->format("%h")) * 60);
                 $answeringTime += intval($diff->format("%i"));
 
                 $answeringCount++;
