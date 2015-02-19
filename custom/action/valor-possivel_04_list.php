@@ -32,11 +32,17 @@
                     </thead>
                     <?php
                         $count = 0;
+                        $lastPerguntaId = false;
+                        $editalPergunta = false;
                         foreach ($valoresPossiveis as $valorPossivel) :
+                            if ($lastPerguntaId != $valorPossivel->get('id_pergunta')) {
+                                $lastPerguntaId = $valorPossivel->get('id_pergunta');
+                                $editalPergunta = $valorPossivelDAO->getEditalPergunta($valorPossivel->get('id'));
+                            }
                     ?>
                         <tr <?php if ($count % 2 == 0) { echo 'style="background-color: #CCCCCC;"'; } ?>>
                             <td style="text-align:center;"><?=$valorPossivel->get('id')?></td>
-                            <td style="text-align:left;"><?=$valorPossivelDAO->getEditalPergunta($valorPossivel->get('id'))?></td>
+                            <td style="text-align:left;"><?=$editalPergunta?></td>
                             <td style="text-align:left;"><?=$valorPossivel->get('valor')?></td>
                             <td style="text-align:left;"><?=$valorPossivel->get('label')?></td>
                             <td style="text-align:center;"><a href="<?=APP_URL?>/admin/valor-possivel?id=<?=$valorPossivel->get('id')?>">Editar</a></td>
