@@ -49,7 +49,14 @@ function setSubmitEvents() {
         }
         /**********************************************************************/
 
-        genericSubmit(action, method, values);
+        var goodToGo = true;
+        if ($(this).hasClass("needs-confirmation")) {
+            var message = "Pressione OK caso realmente queira realizar esse envio.";
+            if ($(this).attr("data-confirm-msg") != "") message = $(this).attr("data-confirm-msg");
+            if (!confirm(message)) goodToGo = false;
+        }
+
+        if (goodToGo) genericSubmit(action, method, values);
     });
 
     $('a.post').bind('click', function(event){

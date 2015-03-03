@@ -37,7 +37,7 @@
                 
             </header>
             <section class="wrapper center">
-                <form method="POST" action="<?=APP_URL?>/edital/action" class="new_submit">
+                <form method="POST" action="<?=APP_URL?>/edital/action" class="new_submit needs-confirmation" data-confirm-msg="Você realmente terminou de preencher esse edital? Se sim, pressione OK.">
 
                     <input type="hidden" name="edital" value="<?=$edital->get('id')?>">
                     <input type="hidden" name="dt_inicio_resposta" value="<?=date('Y-m-d H:i:s')?>">
