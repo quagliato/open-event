@@ -259,6 +259,7 @@ a.submit:hover{
     line-height: 40px;
     padding: 0 10px;
     text-align: center;
+    text-decoration: none;
     text-transform: uppercase;
     vertical-align: middle;
     width: auto;
@@ -275,6 +276,7 @@ button{
     line-height: 14px;
     padding: 10px;
     text-align: center;
+    text-decoration: none;
     text-transform: uppercase;
     vertical-align: top;
     width: auto;
