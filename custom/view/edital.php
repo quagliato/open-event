@@ -126,7 +126,7 @@
                                     $valoresPossiveis = $valorPossivelDAO->getValorPossivelByPergunta($pergunta->get('id'));
                                     foreach ($valoresPossiveis as $valorPossivel) :
                                 ?>
-                                    <option value="<?=$valorPossivel->get('valor')?>"<?=$respostaPergunta->get('vl_resposta') == $valorPossivel->get('valor') ? ' selected' : ''?>><?=$valorPossivel->get('label')?></option>
+                                    <option value="<?=$valorPossivel->get('valor')?>"<?=$respostaPergunta && $respostaPergunta->get('vl_resposta') == $valorPossivel->get('valor') ? ' selected' : ''?>><?=$valorPossivel->get('label')?></option>
                                 <?php
                                     endforeach;
                                 ?>
@@ -159,14 +159,13 @@
                                 ?>
                             <?php elseif ($tipoResposta == "slider") : ?>
                                 <p id="<?=$id?>text" class="fright"></p>
-                                <?php var_dump($respostaPergunta->get('vl_resposta')); ?>
                                 <select name="<?=$name?>" id="<?=$id?>" class="slider" style="display:none;">
                                 <?php
                                     $valorPossivelDAO = new ValorPossivelDAO;
                                     $valoresPossiveis = $valorPossivelDAO->getValorPossivelByPergunta($pergunta->get('id'));
                                     foreach ($valoresPossiveis as $valorPossivel) :
                                 ?>
-                                    <option value="<?=$valorPossivel->get('id')?>"<?=$respostaPergunta->get('vl_resposta') == $valorPossivel->get('id') ? ' selected' : ''?>><?=$valorPossivel->get('label')?></option>
+                                    <option value="<?=$valorPossivel->get('id')?>"<?=$respostaPergunta && $respostaPergunta->get('vl_resposta') == $valorPossivel->get('id') ? ' selected' : ''?>><?=$valorPossivel->get('label')?></option>
                                 <?php
                                     endforeach;
                                 ?>
