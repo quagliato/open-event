@@ -12,6 +12,9 @@
         "/admin/edital/action/delete" => "action/edital_03_delete.php",
         "/admin/edital/action/list" => "action/edital_04_list.php",
 
+        "/admin/edital/buscar" => "view/edital_admin_buscar.php",
+        "/admin/edital/buscar/action" => "action/edital_admin_buscar.php",
+
         "/admin/pergunta" => "view/pergunta_admin.php",
         "/admin/pergunta/action/insert" => "action/pergunta_01_insert.php",
         "/admin/pergunta/action/update" => "action/pergunta_02_update.php",

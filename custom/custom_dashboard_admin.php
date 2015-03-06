@@ -21,6 +21,18 @@
         <?php endif; ?>
     </div>
 </section>
+
+<section id="editais">
+    <header>
+        <h2 class="clickable fade-block" data-target="#editais .content">Editais</h2>
+    </header>
+    <div class="content hidden">
+        <div class="menu_block third fleft">
+            <a href="<?=APP_URL?>/admin/edital">Buscar editais</a>  
+        </div>
+    </div>
+</section>
+
 <section id="cadastros">
     <header>
         <h2 class="clickable fade-block" data-target="#cadastros .content">Cadastros</h2>

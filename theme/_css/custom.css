@@ -55,6 +55,21 @@ ul#info .number{
 }
 
 /******************************************************************************/
+/* TABLE */
+td .btn {
+    font-size: 24px !important;
+}
+td .btn.dark_green{
+    color: #1DA075 !important;
+}
+td .btn.black{
+    color: #000000 !important;
+}
+td .btn.dark_red{
+    color: #D0351B !important;
+}
+
+/******************************************************************************/
 /* CUSTOM */
 
 /*a, a:visited{ color: #00E7EB !important; }
