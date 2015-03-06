@@ -28,7 +28,13 @@
     </header>
     <div class="content hidden">
         <div class="menu_block third fleft">
-            <a href="<?=APP_URL?>/admin/edital">Buscar editais</a>  
+            <a href="<?=APP_URL?>/admin/edital/buscar">Buscar editais</a>
+        </div>
+        <div class="menu_block third fleft">
+            &nbsp;
+        </div>
+        <div class="menu_block third fleft">
+            &nbsp;
         </div>
     </div>
 </section>
