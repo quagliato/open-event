@@ -32,24 +32,43 @@
                 
                 <div id="edital_info">
                     <?php if (!$respostaEdital) : ?>
+
                     <p><?=$edital->get('desc_completa')?></p>
+
                     <?php else : ?>
-                    <p><strong>Nome: </strong><?=$usuario->get('nome')?></p>
+
+                    <div class="left">
+                        <p><strong>Nome: </strong><?=$usuario->get('nome')?></p>
+                        <p><strong>Cidade/UF: </strong><?=$usuario->get('end_cidade')?> / <?=$usuario->get('end_estado')?></p>
+                        <p><strong>Ensino: </strong><?=$usuario->get('inst_ens')?> / <?=$usuario->get('curso')?> - Período: <?=$usuario->get('periodo')?></p>
+                        <p><strong>E-mail: </strong><?=$usuario->get('email')?></p>
+                        <p><strong>Deficiência: </strong><?=strlen($usuario->get('deficiencia')) == 0 ? "Nenhuma" : $usuario->get('deficiencia')?></p>
+                        <p><strong>Alergia: </strong><?=strlen($usuario->get('alergias')) == 0 ? "Nenhuma" : $usuario->get('alergias')?></p>
+                    </div>
+
                     <?php endif; ?>
                     <div class="metric_info">
+
                         <!-- <span class="fleft left">
                             <i class="fa fa-play"></i>&nbsp;<?=Utils::sqlTimestamp2BrFormat($edital->get('dt_abertura'))?>&nbsp;&nbsp;&nbsp;
                             <i class="fa fa-stop"></i>&nbsp;<?=Utils::sqlTimestamp2BrFormat($edital->get('dt_fechamento'))?>
                         </span> -->
+
                         <span class="fleft left">
+
                             <!-- <i class="fa fa-check f-positive"></i>&nbsp;<?=Utils::sqlTimestamp2BrFormat($edital->get('dt_abertura'))?>&nbsp;&nbsp;&nbsp; -->
                             <!-- <i class="fa fa-times f-negative"></i>&nbsp;<?=Utils::sqlTimestamp2BrFormat($edital->get('dt_fechamento'))?> -->
+
                             <?php if (!$respostaEdital) : ?>
+
                             <strong>Fechamento deste edital:</strong> <?=Utils::sqlTimestamp2BrFormat($edital->get('dt_fechamento'))?>
+
                             <?php else : ?>
+
                             <strong>Início da Resposta:</strong> <?=Utils::sqlTimestamp2BrFormat($respostaEdital->get('dt_inicio_resposta'))?>&nbsp;&nbsp;
                             <strong>Fim da Resposta:</strong> <?=Utils::sqlTimestamp2BrFormat($respostaEdital->get('dt_inicio_resposta'))?>
-                        <?php endif; ?>
+
+                            <?php endif; ?>
                         </span>
 
                         <?php if (!$respostaEdital) : ?>
