@@ -109,9 +109,9 @@
                                 $respostaPergunta = $genericDAO->selectAll('RespostaPergunta', 'id_resposta_edital = '.$respostaEdital->get('id').' AND id_pergunta = '.$pergunta->get('id'));
                             }
 
-                            // if ($respostaPergunta) {
-                            //     var_dump($respostaPergunta->get('vl_resposta'));
-                            // }
+                            if (!$respostaPergunta || is_array($respostaPergunta) || sizeof($respostaPergunta) == 0) {
+                                $respostaPergunta = false;
+                            }
 
                             ?>
 
@@ -177,44 +177,48 @@
                                     endforeach;
                                 ?>
                             <?php elseif ($tipoResposta == "slider") : ?>
-                                <p id="<?=$id?>text" class="fright"></p>
-                                <select name="<?=$name?>" id="<?=$id?>" class="slider" style="display:none;">
-                                <?php
-                                    $valorPossivelDAO = new ValorPossivelDAO;
-                                    $valoresPossiveis = $valorPossivelDAO->getValorPossivelByPergunta($pergunta->get('id'));
-                                    foreach ($valoresPossiveis as $valorPossivel) :
-                                ?>
-                                    <option value="<?=$valorPossivel->get('id')?>"<?=$respostaPergunta && $respostaPergunta->get('vl_resposta') == $valorPossivel->get('id') ? ' selected' : ''?>><?=$valorPossivel->get('label')?></option>
-                                <?php
-                                    endforeach;
-                                ?>
-                                </select>
-                                 <script>
-                                    $(function() {
-                                        var select = $( "#<?=$id?>" );
+                                <?php if ($respostaPergunta) : ?>
+                                    <p><strong>Resposta:</strong> <?=$respostaPergunta->get('vl_resposta')?></p>
+                                <?php else : ?>
+                                    <p id="<?=$id?>text" class="fright"></p>
+                                    <select name="<?=$name?>" id="<?=$id?>" class="slider" style="display:none;">
+                                    <?php
+                                        $valorPossivelDAO = new ValorPossivelDAO;
+                                        $valoresPossiveis = $valorPossivelDAO->getValorPossivelByPergunta($pergunta->get('id'));
+                                        foreach ($valoresPossiveis as $valorPossivel) :
+                                    ?>
+                                        <option value="<?=$valorPossivel->get('id')?>"><?=$valorPossivel->get('label')?></option>
+                                    <?php
+                                        endforeach;
+                                    ?>
+                                    </select>
+                                     <script>
+                                        $(function() {
+                                            var select = $( "#<?=$id?>" );
 
-                                        var firstOption = $(select.children("option")[0]);
-                                        $('#<?=$id?>text').html(firstOption.html());
+                                            var firstOption = $(select.children("option")[0]);
+                                            $('#<?=$id?>text').html(firstOption.html());
 
-                                        var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
-                                            min: <?=$valorPossivelDAO->getLowestValue($pergunta->get('id'))?>,
-                                            max: <?=$valorPossivelDAO->getHigherValue($pergunta->get('id'))?>,
-                                            range: "min",
-                                            value: select[ 0 ].selectedIndex + 1,
-                                            slide: function( event, ui ) {
-                                                select[ 0 ].selectedIndex = ui.value - 1;
-                                                
-                                                var count = 0;
-                                                select.children("option").each(function(){
-                                                    if (count == select[0].selectedIndex) {
-                                                        $('#<?=$id?>text').html($(this).html());
-                                                    }
-                                                    count++;
-                                                });
-                                            }
+                                            var slider = $( "<div id='slider'></div>" ).insertAfter( select ).slider({
+                                                min: <?=$valorPossivelDAO->getLowestValue($pergunta->get('id'))?>,
+                                                max: <?=$valorPossivelDAO->getHigherValue($pergunta->get('id'))?>,
+                                                range: "min",
+                                                value: select[ 0 ].selectedIndex + 1,
+                                                slide: function( event, ui ) {
+                                                    select[ 0 ].selectedIndex = ui.value - 1;
+                                                    
+                                                    var count = 0;
+                                                    select.children("option").each(function(){
+                                                        if (count == select[0].selectedIndex) {
+                                                            $('#<?=$id?>text').html($(this).html());
+                                                        }
+                                                        count++;
+                                                    });
+                                                }
+                                            });
                                         });
-                                    });
-                                </script>
+                                    </script>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </div>
                     </div>

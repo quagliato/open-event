@@ -92,7 +92,7 @@
                                 <?php endif; ?>
                             </td>
                             <td class="center">
-                                <?php if (($respostaEdital->get('status') == 3 && $genericDAO->selectAll('RespostaEditalStatus')) || $respostaEdital->get('status') == 1) : ?>
+                                <?php if (($respostaEdital->get('status') == 3 && $genericDAO->selectAll('RespostaEditalStatus', "id_resposta_edital = ".$respostaEdital->get('id')." AND id_user = ".$usuario->get('id'))) || $respostaEdital->get('status') == 1) : ?>
                                 <a class="btn light_gray"><i class="fa fa-dot-circle-o"></i></a>
                                 <?php else : ?>
                                 <a class="post btn black" id="<?=$respostaEdital->get('id')?>" href="<?=APP_URL?>/admin/resposta-edital/action/pre-select"><i class="fa fa-dot-circle-o"></i></a>
