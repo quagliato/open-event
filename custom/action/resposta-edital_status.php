@@ -22,6 +22,8 @@
                 $user = $genericDAO->selectAll("Usuario", "id = ".$respostaEditalStatus->get('id_user'));
                 echo '<p><strong>'.RespostaEditalStatus::getTextStatus($respostaEditalStatus->get('status'))."</strong> as <em>".Utils::sqlTimestamp2BrFormat($respostaEditalStatus->get('dt_update'))."</em> por <u>".$user->get('nome').'</u></p>';
             }
+        } else {
+            echo "<h3>Nenhuma alteração de status.</h3>";
         }
     }
 ?>
