@@ -9,6 +9,7 @@ class RespostaEdital extends GenericClass{
     protected $id_user;
     protected $dt_inicio_resposta;
     protected $dt_fim_resposta;
+    protected $status;
 
     protected $sys_type = array(
         'id' => 'int',
@@ -16,6 +17,7 @@ class RespostaEdital extends GenericClass{
         'id_user' => 'int',
         'dt_inicio_resposta' => 'date',
         'dt_fim_resposta' => 'date',
+        'status' => 'int',
     );
 
     // protected static $createSQL = "
@@ -27,5 +29,7 @@ class RespostaEdital extends GenericClass{
     //         dt_fim_resposta TIMESTAMP NOT NULL,
     //         PRIMARY KEY (id)
     //     );";
+
+    // ALTER TABLE resposta_edital ADD COLUMN status INT NOT NULL DEFAULT 0 AFTER dt_fim_resposta;
 }
 ?>
