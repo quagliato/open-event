@@ -53,6 +53,11 @@ a:hover{ text-decoration: none; }
 .mt40 { margin-top: 40px !important; }
 .mt80 { margin-top: 80px !important; }
 
+.mb10 { margin-bottom: 10px !important; }
+.mb20 { margin-bottom: 20px !important; }
+.mb40 { margin-bottom: 40px !important; }
+.mb80 { margin-bottom: 80px !important; }
+
 .upper { text-transform: uppercase !important; }
 .lower { text-transform: lowercase !important; }
 .no-transform { text-transform: none !important; }

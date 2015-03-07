@@ -29,9 +29,10 @@
                             <h2>Por status</h2>
                             <label for="status">Status</label>
                             <select name="status" id="status">
-                                <option value="PRE">Pré-selecionado</option>
-                                <option value="NEG">Negado</option>
-                                <option value="SEL">Selecionado</option>
+                                <option value="">Todos</option>
+                                <option value="3">Pré-selecionado</option>
+                                <option value="2">Negado</option>
+                                <option value="1">Selecionado</option>
                             </select>
                         </div>
                         <div class="input_container third fnone">
@@ -55,7 +56,7 @@
                     </div>
 
 
-                    <div class="input_line submit_line right">
+                    <div class="input_line submit_line center">
                         <a href="#" class="submit negative cancel">Cancelar</a>
                         <input type="submit" name="buscar" value="Buscar" class="positive">
                     </div>

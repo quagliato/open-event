@@ -19,6 +19,8 @@ function openLightbox(href) {
     
     $.get(href, values, success);
 
+    $('#lightbox_overlay').height($(window).height());
+    $('#lightbox_overlay').width($(window).width());
     $('#lightbox_overlay').fadeIn('fast');
     $('#lightbox').fadeIn('fast');
 }

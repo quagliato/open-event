@@ -202,11 +202,12 @@
                 <?php
                     endforeach;
                 ?>
-
+                    <?php if (!$respostaEdital) : ?>
                     <div class="input_line submit_line center">
                         <a href="#" class="submit negative cancel">Cancelar</a>
                         <input type="submit" name="Enviar" value="Enviar" class="positive">
                     </div>
+                    <?php endif; ?>
                 </form>
             </section>
         </main>

@@ -3,7 +3,7 @@
     <header>
         <h2 class="clickable fade-block" data-target="#info .content">Info</h2>
     </header>
-    <div class="content hidden">
+    <div class="content hidden mb80">
         <?php
             $editalDAO = new EditalDAO;
             $editais = $editalDAO->selectAll("Edital", NULL);
@@ -26,7 +26,7 @@
     <header>
         <h2 class="clickable fade-block" data-target="#editais .content">Editais</h2>
     </header>
-    <div class="content hidden">
+    <div class="content hidden mb80">
         <div class="menu_block third fleft">
             <a href="<?=APP_URL?>/admin/edital/buscar">Buscar editais</a>
         </div>
@@ -43,7 +43,7 @@
     <header>
         <h2 class="clickable fade-block" data-target="#cadastros .content">Cadastros</h2>
     </header>
-    <div class="content hidden">
+    <div class="content hidden mb80">
         <div class="menu_block third fleft">
             <h3>Editais</h3>
             <ul>

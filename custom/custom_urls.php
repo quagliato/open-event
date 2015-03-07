@@ -15,6 +15,11 @@
         "/admin/edital/buscar" => "view/edital_admin_buscar.php",
         "/admin/edital/buscar/action" => "action/edital_admin_buscar.php",
 
+        "/admin/resposta-edital/action/approve" => "action/resposta-edital_approve.php",
+        "/admin/resposta-edital/action/deny" => "action/resposta-edital_deny.php",
+        "/admin/resposta-edital/action/pre-select" => "action/resposta-edital_pre-select.php",
+        "/admin/resposta-edital/action/status" => "action/resposta-edital_status.php",
+
         "/admin/pergunta" => "view/pergunta_admin.php",
         "/admin/pergunta/action/insert" => "action/pergunta_01_insert.php",
         "/admin/pergunta/action/update" => "action/pergunta_02_update.php",

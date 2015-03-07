@@ -68,6 +68,9 @@ td .btn.black{
 td .btn.dark_red{
     color: #D0351B !important;
 }
+td .btn.light_gray{
+    color: #666666 !important;
+}
 
 /******************************************************************************/
 /* CUSTOM */
