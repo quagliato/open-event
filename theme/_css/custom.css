@@ -6,11 +6,12 @@
     height: auto;
     margin: 0 auto;
     min-height: 80px;
-    width: 634px; /* TODO: Corrigir essa implementação. */
+    width: 645px; /* TODO: Corrigir essa implementação. */
 }
 
 #edital_info .metric_info{
-    margin: 20px 0 0 0;
+    margin: 20px 0;
+    overflow: hidden;
 }
 
 ul#edital_list{
