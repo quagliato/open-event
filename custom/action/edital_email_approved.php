@@ -6,7 +6,7 @@
 
 
 
-    $respostasEdital = $genericDAO->selectAll("RespostaEdital", "status = 1 AND id_user = 4");
+    $respostasEdital = $genericDAO->selectAll("RespostaEdital", "status = 1");
 ?>
         <main>
             <header class="center">
