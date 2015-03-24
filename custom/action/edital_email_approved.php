@@ -33,16 +33,16 @@
                     </thead>
                     <?php
                         $count = 0;
+
                         foreach ($respostasEdital as $respostaEdital) :
                             $edital = $genericDAO->selectAll('Edital', 'id = '.$respostaEdital->get('id_edital'));
                             $usuario = $genericDAO->selectAll('Usuario', 'id = '.$respostaEdital->get('id_user'));
                             $message = "";
-                            $message .= "<p>Parabéns! Você foi aprovado no edital de <strong>".$edital->get('nome')."</strong> do N SP 2015!</p>";
-                            $message .= "<br />";
-                            $message .= "<p>Gostaríamos de te agradecer por essa vontade de nos ajudar na construção do nosso encontro. Caso não tenha marcado na sua agenda, o N Design vai acontecer dos dias 9 26 de julho. :D</p>";
-                            $message .= "<br />";
-                            $message .= "<p><strong>IMPORTANTE:</strong> Precisamos que você responda esse e-mail confirmando a sua participação nesse edital o qual foi aprovado até dia <strong>02 de abril!</strong></p>";
+                            $message .= "<p>Parabéns! Você foi aprovado no edital de <strong>".$edital->get('nome')."</strong> do ".APP_TITLE."!</p>";
+                            $message .= "<p>Gostaríamos de te agradecer por essa vontade de nos ajudar na construção do nosso encontro. Caso não tenha marcado na sua agenda, o ".APP_TITLE." vai acontecer dos dias ".DATE_EVENT_STR.". :D</p>";
+                            $message .= "<p><strong>IMPORTANTE:</strong> Precisamos que você responda esse e-mail confirmando a sua participação nesse edital o qual foi aprovado até dia <strong>".DATE_EDITAL_CONFIRMATION."!</strong></p>";
                             $message .= "<p>Se precisar falar alguma coisa que seja muito importante para nosso conhecimento, a hora também é essa! ;)</p>";
+                            $message .= "<p>Com carinho,</p>";
 
                             $notification = new Notification;
                             $subject = DEFAULT_EMAIL_SUBJECT." / ".$edital->get("nome")." - Confirmação";
