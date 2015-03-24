@@ -45,7 +45,7 @@
                             $message .= "<p>Com carinho,</p>";
 
                             $notification = new Notification;
-                            $subject = DEFAULT_EMAIL_SUBJECT." / ".$edital->get("nome")." - Confirmação";
+                            $subject = DEFAULT_EMAIL_SUBJECT." / ".$edital->get("nome")." - ".$respostaEdital->get('id')." - Confirmação";
 
                             $mailResult = $notification->sendEmail($usuario->get('email'), $subject, $message, DEFAULT_EMAIL_FROM_EDITAIS);
                     ?>
