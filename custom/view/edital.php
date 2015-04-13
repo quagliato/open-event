@@ -42,6 +42,8 @@
                         <p><strong>Cidade/UF: </strong><?=$usuario->get('end_cidade')?> / <?=$usuario->get('end_estado')?></p>
                         <p><strong>Ensino: </strong><?=$usuario->get('inst_ens')?> / <?=$usuario->get('curso')?> - Período: <?=$usuario->get('periodo')?></p>
                         <p><strong>E-mail: </strong><?=$usuario->get('email')?></p>
+                        <p><strong>Telefone Residencial: </strong><?=$usuario->get('telefone_residencial')?></p>
+                        <p><strong>Telefone Celular: </strong><?=$usuario->get('telefone_celular')?></p>
                         <p><strong>Deficiência: </strong><?=strlen($usuario->get('deficiencia')) == 0 ? "Nenhuma" : $usuario->get('deficiencia')?></p>
                         <p><strong>Alergia: </strong><?=strlen($usuario->get('alergias')) == 0 ? "Nenhuma" : $usuario->get('alergias')?></p>
                     </div>
