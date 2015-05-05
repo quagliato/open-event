@@ -46,8 +46,6 @@ function userHasExemption($idUser, $idProduct) {
     $products = $_POST['products'];
     if (!is_array($products)) $products = array($products);
 
-    var_dump($products);
-
     $transactionItems = array();
     $totalValue = 0;
 
@@ -64,7 +62,7 @@ function userHasExemption($idUser, $idProduct) {
             }
             $transactionItem->set('vl_item', ($productObj->get('price') - $transactionItem->get('vl_exemption')));
 
-            $totalValue += $transactionItem->get('vl_item');
+            $totalValue += intval($transactionItem->get('vl_item'));
 
             $transactionItems[] = $transactionItem;
         }
