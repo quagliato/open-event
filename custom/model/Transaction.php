@@ -8,6 +8,8 @@ class Transaction extends GenericClass{
     protected $id_user;
     protected $dt_transaction;
     protected $total_value;
+    protected $value_exemption;
+    protected $id_last_payment;
     protected $status;
 
     protected $sys_type = array(
@@ -15,6 +17,8 @@ class Transaction extends GenericClass{
         'id_user' => 'int',
         'dt_transaction' => 'date',
         'total_value' => 'float',
+        'value_exemption' => 'float',
+        'id_last_payment' => 'int',
         'status' => 'int',
     );
 
@@ -24,6 +28,8 @@ class Transaction extends GenericClass{
         //     id_user INT NULL,
         //     dt_transaction TIMESTAMP NOT NULL,
         //     total_value FLOAT NOT NULL DEFAULT 0,
+        //     value_exempltion FLOAT NOT NULL DEFAULT 0,
+        //     id_last_payment INT NULL,
         //     status INT NOT NULL DEFAULT 0,
         //     PRIMARY KEY (id)
         // );

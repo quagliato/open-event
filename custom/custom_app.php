@@ -20,6 +20,7 @@
   include_once("model/RespostaPergunta.php");
   include_once("model/Transaction.php");
   include_once("model/TransactionItem.php");
+  include_once("model/TransactionPayment.php");
   include_once("model/UsuarioFull.php");
   include_once("model/ValorPossivel.php");
 

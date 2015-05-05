@@ -270,19 +270,23 @@ class Payment {
             $credentials = new PagSeguroAccountCredentials(PAGSEGURO_EMAIL, PAGSEGURO_TOKEN);
             $url = $paymentRequest->register($credentials);
             if ($url) {
-                $pagamento = new Pagamento;
-                $pagamento->set('id_transacao', $transacao->get('id'));
-                $pagamento->set('metodo_pagto', 'PGS');
-                $pagamento->set('info', $url);
-                $pagamento->set('obs', "");
-
-                $pagamento_dao = new PagamentoDAO;
-                if (!$pagamento_dao->insert($pagamento)) {
-                    $this->rollbackTransacaoAndItems($transacao);
-                    Structure::redirWithMessage("Erro 304\nProblemas ao criar pagamento. Tente novamente, por favor.", "/dashboard");       
-                }
-
-                $to = $usuario->get('email');
+              $now = date('Y-m-d H:i:s');
+              $transactionPayment = new TransactionPayment;
+              $transactionPayment->set('id_transaction', $transaction->get('id'));
+              $transactionPayment->set('dt_payment', $now);
+              $transactionPayment->set('type', 'PGS');
+              $transactionPayment->set('info', $url);
+              $transactionPayment->set('total_value', $transaction->get('total_value'));
+              
+              if (!$genericDAO->insert($transactionPayment)) {
+                return false;
+              }
+              
+              $transactionPayment = $genericDAO->selectAll("TransactionPayment", "dt_payment = '$now' AND type = 'PGS' AND id_transaction = ".$transaction->get('id'));
+              if ($transactionPayment) {
+                $transaction->set('id_last_payment', $transactionPayment->get('id'));
+                
+                $to = $user->get('email');
                 $subject = DEFAULT_EMAIL_SUBJECT;
                 $message = DEFAULT_EMAIL_GREETING;
                 $message .= "<p>Sua inscrição no ".APP_TITLE." foi realizada.</p>";
@@ -295,9 +299,11 @@ class Payment {
                 $additional_headers .= "From:".DEFAULT_EMAIL_FROM;
                 
                 mail($to, $subject, $message, $additional_headers);
-
-                return $pagamento;
-
+                
+                return $transactionPayment;
+              }
+              
+              return false;
             } else {
                 return false;
             }
