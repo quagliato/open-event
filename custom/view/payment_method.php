@@ -52,6 +52,7 @@ function userHasExemption($idUser, $idProduct) {
 
     foreach ($products as $product) {
         $productObj = $genericDAO->selectAll("Product", "id = $product");
+        var_dump($product);
         if ($productObj) {
             $transactionItem = new TransactionItem;
             $transactionItem->set('id_product', $productObj->get('id'));
@@ -64,8 +65,11 @@ function userHasExemption($idUser, $idProduct) {
               $valueExemption += $exemption;
             }
             $transactionItem->set('vl_item', (floatval($productObj->get('price')) - floatval($transactionItem->get('vl_exemption'))));
+            
+            var_dump($transactionItem);
 
             $totalValue += float($transactionItem->get('vl_item'));
+            var_dump($totalValue);
 
             $transactionItems[] = $transactionItem;
         }
@@ -90,7 +94,7 @@ function userHasExemption($idUser, $idProduct) {
                 $genericDAO->updateWithFields($transactionItem, array('id_transaction'), 'id = '.$transactionItem->get('item'));
             }
             
-            if ($totalValue == 0) : ?>
+            if ($totalValue == 0 && $valueExemption > 0) : ?>
                 <p>Você possui total isenção.</p>
                 <p>Sua incrição está <strong>CONFIRMADA.</strong>
             <?php else : ?>

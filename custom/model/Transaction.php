@@ -23,16 +23,16 @@ class Transaction extends GenericClass{
     );
 
     // protected static $createSQL = "
-        // CREATE TABLE IF NOT EXISTS transaction (
-        //     id INT NOT NULL AUTO_INCREMENT,
-        //     id_user INT NULL,
-        //     dt_transaction TIMESTAMP NOT NULL,
-        //     total_value FLOAT NOT NULL DEFAULT 0,
-        //     value_exempltion FLOAT NOT NULL DEFAULT 0,
-        //     id_last_payment INT NULL,
-        //     status INT NOT NULL DEFAULT 0,
-        //     PRIMARY KEY (id)
-        // );
+//         CREATE TABLE IF NOT EXISTS transaction (
+//             id INT NOT NULL AUTO_INCREMENT,
+//             id_user INT NULL,
+//             dt_transaction TIMESTAMP NOT NULL,
+//             total_value FLOAT NOT NULL DEFAULT 0,
+//             value_exemption FLOAT NOT NULL DEFAULT 0,
+//             id_last_payment INT NULL,
+//             status INT NOT NULL DEFAULT 0,
+//             PRIMARY KEY (id)
+//         );
     // ";
 }
 ?>
