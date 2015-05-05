@@ -64,6 +64,8 @@ a:hover{ text-decoration: none; }
 
 .clickable { cursor: pointer; }
 
+.disabled { opacity: 0.6; }
+
 /******************************************************************************/
 /* INPUTS */
 .input_line { display: block; height: auto; margin: 0 0 10px 0; overflow: hidden; position: relative; width: 100%; }

@@ -38,6 +38,11 @@
         "/edital/confirmacao" => "view/edital_confirmacao.php",
 
         "/admin/edital/email/approved" => "action/edital_email_approved.php",
+
+
+        "/pacotes" => "view/product_selection.php",
+        "/pagamento/metodo" => "view/payment_method.php",
+        "/pagamento" => "view/payment.php",
     );
 
 ?>
