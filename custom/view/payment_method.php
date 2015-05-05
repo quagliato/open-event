@@ -48,6 +48,7 @@ function userHasExemption($idUser, $idProduct) {
 
     $transactionItems = array();
     $totalValue = 0;
+    $valueExemption = 0;
 
     foreach ($products as $product) {
         $productObj = $genericDAO->selectAll("Product", "id = $product");
@@ -58,11 +59,13 @@ function userHasExemption($idUser, $idProduct) {
             $exemption = userHasExemption($user->get('id'), $productObj->get('id'));
             $transactionItem->set('vl_exemption', 0);
             if ($exemption) {
-                $transactionItem->set('vl_exemption', $productObj->get('price') * $exemption->get('modifier'));
+              $exemption = floatval($productObj->get('price')) * floatval($exemption->get('modifier'));
+              $transactionItem->set('vl_exemption', $exemption);
+              $valueExemption += $exemption;
             }
-            $transactionItem->set('vl_item', ($productObj->get('price') - $transactionItem->get('vl_exemption')));
+            $transactionItem->set('vl_item', (floatval($productObj->get('price')) - floatval($transactionItem->get('vl_exemption'))));
 
-            $totalValue += intval($transactionItem->get('vl_item'));
+            $totalValue += float($transactionItem->get('vl_item'));
 
             $transactionItems[] = $transactionItem;
         }
@@ -74,13 +77,17 @@ function userHasExemption($idUser, $idProduct) {
     $transaction->set('id_user', $user->get('id'));
     $transaction->set('dt_transaction', $now);
     $transaction->set('total_value', $totalValue);
+    $transaction->set('value_exemption', $valueExemption);
     
     $result = $genericDAO->insert($transaction);
+    var_dump($result);
     if ($result) :
         $transaction = $genericDAO->selectAll("Transaction", "id_user = ".$user->get('id')." AND dt_transaction = '$now'");
+        var_dump($transaction);
         if ($transaction) :
             foreach ($transactionItems as $transactionItem) {
                 $transactionItem->set('id_transaction', $transaction->get('id'));
+                $genericDAO->updateWithFields($transactionItem, array('id_transaction'), 'id = '.$transactionItem->get('item'));
             }
             
             if ($totalValue == 0) : ?>
