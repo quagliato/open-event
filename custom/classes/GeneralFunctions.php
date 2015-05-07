@@ -4,7 +4,8 @@ function isMaxReached() {
     $isClosed = true;
 
     $genericDAO = new GenericDAO;
-    $fatherProducts = $genericDAO->selectAll("Product", "id_father IS NULL");
+    $now = date('Y-m-d H:i:s');
+    $fatherProducts = $genericDAO->selectAll("Product", "id_father IS NULL AND dt_begin < '$now' AND dt_end > '$now'");
     if ($fatherProducts) {
         if (!is_array($fatherProducts)) $fatherProducts = array($fatherProducts);
         foreach ($fatherProducts as $product) {
