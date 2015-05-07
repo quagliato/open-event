@@ -82,9 +82,9 @@
       if ($transactionPayment) {
           Structure::header();
           $html = '<h2>PagSeguro</h2>';
-          $html .= '<p>Valor Total Final: <strong>R$ '.(floatval($transaction->get('total_value')) * PAGSEGURO_MULTIPLIER).'</strong></p>';
-          $html .= '<p><a class="submit positive" href="'.$transactionPayment->get('info').'">Pagar</a></p>';
+          $html .= '<p>Valor Total Final: <strong>R$ '.(floatval($transaction->get('total_value')) * PAGSEGURO_MULTIPLIER).'</strong> <a class="submit positive" href="'.$transactionPayment->get('info').'">Pagar</a></p>';
           $html .= '<p><em>Utilize o mesmo e-mail que você utilizou em seu cadastro.</em></p>';
+          $html .= '<p><em>Aguarde a confirmação de seu pagamento em até 3 dias úteis.</em></p>';
           echo $html;
           Structure::footer();
       } else {
