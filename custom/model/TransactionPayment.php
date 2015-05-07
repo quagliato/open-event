@@ -35,7 +35,7 @@ class TransactionPayment extends GenericClass{
 //             total_value FLOAT NOT NULL DEFAULT 0,
 //             status INT NOT NULL DEFAULT 0,
 //             PRIMARY KEY (id)
-//         );
+//         ) ENGINE=InnoDB AUTO_INCREMENT=50000;
     // ";
 }
 ?>

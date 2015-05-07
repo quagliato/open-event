@@ -26,7 +26,7 @@ class TransactionItem extends GenericClass{
         //     vl_exemption FLOAT NOT NULL DEFAULT 0,
         //     vl_item FLOAT NOT NULL DEFAULT 0,
         //     PRIMARY KEY (id)
-        // );
+        // ) ENGINE=InnoDB AUTO_INCREMENT=40000;
     // ";
 }
 ?>

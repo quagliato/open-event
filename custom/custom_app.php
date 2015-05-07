@@ -13,6 +13,7 @@
 
   include_once("model/Edital.php");
   include_once("model/Exemption.php");
+  include_once("model/ExemptionEmail.php");
   include_once("model/Pergunta.php");
   include_once("model/Product.php");
   include_once("model/ProductExclude.php");

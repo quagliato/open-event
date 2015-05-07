@@ -156,7 +156,7 @@
                         </div>
                     </div>
 
-                    <div class="input_line submit_line right">
+                    <div class="input_line submit_line center">
                         <a href="<?=APP_URL?>/dashboard" class="submit negative">Cancelar</a>
                         <input type="submit" name="next" id="btn_next" value="Próximo" class="positive disabled" disabled>
                     </div>
@@ -168,7 +168,7 @@
             var total = 0;
             var totalExemption = 0;
             $('input.product').each(function(){
-                if ($(this).is(":checked")) {
+                if ($(this).is(":checked") && $(this).attr('name').indexOf('products') >= 0) {
                     $(this).parent().find('.price').each(function(){
                         total += parseFloat($(this).html());
                     });

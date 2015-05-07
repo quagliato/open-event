@@ -101,7 +101,7 @@
                         </ul>
                         </div>
                     </div>
-                    <div class="input_line submit_line right">
+                    <div class="input_line submit_line center">
                         <a href="<?=APP_URL?>/dashboard" class="submit negative">Cancelar</a>
                         <input type="submit" name="next" value="Pagar" class="positive">
                     </div>

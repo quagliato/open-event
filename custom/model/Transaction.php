@@ -32,7 +32,7 @@ class Transaction extends GenericClass{
 //             id_last_payment INT NULL,
 //             status INT NOT NULL DEFAULT 0,
 //             PRIMARY KEY (id)
-//         );
+//         ) ENGINE=InnoDB AUTO_INCREMENT=30000;
     // ";
 }
 ?>
