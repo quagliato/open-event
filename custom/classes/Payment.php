@@ -108,7 +108,7 @@ class Payment {
         $pagamento_dao = new PagamentoDAO;
         if (!$pagamento_dao->insert($pagamento)) {
             $this->rollbackTransacaoAndItems($transacao);
-            Structure::redirWithMessage("Erro304\nProblemas ao criar pagamento. Tente novamente, por favor.", "/dashboard");        
+            Structure::redirWithMessage("Erro304\nProblemas ao criar pagamento. Tente novamente, por favor.", "/dashboard");
         }
 
         $to = $usuario->get('email');
@@ -314,6 +314,8 @@ class Payment {
         }  catch (PagSeguroServiceException $e) {
                 $log = new LogEngine('payment.log');
                 $log->logIt("Transacao".$transactionId." PagSeguro ERROR: ".$e->getMessage());
+
+                Structure::redirWithMessage("Erro399\nProblemas ao criar requisição no PagSeguro. Entre em contato através com o administrador.", "/dashboard");
                 return false;
         }
     }
