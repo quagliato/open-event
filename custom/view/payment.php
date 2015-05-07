@@ -74,7 +74,7 @@
 
   elseif ($paymentMethod == "PGS") :
       if (!PAY_PAGSEGURO) {
-          Structure::redirWithMessage("Erro 305\nO metodo de pagamento PAGSEGURO nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
+          Structure::redirWithMessage("Erro 305 - O metodo de pagamento PAGSEGURO nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
 
       $transactionPayment = $payment->pay($user->get('id'), $transaction->get('id'), $paymentMethod, $transaction->get('total_value'));
@@ -88,7 +88,7 @@
           echo $html;
           Structure::footer();
       } else {
-          Structure::redirWithMessage("Erro 306\nProblemas ao processar seu pagamento. Tente novamente mais tarde. Sua inscricao esta garantida.", "/dashboard"); //TODO: Adicionar acento
+          Structure::redirWithMessage("Erro 306 - Problemas ao processar seu pagamento. Tente novamente mais tarde. Sua inscricao esta garantida.", "/dashboard"); //TODO: Adicionar acento
       }
   endif;
 ?>

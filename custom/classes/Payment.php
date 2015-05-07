@@ -315,7 +315,7 @@ class Payment {
                 $log = new LogEngine('payment.log');
                 $log->logIt("Transacao".$transactionId." PagSeguro ERROR: ".$e->getMessage());
 
-                Structure::redirWithMessage("Erro399\nProblemas ao criar requisição no PagSeguro. Entre em contato através com o administrador.", "/dashboard");
+                Structure::redirWithMessage("Erro399 - Problemas ao criar requisição no PagSeguro. Entre em contato através com o administrador.", "/dashboard");
                 return false;
         }
     }
