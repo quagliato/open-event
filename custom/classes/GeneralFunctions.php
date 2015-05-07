@@ -1,7 +1,7 @@
 <?php
 
 function isMaxReached() {
-    $isOpen = false;
+    $isClosed = true;
 
     $genericDAO = new GenericDAO;
     $fatherProducts = $genericDAO->selectAll("Product", "id_father IS NULL");
@@ -15,7 +15,7 @@ function isMaxReached() {
                 if (!is_array($transactionItems)) $transactionItems = array($transactionItems);
                 foreach ($transactionItems as $transactionItem) {
                     $transaction = $genericDAO->selectAll("Transaction", "id = ".$transactionItem->get('id_transaction'));
-                    if ($transaction) {
+                    if ($transaction && floatval($transaction->get('value_exemption')) == 0) {
                         if ($transaction->get('status') != 3) {
                             $count++;
                         }
@@ -24,12 +24,12 @@ function isMaxReached() {
             }
             echo "<!-- Product: ".$product->get('id')."; Max/Total: $max / $count -->";
             if ($count <= $max) {
-                $isOpen = true;
+                $isClosed = false;
             }
         }
     }
 
-    return $isOpen;
+    return $isClosed;
 }
 
 function userHasProduct($idUser, $idProduct) {
