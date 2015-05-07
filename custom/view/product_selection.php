@@ -2,36 +2,9 @@
     $user = Structure::verifySession();
     Structure::header();
 
-function userHasProduct($idUser, $idProduct) {
-    $genericDAO = new GenericDAO;
-    $transactions = $genericDAO->selectAll("Transaction", "id_user = $idUser AND (status = 1 OR status = 0)");
-    if ($transactions) {
-        if (!is_array($transactions)) $transactions = array($transactions);
-        foreach ($transactions as $transaction) {
-            $transactionsItems = $genericDAO->selectAll("TransactionItem", "id_product = $idProduct AND id_transaction = ".$transaction->get('id'));
-            if ($transactionsItems) return true;
-        }
+    if (isMaxReached()) {
+        Structure::redirWithMessage("Lote encerrado.", "/dashboard");
     }
-
-    return false;
-}
-
-function userHasExemption($idUser, $idProduct) {
-    $genericDAO = new GenericDAO;
-    $selectedEditals = $genericDAO->selectAll("RespostaEdital", "id_user = $idUser AND status = 1");
-    if ($selectedEditals) {
-        if (!is_array($selectedEditals)) $selectedEditals = array($selectedEditals);
-        foreach ($selectedEditals as $selectedEdital) {
-            $edital = $genericDAO->selectAll("Edital", "id = ".$selectedEdital->get('id'));
-            if ($edital && sizeof($edital) > 0) {
-                $exemptions = $genericDAO->selectAll("Exemption", "id_product = $idProduct AND id_edital = ".$edital->get('id'));
-                return $exemptions;
-            }
-        }
-    }
-
-    return false;
-}
 
     $genericDAO = new GenericDAO;
 
@@ -65,8 +38,7 @@ function userHasExemption($idUser, $idProduct) {
                                         value="<?=$product->get('id')?>"
                                         class="product father <?=$exclude ? 'exclude' : ''?>"
                                         <?=$exclude ? 'data-exclude="'.$exclude->get('id').'"' : ''?>
-                                        <?php if (userHasExemption($user->get('id'), $product->get('id')) ||
-                                                  userHasProduct($user->get('id'), $product->get('id'))) : ?> 
+                                        <?php if (userHasProduct($user->get('id'), $product->get('id'))) : ?> 
                                             <?php $hasFather = true; ?>
                                         disabled
                                         checked
@@ -76,7 +48,20 @@ function userHasExemption($idUser, $idProduct) {
                                         for="product<?=$product->get('id')?>"
                                     >
                                         <?=$product->get('description')?>
+                                        <!--PRICE -->
                                         - <strong>R$ <span class="price" data-value="<?=$product->get('price')?>"><?=$product->get('price')?></span></strong>
+                                        <!--/PRICE -->
+
+                                        <!--EXEMPTION -->
+                                        <?php 
+                                        $exemption = userHasExemption($user->get('id'), $product->get('id'));
+                                        if ($exemption) :
+                                            $value = floatval($product->get('price')) * floatval($exemption->get('modifier'));
+                                        ?>
+                                        (Isenção: <strong>R$ <span class="exemption" data-value="<?=$value?>"><?=$value?></span></strong>)
+                                        <?php endif; ?>
+                                        <!--/EXEMPTION -->
+
                                     </label>
                                 </li>
                                 <?php 
@@ -90,8 +75,7 @@ function userHasExemption($idUser, $idProduct) {
                                         $disabled = true;
                                         $checked = false;
                                         if ($hasFather) $disabled = false;
-                                        if (userHasExemption($user->get('id'), $child->get('id')) || 
-                                            userHasProduct($user->get('id'), $child->get('id'))) {
+                                        if (userHasProduct($user->get('id'), $child->get('id'))) {
                                             $disabled = true;
                                             $checked = true;
                                         }
@@ -102,7 +86,6 @@ function userHasExemption($idUser, $idProduct) {
                                             ($excludeItem->get('id_product2') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product1')))) {
                                               $disabled = true;
                                               $exclude = $excludeItem;
-                                              var_dump($exclude);
                                           }
                                         }
 
@@ -124,7 +107,20 @@ function userHasExemption($idUser, $idProduct) {
                                             <?=$disabled ? 'class="disabled"' : ''?>
                                         >
                                             <?=$child->get('description')?>
+
+                                            <!-- PRICE -->
                                              - <strong>R$ <span class="price" data-value="<?=$child->get('price')?>"><?=$child->get('price')?></span></strong>
+                                            <!-- /PRICE-->
+
+                                            <!--EXEMPTION -->
+                                            <?php 
+                                            $exemption = userHasExemption($user->get('id'), $child->get('id'));
+                                            if ($exemption) :
+                                                $value = floatval($child->get('price')) * floatval($exemption->get('modifier'));
+                                            ?>
+                                            (Isenção: <strong>R$ <span class="exemption" data-value="<?=$value?>"><?=$value?></span></strong>)
+                                            <?php endif; ?>
+                                            <!--/EXEMPTION -->
                                         </label>
                                     </li>
                                 <?php
@@ -134,15 +130,35 @@ function userHasExemption($idUser, $idProduct) {
                             </ul>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                     <div class="input_line">
                         <div class="input_container two-thirds fnone">
                             <p><strong style="font-size: 24px;">R$ <span id="total">0</span></strong> (total)</p>
                         </div>
                     </div>
+
+                    <?php
+                    $totalValueExemption = getTotalValueExemptions($user->get('id'));
+                    echo "<!-- $totalValueExemption -->";
+                    if ($totalValueExemption) :
+                    ?>
+                    <div class="input_line">
+                        <div class="input_container two-thirds fnone">
+                            <!-- <p><strong>ATENÇÃO!</strong> Você possui isenções. Mais informações na próxima página.</p> -->
+                            <p><strong style="font-size: 24px;">R$ <span id="total-exemption">0</span></strong> (isenção total)</p>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
+                    <div class="input_line">
+                        <div class="input_container fnone">
+                            <p><strong>ATENÇÃO!</strong> Prosseguindo no processo de inscrição você concorda com os termos <a href="<?=TERMS_LINK?>" target="_blank">aqui</a> descritos.</p>
+                        </div>
+                    </div>
+
                     <div class="input_line submit_line right">
-                        <a href="#" class="submit negative cancel">Cancelar</a>
-                        <input type="submit" name="next" value="Próximo" class="positive">
+                        <a href="<?=APP_URL?>/dashboard" class="submit negative">Cancelar</a>
+                        <input type="submit" name="next" id="btn_next" value="Próximo" class="positive disabled" disabled>
                     </div>
                 </form>
             </section>
@@ -150,14 +166,26 @@ function userHasExemption($idUser, $idProduct) {
         <script>
         function updatePrice(){
             var total = 0;
+            var totalExemption = 0;
             $('input.product').each(function(){
                 if ($(this).is(":checked")) {
                     $(this).parent().find('.price').each(function(){
                         total += parseFloat($(this).html());
                     });
+                    $(this).parent().find('.exemption').each(function(){
+                        totalExemption += parseFloat($(this).html());
+                    });
                 }
             });
+
+            if (total > 0) {
+                $('#btn_next').removeClass('disabled').removeAttr('disabled');
+            } else {
+                $('#btn_next').addClass('disabled').attr('disabled', 'disabled');
+            }
+
             $('#total').html(total);
+            $('body').find('#total-exemption').html(totalExemption);
         }
 
         $(document).ready(function(){
@@ -168,7 +196,7 @@ function userHasExemption($idUser, $idProduct) {
                 var fatherId = $(this).attr("id");
 
                 $('input.child').each(function(){
-                    if ($(this).attr("data-father") == fatherId && !$(this).is(':checked')) {
+                    if ($(this).attr("data-father") == fatherId) {
                         if (fatherChecked) {
                             $(this).removeAttr("disabled");
                             $(this).parent().children("label").each(function(){

@@ -3,6 +3,7 @@
 // Include your customized DAOs, VOs etc. here.
 
   include_once("classes/Payment.php");
+  include_once("classes/GeneralFunctions.php");
 
   include_once("dao/EditalDAO.php");
   include_once("dao/PerguntaDAO.php");

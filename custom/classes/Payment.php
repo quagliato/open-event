@@ -253,10 +253,13 @@ class Payment {
 
         foreach ($transactionItems as $transactionItem) {
             $product = $genericDAO->selectAll("Product", "id = ".$transactionItem->get('id_product'));
-            $vlItem = $transactionItem->get('vl_item');
-            $vlItem *= PAGSEGURO_MULTIPLIER;
-            $vlItem = number_format($vlItem, 2, '.', '');
-            $paymentRequest->addItem($transactionItem->get('id'), $product->get('description'), 1, $vlItem);
+
+            $vlItem = floatval($transactionItem->get('vl_item'));
+            if ($vlItem > 0) {
+                $vlItem *= PAGSEGURO_MULTIPLIER;
+                $vlItem = number_format($vlItem, 2, '.', '');
+                $paymentRequest->addItem($transactionItem->get('id'), $product->get('description'), 1, $vlItem);
+            }
         }
         
         $paymentRequest->setReference($transactionId);
@@ -265,7 +268,7 @@ class Payment {
         $paymentRequest->setSender($user->get('nome'), $user->get('email'), '41', '98623286');
         
         $paymentRequest->setRedirectUrl(APP_URL."/dashboard");
-        
+
         try {
             $credentials = new PagSeguroAccountCredentials(PAGSEGURO_EMAIL, PAGSEGURO_TOKEN);
             $url = $paymentRequest->register($credentials);
@@ -276,7 +279,7 @@ class Payment {
               $transactionPayment->set('dt_payment', $now);
               $transactionPayment->set('type', 'PGS');
               $transactionPayment->set('info', $url);
-              $transactionPayment->set('total_value', $transaction->get('total_value'));
+              $transactionPayment->set('total_value', floatval($transaction->get('total_value') * PAGSEGURO_MULTIPLIER));
               
               if (!$genericDAO->insert($transactionPayment)) {
                 return false;

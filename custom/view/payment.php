@@ -82,10 +82,9 @@
       if ($transactionPayment) {
           Structure::header();
           $html = '<h2>PagSeguro</h2>';
-          $html .= '<p>Clique no link abaixo para realizar o pagamento de sua inscrição.</p>';
-          $html .= '<p>Utilize o mesmo e-mail que você utilizou em seu cadastro.</p>';
-          $html .= '<p>Valor Total Final: <strong>R$ '.((floatval($transaction->get('total_value')) - floatval($transaction->get('value_exemption'))) * PAGSEGURO_MULTIPLIER).'</strong></p>';
-          $html .= "<p><a href='".$transactionPayment->get('info')."'>PagSeguro</a></p>";
+          $html .= '<p>Valor Total Final: <strong>R$ '.(floatval($transaction->get('total_value')) * PAGSEGURO_MULTIPLIER).'</strong></p>';
+          $html .= '<p><a class="submit positive" href="'.$transactionPayment->get('info').'">Pagar</a></p>';
+          $html .= '<p><em>Utilize o mesmo e-mail que você utilizou em seu cadastro.</em></p>';
           echo $html;
           Structure::footer();
       } else {
