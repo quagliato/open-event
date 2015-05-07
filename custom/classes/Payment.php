@@ -299,7 +299,8 @@ class Payment {
                 
                 $additional_headers = "MIME-Version: 1.0\n";
                 $additional_headers .= "Content-type: text/html; utf8";
-                $additional_headers .= "From:".DEFAULT_EMAIL_FROM;
+                $additional_headers .= "From: ".APP_TITLE." <".DEFAULT_EMAIL_FROM.">\n";
+                $additional_headers .= "Reply-To: ".APP_TITLE." <".DEFAULT_EMAIL_FROM.">";
                 
                 mail($to, $subject, $message, $additional_headers);
                 

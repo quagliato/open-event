@@ -49,7 +49,7 @@ table.noline thead td{ border: none; }
         <td class="right">R$ <?=$transaction->get('total_value')?></td>
         <td class="right">R$ <?=$transaction->get('value_exemption')?></td>
         <td><?=$transactionStatus?></td>
-        <td><?=$payment ? '<a href="'.$payment->get('info').'">Pagar</a>' : ''?></td>
+        <td><?=$payment && $transaction->get('status') != 3 ? '<a href="'.$payment->get('info').'">Pagar</a>' : ''?></td>
     </tr>
 <?php
             $transactionItems = $genericDAO->selectAll("TransactionItem", "id_transaction = ".$transaction->get('id'));
