@@ -18,14 +18,14 @@ function userHasProduct($idUser, $idProduct) {
 
 function userHasExemption($idUser, $idProduct) {
     $genericDAO = new GenericDAO;
-    $selectedEditals = $genericDAO->selectAll("RespostaEdital", "id_user = $idUser");
+    $selectedEditals = $genericDAO->selectAll("RespostaEdital", "id_user = $idUser AND status = 1");
     if ($selectedEditals) {
         if (!is_array($selectedEditals)) $selectedEditals = array($selectedEditals);
         foreach ($selectedEditals as $selectedEdital) {
             $edital = $genericDAO->selectAll("Edital", "id = ".$selectedEdital->get('id'));
             if ($edital && sizeof($edital) > 0) {
                 $exemptions = $genericDAO->selectAll("Exemption", "id_product = $idProduct AND id_edital = ".$edital->get('id'));
-                if ($exemptions) return true;
+                return $exemptions;
             }
         }
     }
@@ -61,7 +61,7 @@ function userHasExemption($idUser, $idProduct) {
                                     <input 
                                         type="checkbox" 
                                         id="product<?=$product->get('id')?>" 
-                                        name="<?=userHasProduct($user->get('id'), $product->get('id')) ? 'alreadyOwn' : 'products'?>" 
+                                        name="<?=userHasProduct($user->get('id'), $product->get('id')) ? 'alreadyOwn[]' : 'products[]'?>" 
                                         value="<?=$product->get('id')?>"
                                         class="product father <?=$exclude ? 'exclude' : ''?>"
                                         <?=$exclude ? 'data-exclude="'.$exclude->get('id').'"' : ''?>
@@ -95,17 +95,27 @@ function userHasExemption($idUser, $idProduct) {
                                             $disabled = true;
                                             $checked = true;
                                         }
+                                        
+                                        if (!is_array($exclude)) $exclude = array($exclude);
+                                        foreach ($exclude as $excludeItem) {
+                                          if (($excludeItem->get('id_product1') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product2'))) ||
+                                            ($excludeItem->get('id_product2') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product1')))) {
+                                              $disabled = true;
+                                              $exclude = $excludeItem;
+                                              var_dump($exclude);
+                                          }
+                                        }
 
                                 ?>
                                 <li>
                                     <input 
                                         type="checkbox" 
                                         id="product<?=$child->get('id')?>" 
-                                        name="<?=userHasProduct($user->get('id'), $child->get('id')) ? 'alreadyOwn' : 'products'?>" 
+                                        name="<?=userHasProduct($user->get('id'), $child->get('id')) ? 'alreadyOwn[]' : 'products[]'?>" 
                                         value="<?=$child->get('id')?>"
                                         class="product child  <?=$exclude ? 'exclude' : ''?>"
                                         data-father="product<?=$product->get('id')?>"
-                                        <?=$exclude ? 'data-exclude="'.$exclude->get('id').'"' : ''?>
+                                        <?=$exclude && !is_array($exclude) ? 'data-exclude="'.$exclude->get('id').'"' : ''?>
                                         <?=$disabled ? 'disabled' : ''?>
                                         <?=$checked ? 'checked' : ''?>
                                     >

@@ -242,10 +242,10 @@ class Payment {
     private function payWithPagSeguro($userId, $transactionId, $totalValue) {
         $genericDAO = new GenericDAO;
         $usuarioDAO = new UsuarioDAO;
-        $user = $usuarioDAO->getUserByID($userID);
+        $user = $usuarioDAO->getUserByID($userId);
 
         $transaction = $genericDAO->selectAll("Transaction", "id = $transactionId");
-        $transactionItems = $genericDAO->selectAll("TransactionItems", "id_transaction = $transactionId");
+        $transactionItems = $genericDAO->selectAll("TransactionItem", "id_transaction = $transactionId");
         if (!is_array($transactionItems)) $transactionItems = array($transactionItems);
 
         $paymentRequest = new PagSeguroPaymentRequest();
@@ -253,7 +253,7 @@ class Payment {
 
         foreach ($transactionItems as $transactionItem) {
             $product = $genericDAO->selectAll("Product", "id = ".$transactionItem->get('id_product'));
-            $vlItem = $item->get('vl_item');
+            $vlItem = $transactionItem->get('vl_item');
             $vlItem *= PAGSEGURO_MULTIPLIER;
             $vlItem = number_format($vlItem, 2, '.', '');
             $paymentRequest->addItem($transactionItem->get('id'), $product->get('description'), 1, $vlItem);
@@ -308,8 +308,8 @@ class Payment {
                 return false;
             }
         }  catch (PagSeguroServiceException $e) {
-                $log = new LogEngine;
-                $log->logIt("Transacao".$transacao_id." PagSeguro ERROR: ".$e->getMessage());
+                $log = new LogEngine('payment.log');
+                $log->logIt("Transacao".$transactionId." PagSeguro ERROR: ".$e->getMessage());
                 return false;
         }
     }

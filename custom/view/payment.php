@@ -3,7 +3,7 @@
   Structure::header();
   
   $idTransaction = $_POST['id_transaction'];
-  $paymentMethod = $_POST['payment_method'];
+  $paymentMethod = $_POST['payment'];
 
   $genericDAO = new GenericDAO;
   $transaction = $genericDAO->selectAll("Transaction", "id = $idTransaction");
@@ -11,31 +11,31 @@
  
           <main>
             <header class="center">
-                <h1>Escolha o método de pagamento</h1>
+                <h1>Pagamento</h1>
             </header>
             <section class="wrapper">
-<?
+<?php
 
   $payment = new Payment;
 
-  if ($metodo_pagamento == "BOL") :
+  if ($paymentMethod == "BOL") :
       if (!PAY_BOLETO) {
           Structure::redirWithMessage("Erro 305\nO metodo de pagamento BOLETO nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
       
-      $pagamento = $payment->pay($usuario->get('id'), $transacao->get('id'), $metodo_pagamento, $valor_final);
+      $pagamento = $payment->pay($usuario->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
       Structure::header();
       echo "<h1>Boleto</h1>";
       echo '<a target="_blank" href="'.$pagamento->get('info').'">Clique aqui para imprimir seu boleto</a>';
       echo "<h3>Guarde sempre o seu comprovante de pagamento.</h3>";
       Structure::footer();
 
-  elseif ($metodo_pagamento == "DEP") :
+  elseif ($paymentMethod == "DEP") :
       if (!PAY_DEPOSITO) {
           Structure::redirWithMessage("Erro 305\nO metodo de pagamento DEPOSITO nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
       
-      $pagamento = $payment->pay($usuario->get('id'), $transacao->get('id'), $metodo_pagamento, $valor_final);
+      $pagamento = $payment->pay($usuario->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
       if ($pagamento) {
           Structure::header();
           echo "<h1>Depósito</h1>";
@@ -55,12 +55,12 @@
           Structure::redirWithMessage("Erro 306\nProblemas ao processar seu pagamento. Tente novamente mais tarde. Sua inscricao esta garantida.", "/dashboard"); //TODO: Adicionar acento
       }
 
-  elseif ($metodo_pagamento == "PPL") :
+  elseif ($paymentMethod == "PPL") :
       if (!PAY_PAYPAL) {
           Structure::redirWithMessage("Erro 305\nO metodo de pagamento PAYPAL nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
 
-      $pagamento = $payment->pay($usuario->get('id'), $transacao->get('id'), $metodo_pagamento, $valor_final);
+      $pagamento = $payment->pay($usuario->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
       Structure::header();
       $paypal_html = '<h2>PayPal</h2>';
       $paypal_html .= '<h2>Clique no botão abaixo para realizar o pagamento de sua inscrição.</h2>';
@@ -72,20 +72,20 @@
       Structure::footer();
 
 
-  elseif ($metodo_pagamento == "PGS") :
+  elseif ($paymentMethod == "PGS") :
       if (!PAY_PAGSEGURO) {
           Structure::redirWithMessage("Erro 305\nO metodo de pagamento PAGSEGURO nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
 
       $transactionPayment = $payment->pay($user->get('id'), $transaction->get('id'), $paymentMethod, $transaction->get('total_value'));
 
-      if ($pagamento) {
+      if ($transactionPayment) {
           Structure::header();
-          $html = '<h1>PagSeguro</h1>';
-          $html .= '<h2>Clique no link abaixo para realizar o pagamento de sua inscrição.</h2>';
-          $html .= '<h3>Utilize o mesmo e-mail que você utilizou em seu cadastro.</h3>';
-          $html .= '<h3>Valor Total Final: R$ '.($valor_final * PAGSEGURO_MULTIPLIER).'</h3>';
-          $html .= "<p><a href='".$pagamento->get('info')."'>PagSeguro</a></p>";
+          $html = '<h2>PagSeguro</h2>';
+          $html .= '<p>Clique no link abaixo para realizar o pagamento de sua inscrição.</p>';
+          $html .= '<p>Utilize o mesmo e-mail que você utilizou em seu cadastro.</p>';
+          $html .= '<p>Valor Total Final: <strong>R$ '.((floatval($transaction->get('total_value')) - floatval($transaction->get('value_exemption'))) * PAGSEGURO_MULTIPLIER).'</strong></p>';
+          $html .= "<p><a href='".$transactionPayment->get('info')."'>PagSeguro</a></p>";
           echo $html;
           Structure::footer();
       } else {
