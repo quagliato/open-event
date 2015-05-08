@@ -42,6 +42,7 @@
 
         "/pacotes" => "view/product_selection.php",
         "/pagamento/metodo" => "view/payment_method.php",
+        "/pagamento/metodo/late" => "view/payment_method_late.php",
         "/pagamento" => "view/payment.php",
     );
 
