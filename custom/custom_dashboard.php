@@ -51,7 +51,7 @@ table.noline thead td{ border: none; }
         <td><?=$transactionStatus?></td>
         <?php if($transaction->get('status') < 2) : ?>
             <?php if($payment) : ?>
-                <td><a href="<?$payment->get('info')?>">Pagar</a></td>
+                <td><a href="<?=$payment->get('info')?>">Pagar</a></td>
             <?php else : ?>
                 <td><a href="<?=APP_URL?>/pagamento/metodo/late?id=<?=$transaction->get('id')?>">Pagar</a></td>
             <?php endif; ?>

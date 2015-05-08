@@ -22,6 +22,10 @@
     if (!$transaction) {
         Structure::redirWithMessage("Erro 557 - Transação não encontrada.", "/dashboard");
     }
+
+    if (floatval($transaction->get('total_value')) == 0) {
+      Structure::redirWithMessage("Error 558 - Pagamento não pode ser realizado para uma inscrição isenta.", "/dashboard");
+    }
 ?>
                 <form method="POST" action="<?=APP_URL?>/pagamento">
                 <input type="hidden" name="id_transaction" id="id_transaction" value="<?=$transaction->get('id')?>">
@@ -68,11 +72,6 @@
                         <input type="submit" name="next" value="Pagar" class="positive">
                     </div>
                 </form>
-            <?php endif; ?>
             </section>
         </main>
-<?php
-        endif;
-    endif;
-?>
 <?php Structure::footer(); ?>
