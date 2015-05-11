@@ -1,3 +1,7 @@
+<?php
+  $genericDAO = new GenericDAO;
+  $user = $genericDAO->selectAll("Usuario", "id = ".$_SESSION['user_id']);
+?>
 <h2>Inscrições</h2>
 <style>
 table.noline { border: none; }
@@ -18,8 +22,6 @@ table.noline thead td{ border: none; }
         <td class="tenth">Pagamento</td>
     </thead>
 <?php
-    $genericDAO = new GenericDAO;
-    $user = $genericDAO->selectAll("Usuario", "id = ".$_SESSION['user_id']);
     $transactions = $genericDAO->selectAll("Transaction", "id_user = ".$user->get('id'));
     if ($transactions) {
         if (!is_array($transactions)) $transactions = array($transactions);

@@ -261,11 +261,14 @@ class Payment {
                 $paymentRequest->addItem($transactionItem->get('id'), $product->get('description'), 1, $vlItem);
             }
         }
+
+        $phoneCode = substr($user->get('telefone_celular'), 1, 2);
+        $phoneNumber = str_replace("-", "", trim(substr($user->get('telefone_celular'), 4)));
         
         $paymentRequest->setReference($transactionId);
         $paymentRequest->setMaxAge(259200);
         $paymentRequest->setMaxUses(15);
-        $paymentRequest->setSender($user->get('nome'), $user->get('email'), '41', '98623286');
+        $paymentRequest->setSender($user->get('nome'), $user->get('email'), $phoneCode, $phoneNumber);
         
         $paymentRequest->setRedirectUrl(APP_URL."/dashboard");
 
