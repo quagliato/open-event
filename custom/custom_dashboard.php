@@ -28,7 +28,7 @@ table.noline thead td{ border: none; }
         foreach ($transactions as $transaction) {
             $payment  = false;
             if ($transaction->get('id_last_payment') == '' || is_null($transaction->get('id_last_payment'))) {
-                $payments = $genericDAO->selectAll("TransactionPayment", "id_transaction = ".$transaction->get('id')." ORDER BY dt_payment DESC");
+                $payments = $genericDAO->selectAll("TransactionPayment", "status = 0 && id_transaction = ".$transaction->get('id')." ORDER BY dt_payment DESC");
                 if ($payments) {
                     if (!is_array($payments)) {
                         $payment = $payments;
@@ -37,7 +37,7 @@ table.noline thead td{ border: none; }
                     }
                 }
             } else {
-                $payment = $genericDAO->selectAll("TransactionPayment", "id = ".$transaction->get('id_last_payment'));
+                $payment = $genericDAO->selectAll("TransactionPayment", "status = 0 && id = ".$transaction->get('id_last_payment'));
             }
             $transactionStatus = "";
             if ($transaction->get('status') == 0) $transactionStatus = "Aguardando Confirmação";
