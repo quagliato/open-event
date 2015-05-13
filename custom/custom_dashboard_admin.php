@@ -44,31 +44,59 @@
         <h2 class="clickable fade-block" data-target="#cadastros .content">Cadastros</h2>
     </header>
     <div class="content hidden mb80">
-        <div class="menu_block third fleft">
-            <h3>Editais</h3>
-            <ul>
-                <li><a href="<?=APP_URL?>/admin/edital">Cadastrar</a></li>
-                <li><a href="<?=APP_URL?>/admin/edital/action/list">Listar</a></li>
-                <li><a href="<?=APP_URL?>/admin/edital/buscar">Buscar</a></li>
-            </ul>
+        <div class="input_line">
+            <div class="menu_block fourth fleft">
+                <h3>Editais</h3>
+                <ul>
+                    <li><a href="<?=APP_URL?>/admin/edital">Cadastrar</a></li>
+                    <li><a href="<?=APP_URL?>/admin/edital/action/list">Listar</a></li>
+                    <li><a href="<?=APP_URL?>/admin/edital/buscar">Buscar</a></li>
+                </ul>
+            </div>
+
+            <div class="menu_block fourth fleft">
+                <h3><!--i class="fa fa-question"></i--> Perguntas</h3>
+                <ul>
+                    <li><a href="<?=APP_URL?>/admin/pergunta">Cadastrar</a></li>
+                    <li><a href="<?=APP_URL?>/admin/pergunta/action/list">Listar</a></li>
+                    <li><a href="<?=APP_URL?>/admin/pergunta/buscar">Buscar</a></li>
+                </ul>
+            </div>
+
+            <div class="menu_block fourth fleft">
+                <h3><!--i class="fa fa-list-ol"></i-->Valores Possíveis</h3>
+                <ul>
+                    <li><a href="<?=APP_URL?>/admin/valor-possivel">Cadastrar</a></li>
+                    <li><a href="<?=APP_URL?>/admin/valor-possivel/action/list">Listar</a></li>
+                    <li><a href="<?=APP_URL?>/admin/valor-possivel/buscar">Buscar</a></li>
+                </ul>
+            </div>
+
+            <div class="menu_block fourth fleft">
+                <h3>Pacotes</h3>
+                <ul>
+                    <li><a href="<?=APP_URL?>/admin/product">Cadastrar</a></li>
+                    <li><a href="<?=APP_URL?>/admin/product/action/list">Listar</a></li>
+                </ul>
+            </div>
         </div>
 
-        <div class="menu_block third fleft">
-            <h3><!--i class="fa fa-question"></i--> Perguntas</h3>
-            <ul>
-                <li><a href="<?=APP_URL?>/admin/pergunta">Cadastrar</a></li>
-                <li><a href="<?=APP_URL?>/admin/pergunta/action/list">Listar</a></li>
-                <li><a href="<?=APP_URL?>/admin/pergunta/buscar">Buscar</a></li>
-            </ul>
-        </div>
+        <div class="input_line">
+            <div class="menu_block fourth fleft">
+                <h3>Isenções por Edital</h3>
+                <ul>
+                    <li><a href="<?=APP_URL?>/admin/exemption">Cadastrar</a></li>
+                    <li><a href="<?=APP_URL?>/admin/exemption/action/list">Listar</a></li>
+                </ul>
+            </div>
 
-        <div class="menu_block third fleft">
-            <h3><!--i class="fa fa-list-ol"></i-->Valores Possíveis</h3>
-            <ul>
-                <li><a href="<?=APP_URL?>/admin/valor-possivel">Cadastrar</a></li>
-                <li><a href="<?=APP_URL?>/admin/valor-possivel/action/list">Listar</a></li>
-                <li><a href="<?=APP_URL?>/admin/valor-possivel/buscar">Buscar</a></li>
-            </ul>
+            <div class="menu_block fourth fleft">
+                <h3>Isenções por E-mail</h3>
+                <ul>
+                    <li><a href="<?=APP_URL?>/admin/exemption-email">Cadastrar</a></li>
+                    <li><a href="<?=APP_URL?>/admin/exemption-email/action/list">Listar</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>

@@ -33,6 +33,24 @@
         "/admin/valor-possivel/action/delete" => "action/valor-possivel_03_delete.php",
         "/admin/valor-possivel/action/list" => "action/valor-possivel_04_list.php",
 
+        "/admin/exemption" => "view/exemption_admin.php",
+        "/admin/exemption/action/insert" => "action/exemption_01_insert.php",
+        "/admin/exemption/action/update" => "action/exemption_02_update.php",
+        "/admin/exemption/action/delete" => "action/exemption_03_delete.php",
+        "/admin/exemption/action/list" => "action/exemption_04_list.php",
+
+        "/admin/exemption-email" => "view/exemption-email_admin.php",
+        "/admin/exemption-email/action/insert" => "action/exemption-email_01_insert.php",
+        "/admin/exemption-email/action/update" => "action/exemption-email_02_update.php",
+        "/admin/exemption-email/action/delete" => "action/exemption-email_03_delete.php",
+        "/admin/exemption-email/action/list" => "action/exemption-email_04_list.php",
+
+        "/admin/product" => "view/product_admin.php",
+        "/admin/product/action/insert" => "action/product_01_insert.php",
+        "/admin/product/action/update" => "action/product_02_update.php",
+        "/admin/product/action/delete" => "action/product_03_delete.php",
+        "/admin/product/action/list" => "action/product_04_list.php",
+
         "/edital" => "view/edital.php",
         "/edital/action" => "action/edital.php",
         "/edital/confirmacao" => "view/edital_confirmacao.php",
