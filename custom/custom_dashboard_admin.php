@@ -100,3 +100,18 @@
         </div>
     </div>
 </section>
+
+<section id="emails">
+    <header>
+        <h2 class="clickable fade-block" data-target="#emails .content">E-mails</h2>
+    </header>
+    <div class="content hidden mb80">
+        <div class="menu_block third fleft">
+            <ul>
+                <li><a href="<?=APP_URL?>/admin/send-email">Enviar e-mails</a></li>
+                <li><a href="#">Listar e-mails</a></li>
+                <li><a href="#">Exportar e-mails</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
