@@ -18,6 +18,7 @@
         Structure::redirWithMessage("Critério é um campo obrigatório.", "/admin/send-email");
     }
     $criteria = $_POST['criteria'];
+    $specific = $_POST['specific'];
 
     $emails = array();
 
@@ -123,6 +124,25 @@
                 }
             }
         }
+    } elseif ($criteria == "transaction_less") {
+        $transactions = $genericDAO->selectAll("Transaction", "id < ".$specific);
+        if ($transactions) {
+            if (!is_array($transactions)) $transactions = array($transactions);
+            foreach ($transactions as $transaction) {
+                $users = $genericDAO->selectAll("Usuario", "id = ".$transaction->get('id_user'));
+                if ($users) {
+                    if (!is_array($users)) $users = array($users);
+                    foreach ($users as $user) {
+                        $email = $user->get('email');
+                        $email = trim($email);
+                        $email = strtolower($email);
+                        if ($email != "" && !in_array($email, $emails)) {
+                            $emails[] = $email;
+                        }
+                    }
+                }
+            }
+        }
     }
 ?>
         <main>
@@ -155,6 +175,7 @@
                             $status = 0;
                             if ($notification->sendEmail($email, $subject, $message)) {
                                 $status = 1;
+                                $emailMessage->set('status', $status);
                             }
 
                             $genericDAO->insert($emailMessage);
