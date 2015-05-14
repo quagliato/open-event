@@ -57,6 +57,8 @@
 
         "/admin/edital/email/approved" => "action/edital_email_approved.php",
 
+        "/admin/send-email" => "view/send-email_admin.php",
+        "/admin/action/send-email" => "action/send-email_admin.php",
 
         "/pacotes" => "view/product_selection.php",
         "/pagamento/metodo" => "view/payment_method.php",

@@ -12,6 +12,7 @@
   include_once("dao/ValorPossivelDAO.php");
 
   include_once("model/Edital.php");
+  include_once("model/EmailMessage.php");
   include_once("model/Exemption.php");
   include_once("model/ExemptionEmail.php");
   include_once("model/Pergunta.php");
