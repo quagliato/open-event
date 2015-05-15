@@ -262,8 +262,18 @@ class Payment {
             }
         }
 
-        $phoneCode = substr($user->get('telefone_celular'), 1, 2);
-        $phoneNumber = str_replace("-", "", trim(substr($user->get('telefone_celular'), 4)));
+        $phone = $user->get('telefone_celular');
+        $phone = trim($phone);
+        $phone = str_replace('(', '', $phone);
+        $phone = str_replace(')', '', $phone);
+        $phone = str_replace(' ', '', $phone);
+        $phone = str_replace('-', '', $phone);
+
+        $phoneCode = substr($phone, 0, 2);
+        $phoneNumber = substr($phone, 2);
+
+        // $phoneCode = substr($user->get('telefone_celular'), 1, 2);
+        // $phoneNumber = str_replace("-", "", trim(substr($user->get('telefone_celular'), 4)));
         
         $paymentRequest->setReference($transactionId);
         $paymentRequest->setMaxAge(259200);
