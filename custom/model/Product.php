@@ -5,7 +5,6 @@ class Product extends GenericClass{
     protected static $sys_tablename = "product";
 
     protected $id;
-    protected $id_father;
     protected $dt_begin;
     protected $dt_end;
     protected $max_quantity;
@@ -14,7 +13,6 @@ class Product extends GenericClass{
 
     protected $sys_type = array(
         'id' => 'int',
-        'id_father' => 'int',
         'dt_begin' => 'date',
         'dt_end' => 'date',
         'max_quantity' => 'int',
@@ -25,7 +23,6 @@ class Product extends GenericClass{
     // protected static $createSQL = "
 //         CREATE TABLE IF NOT EXISTS product (
 //             id INT NOT NULL AUTO_INCREMENT,
-//             id_father INT NULL,
 //             dt_begin TIMESTAMP NOT NULL,
 //             dt_end TIMESTAMP NOT NULL,
 //             max_quantity INT NOT NULL DEFAULT 1,

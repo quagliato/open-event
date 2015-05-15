@@ -3,29 +3,33 @@
 function isMaxReached() {
     $isClosed = true;
 
+    if (getUserExemptions($_SESSION['user_id'])) return false;
+
     $genericDAO = new GenericDAO;
     $now = date('Y-m-d H:i:s');
-    $fatherProducts = $genericDAO->selectAll("Product", "id_father IS NULL AND dt_begin < '$now' AND dt_end > '$now'");
+    $fatherProducts = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'");
     if ($fatherProducts) {
         if (!is_array($fatherProducts)) $fatherProducts = array($fatherProducts);
         foreach ($fatherProducts as $product) {
-            $max = $product->get('max_quantity');
-            $count = 0;
-            $transactionItems = $genericDAO->selectAll("TransactionItem", "id_product = ".$product->get('id'));
-            if ($transactionItems) {
-                if (!is_array($transactionItems)) $transactionItems = array($transactionItems);
-                foreach ($transactionItems as $transactionItem) {
-                    $transaction = $genericDAO->selectAll("Transaction", "id = ".$transactionItem->get('id_transaction'));
-                    if ($transaction && floatval($transaction->get('value_exemption')) == 0) {
-                        if ($transaction->get('status') != 3) {
-                            $count++;
+            if ($genericDAO->selectAll("ProductFather", "id_father = ".$product->get('id'). " AND id_product <> ".$product->get('id'))) {
+                $max = $product->get('max_quantity');
+                $count = 0;
+                $transactionItems = $genericDAO->selectAll("TransactionItem", "id_product = ".$product->get('id'));
+                if ($transactionItems) {
+                    if (!is_array($transactionItems)) $transactionItems = array($transactionItems);
+                    foreach ($transactionItems as $transactionItem) {
+                        $transaction = $genericDAO->selectAll("Transaction", "id = ".$transactionItem->get('id_transaction'));
+                        if ($transaction && floatval($transaction->get('value_exemption')) == 0) {
+                            if ($transaction->get('status') != 3) {
+                                $count++;
+                            }
                         }
                     }
                 }
-            }
-            echo "<!-- Product: ".$product->get('id')."; Max/Total: $max / $count -->";
-            if ($count <= $max) {
-                $isClosed = false;
+                echo "<!-- Product: ".$product->get('id')."; Max/Total: $max / $count -->";
+                if ($count <= $max) {
+                    $isClosed = false;
+                }
             }
         }
     }
@@ -39,7 +43,7 @@ function userHasProduct($idUser, $idProduct) {
     if ($transactions) {
         if (!is_array($transactions)) $transactions = array($transactions);
         foreach ($transactions as $transaction) {
-            $transactionsItems = $genericDAO->selectAll("TransactionItem", "id_product = $idProduct AND id_transaction = ".$transaction->get('id'));
+            $transactionsItems = $genericDAO->selectAll("TransactionItem", "(id_product = $idProduct ".($idProduct == 1 ? 'OR id_product = 7' : ($idProduct == 7 ? 'OR id_product = 1' : '')).") AND id_transaction = ".$transaction->get('id'));
             if ($transactionsItems) return true;
         }
     }

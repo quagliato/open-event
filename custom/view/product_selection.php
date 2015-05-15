@@ -8,8 +8,33 @@
 
     $genericDAO = new GenericDAO;
 
-    $products = $genericDAO->selectAll("Product", "id_father IS NULL");
-    if (!$products) Structure::redirWithMessage("Nenhum item cadastrado", "/");
+    $isExempted = getUserExemptions($user->get('id'));
+    $now = date("Y-m-d H:i:s");
+
+    $products = false;
+
+    // $products = $genericDAO->selectAll("Product", "id_father IS NULL AND dt_begin < '$now' AND dt_end > '$now' ORDER BY id");
+    // if ($isExempted) {
+    //     $products = $genericDAO->selectAll("Product", "id_father IS NULL ORDER BY id".($isExempted ? ' LIMIT 1' : ''));
+    // }
+
+    $productsFatherStr = "";
+    $productsFather = $genericDAO->selectAll("ProductFather", NULL);
+    if ($productsFather) {
+        if (!is_array($productsFather)) $productsFather = array($productsFather);
+        foreach ($productsFather as $productFather) {
+            if (strlen($productsFatherStr) > 0) $productsFatherStr .= ", ";
+            $productsFatherStr .= $productFather->get('id_father');
+        }
+    }
+    
+    if (!$isExempted) {
+        $products = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'".(strlen($productsFatherStr) > 0 ? " AND id IN ($productsFatherStr)" : ""));
+    } else {
+        $products = $genericDAO->selectAll("Product", (strlen($productsFatherStr) > 0 ? " id IN ($productsFatherStr)" : " 1=1")." ORDER BY id LIMIT 1");
+    }
+
+    if (!$products) Structure::redirWithMessage("Nenhum item cadastrado", "/dashboard");
 
     if (!is_array($products)) $products = array($products);
 ?>
@@ -65,7 +90,17 @@
                                     </label>
                                 </li>
                                 <?php 
-                                $children = $genericDAO->selectAll("Product", "id_father = ".$product->get('id')." ORDER BY description");
+                                $children = $genericDAO->selectAll("ProductFather", "id_father = ".$product->get('id'));
+                                if ($children) {
+                                    $strChildren = "";
+                                    if (!is_array($children)) $children = array($children);
+                                    foreach ($children as $child) {
+                                        if (strlen($strChildren) > 0) $strChildren .= ", ";
+                                        $strChildren .= $child->get('id_product');
+                                    }
+                                    if (strlen($strChildren) > 0) $children = $strChildren;
+                                }
+                                $children = $genericDAO->selectAll("Product", "id IN ($children)");
                                 if ($children):
                                     if (!is_array($children)) $children = array($children);
                                     foreach ($children as $child) :
@@ -196,8 +231,19 @@
                 var fatherId = $(this).attr("id");
 
                 $('input.child').each(function(){
-                    if ($(this).attr("data-father") == fatherId) {
-                        if (fatherChecked) {
+                    if ($(this).attr("data-father") == fatherId && !$(this).attr("checked")) {
+                        var canEnable = true;
+                        if ($(this).attr('data-father')) {
+                            var thisProduct = $(this).attr('value');
+                            var dataFather = $(this).attr('data-father');
+                            $('input.child').each(function(){
+                                if ($(this).attr('data-father') == dataFather && $(this).attr('value') != thisProduct && $(this).attr("checked")) {
+                                    canEnable = false;
+                                }
+                            });
+                        }
+
+                        if (fatherChecked && canEnable) {
                             $(this).removeAttr("disabled");
                             $(this).parent().children("label").each(function(){
                                 $(this).removeClass("disabled");

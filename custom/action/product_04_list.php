@@ -21,7 +21,6 @@
                 <table style="font-size:12px;" class="jquerydatatable">
                     <thead>
                         <td style="width:5%; text-align:center;">ID</td>
-                        <td style="width:20%; text-align:left;">Produto-pai</td>
                         <td style="width:23%; text-align:left;">Descrição</td>
                         <td style="width:7%; text-align:right;">Qtde. Máxima</td>
                         <td style="width:7%; text-align:right;">Preço</td>
@@ -33,14 +32,9 @@
                     <?php
                         $count = 0;
                         foreach ($products as $product) :
-                            $fatherProduct = false;
-                            if ($product->get('id_father') != "") {
-                                $fatherProduct = $genericDAO->selectAll("Product", "id = ".$product->get('id_father'));
-                            }
                     ?>
                         <tr <?php if ($count % 2 == 0) { echo 'style="background-color: #CCCCCC;"'; } ?>>
                             <td style="text-align:center;"><?=$product->get('id')?></td>
-                            <td style="text-align:left;"><?=$fatherProduct ? $fatherProduct->get('description') : ''?></td>
                             <td style="text-align:left;"><?=$product->get('description')?></td>
                             <td style="text-align:right;"><?=$product->get('max_quantity')?></td>
                             <td style="text-align:right;">R$ <?=$product->get('price')?></td>

@@ -29,27 +29,7 @@
                     <?php if ($status == "UPDATING") : ?>
                         <input type="hidden" name="Product-id" value="<?=$obj->get('id')?>">
                     <?php endif; ?>
-
-                    <div class="input_line">
-                        <div class="input_container third">
-                            <label for="id_father">Produto-pai</label>
-                            <select name="Product-id_father" id="id_father">
-                                <option value="NULL">Sem produto pai</option>
-                            <?php
-                            $products = $genericDAO->selectAll("Product", NULL);
-                            if ($products) :
-                                if (!is_array($products)) $products = array($products);
-                                foreach ($products as $product) :
-                            ?>
-                                <option value="<?=$product->get('id')?>"<?=$status == "UPDATING" && $product->get('id') == $obj->get('id_father') ? ' selected' : ''?>><?=$product->get('id')?> - <?=$product->get('description')?></option>
-                            <?php
-                                endforeach;
-                            endif;
-                            ?>
-                            </select>
-                        </div>
-                    </div>
-
+                    
                     <div class="input_line">
                         <div class="input_container fourth">
                             <label for="dt_begin">Data de Início</label>
