@@ -3,7 +3,7 @@
 function isMaxReached() {
     $isClosed = true;
 
-    if (getUserExemptions($_SESSION['user_id'])) return false;
+    if (getUserExemptions($_SESSION['user_id']) || $genericDAO->selectAll("RespostaEdital", "status = 1 && id_user = ".$_SESSION['user_id'])) return false;
 
     $genericDAO = new GenericDAO;
     $now = date('Y-m-d H:i:s');
