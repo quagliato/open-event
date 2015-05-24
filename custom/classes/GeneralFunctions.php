@@ -4,7 +4,7 @@ function isMaxReached() {
     $isClosed = true;
     $genericDAO = new GenericDAO;
 
-    if (getUserExemptions($_SESSION['user_id']) || $genericDAO->selectAll("RespostaEdital", "status = 1 && id_user = ".$_SESSION['user_id'])) return false;
+    if (getUserExemptions($_SESSION['user_id']) || $genericDAO->selectAll("RespostaEdital", "status = 1 AND id_user = ".$_SESSION['user_id'])) return false;
 
     $genericDAO = new GenericDAO;
     $now = date('Y-m-d H:i:s');
@@ -123,7 +123,7 @@ function getUserExemptions($idUser) {
         return $highestPackExemption;
     }
 
-    if ($genericDAO->selectAll("RespostaEdital", "status = 1 && id_user = ".$_SESSION['user_id'])) return true;
+    if ($genericDAO->selectAll("RespostaEdital", "status = 1 AND id_user = $idUser")) return true;
 
     return false;
 }
