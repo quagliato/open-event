@@ -132,7 +132,7 @@ function getUserExemptions($idUser) {
 function userHasExemption($idUser, $idProduct) {
     $genericDAO = new GenericDAO;
     $exemptions = getUserExemptions($idUser);
-    if ($exemptions) {
+    if ($exemptions && $exemptions !== true) {
         if (!is_array($exemptions)) $exemptions = array($exemptions);
         foreach ($exemptions as $exemption) {
             if ($exemption->get('id_product') == $idProduct) return $exemption;
