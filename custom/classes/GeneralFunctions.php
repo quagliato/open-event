@@ -123,6 +123,8 @@ function getUserExemptions($idUser) {
         return $highestPackExemption;
     }
 
+    if ($genericDAO->selectAll("RespostaEdital", "status = 1 && id_user = ".$_SESSION['user_id'])) return true;
+
     return false;
 }
 
