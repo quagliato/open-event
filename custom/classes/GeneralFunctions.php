@@ -44,7 +44,7 @@ function userHasProduct($idUser, $idProduct) {
     if ($transactions) {
         if (!is_array($transactions)) $transactions = array($transactions);
         foreach ($transactions as $transaction) {
-            $transactionsItems = $genericDAO->selectAll("TransactionItem", "(id_product = $idProduct ".($idProduct == 1 ? 'OR id_product = 7' : ($idProduct == 7 ? 'OR id_product = 1' : '')).") AND id_transaction = ".$transaction->get('id'));
+            $transactionsItems = $genericDAO->selectAll("TransactionItem", "(id_product = $idProduct ".($idProduct == 1 || $idProduct == 7 || $idProduct == 8 ? ' OR id_product IN (1, 7, 8)' : '').") AND id_transaction = ".$transaction->get('id'));
             if ($transactionsItems) return true;
         }
     }
