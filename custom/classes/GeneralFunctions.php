@@ -120,7 +120,8 @@ function getUserExemptions($idUser) {
                 // }
             }
         }
-        return $highestPackExemption;
+
+        if ($highestPackExemption) return $highestPackExemption;
     }
 
     if ($genericDAO->selectAll("RespostaEdital", "status = 1 AND id_user = $idUser")) return true;
