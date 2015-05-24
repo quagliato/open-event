@@ -54,7 +54,7 @@ function userHasProduct($idUser, $idProduct) {
 
 function sumTotalExemptions($exemptions) {
     $genericDAO = new GenericDAO;
-    if ($exemptions) {
+    if ($exemptions && $exemptions !== true) {
         if (!is_array($exemptions)) $exemptions = array($exemptions);
         $totalValue = 0;
         foreach ($exemptions as $exemption) {
