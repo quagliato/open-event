@@ -18,14 +18,14 @@ function isMaxReached() {
                 $transactionItems = $genericDAO->selectAll("TransactionItem", "id_product = ".$product->get('id'));
                 if ($transactionItems) {
                     if (!is_array($transactionItems)) $transactionItems = array($transactionItems);
+                    $inStr = "";
                     foreach ($transactionItems as $transactionItem) {
-                        $transaction = $genericDAO->selectAll("Transaction", "id = ".$transactionItem->get('id_transaction'));
-                        if ($transaction && floatval($transaction->get('value_exemption')) == 0) {
-                            if ($transaction->get('status') != 3) {
-                                $count++;
-                            }
-                        }
+                        if (strlen($inStr) > 0) $inStr .= ', ';
+                        $inStr .= $transactionItem->get('id_transaction');
                     }
+
+                    $transactionCount = $genericDAO->selectCount("Transaction", "id", "value_exemption = 0 && status <> 3 AND id IN ($inStr)");
+                    $count = $transactionCount;
                 }
                 echo "<!-- Product: ".$product->get('id')."; Max/Total: $max / $count -->";
                 if ($count <= $max) {
