@@ -1,5 +1,5 @@
 <?php
-    Structure::verifySession("/edital", $_GET, true);
+    $user = Structure::verifySession("/edital", $_GET, true);
     Structure::header();
 
     $genericDAO = new GenericDAO;
@@ -9,7 +9,7 @@
     $usuario = false;
     $respostaEdital = false;
     $idEdital = false;
-    if (array_key_exists('idRespostaEdital', $_GET)) {
+    if (array_key_exists('idRespostaEdital', $_GET) && $user->get('privilegio') == 'ADM') {
         $respostaEdital = $genericDAO->selectAll('RespostaEdital', 'id = '.$_GET['idRespostaEdital']);
         if ($respostaEdital) {
             $usuario = $genericDAO->selectAll('Usuario', 'id = '.$respostaEdital->get('id_user'));
