@@ -307,7 +307,7 @@
                     if ($(this).attr('data-exclude') != undefined && $(this).attr('data-exclude') == excludeId && $(this).attr('id') != thisId) {
 
                         // If the click source it's checked and this is now disabled
-                        if (isChecked && !$(this).is(":disabled") && !$(this).indexOf('alreadyOwn')) {
+                        if (isChecked && !$(this).is(":disabled") && $(this).attr('name').indexOf('alreadyOwn') == -1) {
 
                             // Uncheck the pair
                             $(this).removeAttr("checked");
