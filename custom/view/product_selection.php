@@ -13,11 +13,6 @@
 
     $products = false;
 
-    // $products = $genericDAO->selectAll("Product", "id_father IS NULL AND dt_begin < '$now' AND dt_end > '$now' ORDER BY id");
-    // if ($isExempted) {
-    //     $products = $genericDAO->selectAll("Product", "id_father IS NULL ORDER BY id".($isExempted ? ' LIMIT 1' : ''));
-    // }
-
     $productsFatherStr = "";
     $productsFather = $genericDAO->selectAll("ProductFather", NULL);
     if ($productsFather) {
@@ -37,6 +32,41 @@
     if (!$products) Structure::redirWithMessage("Nenhum item cadastrado", "/dashboard");
 
     if (!is_array($products)) $products = array($products);
+
+
+    function onlyOpenProductExclude($exclude) {
+        $genericDAO = new GenericDAO;
+        if ($exclude && is_array($exclude)) {
+            $aux = array();
+
+            foreach ($exclude as $excludeItem) {
+                $product1 = $genericDAO->selectAll("Product", "id = ".$excludeItem->get('id_product1'));
+                $product2 = $genericDAO->selectAll("Product", "id = ".$excludeItem->get('id_product2'));
+
+                $productToFind = false;
+
+                if ($product1->get('id') == $productId) {
+                    $productToFind = $product2;
+                } else {
+                    $productToFind = $product1;
+                }
+
+                $begin = new DateTime($productToFind->get('dt_begin'));
+                $end = new DateTime($productToFind->get('dt_end'));
+
+                $now = new DateTime();
+
+                if ($now > $begin && $now < $end) {
+                    $aux[] = $excludeItem;
+                }
+            }
+            
+            if (sizeof($aux) == 1) return $aux[0];
+            else return false;
+        }
+
+        return $exclude;
+    }
 ?>
         <main>
             <header class="center">
@@ -44,17 +74,18 @@
             </header>
             <section class="wrapper">
                 <form method="POST" action="<?=APP_URL?>/pagamento/metodo">
-                    <?php
-
-                    foreach ($products as $product) :
-                        $hasFather = false;
-                        $productId = $product->get('id');
-                        $exclude = $genericDAO->selectAll("ProductExclude", "id_product1 = $productId OR id_product2 = $productId");
-
-                    ?>
                     <div class="input_line">
                         <div class="input_container two-thirds fnone">
                             <ul class="checkbox">
+                            <?php
+                            foreach ($products as $product) :
+                                $hasFather = false;
+                                $productId = $product->get('id');
+                                $exclude = $genericDAO->selectAll("ProductExclude", "id_product1 = $productId OR id_product2 = $productId");
+
+                                // Search for ProductExcludes just for open Products
+                                $exclude = onlyOpenProductExclude($exclude);
+                            ?>
                                 <li>
                                     <input 
                                         type="checkbox" 
@@ -116,6 +147,7 @@
                                         }
                                         
                                         if (!is_array($exclude)) $exclude = array($exclude);
+                                        $exclude = onlyOpenProductExclude($exclude);
                                         foreach ($exclude as $excludeItem) {
                                           if (($excludeItem->get('id_product1') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product2'))) ||
                                             ($excludeItem->get('id_product2') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product1')))) {
@@ -162,10 +194,10 @@
                                     endforeach;
                                 endif;
                                 ?>
+                            <?php endforeach; ?>
                             </ul>
                         </div>
                     </div>
-                    <?php endforeach; ?>
                     <div class="input_line">
                         <div class="input_container two-thirds fnone">
                             <p><strong style="font-size: 24px;">R$ <span id="total">0</span></strong> (total)</p>
@@ -262,13 +294,53 @@
             });
 
             $('input.exclude').change(function(){
+                var clickSource = $(this);
+
                 var excludeId = $(this).attr('data-exclude');
                 var thisId = $(this).attr('id');
                 var isChecked = false;
+
                 if ($(this).is(":checked")) isChecked = true;
+
                 $('input.exclude').each(function(){
-                    if ($(this).attr('data-exclude') == excludeId && $(this).attr('id') != thisId) {
-                        if (isChecked && !$(this).is(":disabled")) $(this).removeAttr("checked");
+                    // Search the other pair of exclude
+                    if ($(this).attr('data-exclude') != undefined && $(this).attr('data-exclude') == excludeId && $(this).attr('id') != thisId) {
+
+                        // If the click source it's checked and this is now disabled
+                        if (isChecked && !$(this).is(":disabled") && !$(this).indexOf('alreadyOwn')) {
+
+                            // Uncheck the pair
+                            $(this).removeAttr("checked");
+
+                            // If the pair is a father
+                            if ($(this).hasClass("father")) {
+
+                                // Finds its children and disable then;
+                                var fatherId = $(this).attr('id');
+                                $('input.child').each(function(){
+                                    if ($(this).attr('data-father') == fatherId) {
+                                        $(this).removeAttr("checked");
+                                        $(this).attr("disabled", "disabled");
+                                        $(this).parent().find('label').addClass("disabled");
+                                    }
+                                });
+                            }
+                        } else {
+                            clickSource.removeAttr("checked");
+                            // If the pair is a father
+                            if (clickSource.hasClass("father")) {
+
+                                // Finds its children and disable then;
+                                var fatherId = clickSource.attr('id');
+                                $('input.child').each(function(){
+                                    if ($(this).attr('data-father') == fatherId) {
+                                        $(this).removeAttr("checked");
+                                        $(this).attr("disabled", "disabled");
+                                        $(this).parent().find('label').addClass("disabled");
+                                    }
+                                });
+                            }
+                        }
                     }
                     updatePrice();
                 });
