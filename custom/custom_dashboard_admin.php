@@ -101,6 +101,22 @@
     </div>
 </section>
 
+<section id="inscricoes">
+    <header>
+        <h2 class="clickable fade-block" data-target="#inscricoes .content">Inscrições</h2>
+    </header>
+    <div class="content hidden mb80">
+        <div class="input_line">
+            <div class="menu_block fourth fleft">
+                <h3>Transferência</h3>
+                <ul>
+                    <li><a href="<?=APP_URL?>/admin/transaction/transfer">Transferir inscrição</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section id="emails">
     <header>
         <h2 class="clickable fade-block" data-target="#emails .content">E-mails</h2>
