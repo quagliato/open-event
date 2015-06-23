@@ -305,9 +305,24 @@
                 $('input.exclude').each(function(){
                     // Search the other pair of exclude
                     if ($(this).attr('data-exclude') != undefined && $(this).attr('data-exclude') == excludeId && $(this).attr('id') != thisId) {
+                    console.log(isChecked);
+                    console.log(!$(this).is(":disabled"));
+                    console.log($(this).attr('name').indexOf('alreadyOwn') === -1);
+                    console.log(isChecked && !$(this).is(":disabled") && $(this).attr('name').indexOf('alreadyOwn') === -1);
 
                         // If the click source it's checked and this is now disabled
-                        if (isChecked && !$(this).is(":disabled") && $(this).attr('name').indexOf('alreadyOwn') == -1) {
+                        if (isChecked && 
+                            (
+                              (
+                                !$(this).is(":disabled") && 
+                                $(this).attr('name').indexOf('alreadyOwn') == -1
+                              ) || 
+                              (
+                                $(this).is(":disabled") && 
+                                $(this).attr('name').indexOf('product') > -1
+                              )
+                            )
+                          ) {
 
                             // Uncheck the pair
                             $(this).removeAttr("checked");
