@@ -22,6 +22,22 @@
     </div>
 </section>
 
+<section id="inscricoes">
+    <header>
+        <h2 class="clickable fade-block" data-target="#inscricoes .content">Inscrições</h2>
+    </header>
+    <div class="content hidden mb80">
+        <div class="input_line">
+            <div class="menu_block fourth fleft">
+                <h3>Transferência</h3>
+                <ul>
+                    <li><a href="<?=APP_URL?>/admin/transaction/transfer">Transferir inscrição</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section id="editais">
     <header>
         <h2 class="clickable fade-block" data-target="#editais .content">Editais</h2>
@@ -55,7 +71,7 @@
             </div>
 
             <div class="menu_block fourth fleft">
-                <h3><!--i class="fa fa-question"></i--> Perguntas</h3>
+                <h3>Perguntas</h3>
                 <ul>
                     <li><a href="<?=APP_URL?>/admin/pergunta">Cadastrar</a></li>
                     <li><a href="<?=APP_URL?>/admin/pergunta/action/list">Listar</a></li>
@@ -64,7 +80,7 @@
             </div>
 
             <div class="menu_block fourth fleft">
-                <h3><!--i class="fa fa-list-ol"></i-->Valores Possíveis</h3>
+                <h3>Valores Possíveis</h3>
                 <ul>
                     <li><a href="<?=APP_URL?>/admin/valor-possivel">Cadastrar</a></li>
                     <li><a href="<?=APP_URL?>/admin/valor-possivel/action/list">Listar</a></li>
@@ -75,8 +91,12 @@
             <div class="menu_block fourth fleft">
                 <h3>Pacotes</h3>
                 <ul>
-                    <li><a href="<?=APP_URL?>/admin/product">Cadastrar</a></li>
-                    <li><a href="<?=APP_URL?>/admin/product/action/list">Listar</a></li>
+                    <li><a href="<?=APP_URL?>/admin/product">Cadastrar Pacotes</a></li>
+                    <li><a href="<?=APP_URL?>/admin/product/action/list">Listar Pacotes</a></li>
+                    <li><a href="<?=APP_URL?>/admin/product-exclude">Cadastrar Pacotes Excludentes</a></li>
+                    <li><a href="<?=APP_URL?>/admin/product-exclude/action/list">Listar Pacotes Excludentes</a></li>
+                    <li><a href="<?=APP_URL?>/admin/product-father">Cadastrar Pacotes-pai</a></li>
+                    <li><a href="<?=APP_URL?>/admin/product-father/action/list">Listar Pacotes-pai</a></li>
                 </ul>
             </div>
         </div>
@@ -95,22 +115,6 @@
                 <ul>
                     <li><a href="<?=APP_URL?>/admin/exemption-email">Cadastrar</a></li>
                     <li><a href="<?=APP_URL?>/admin/exemption-email/action/list">Listar</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="inscricoes">
-    <header>
-        <h2 class="clickable fade-block" data-target="#inscricoes .content">Inscrições</h2>
-    </header>
-    <div class="content hidden mb80">
-        <div class="input_line">
-            <div class="menu_block fourth fleft">
-                <h3>Transferência</h3>
-                <ul>
-                    <li><a href="<?=APP_URL?>/admin/transaction/transfer">Transferir inscrição</a></li>
                 </ul>
             </div>
         </div>

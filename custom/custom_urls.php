@@ -51,6 +51,18 @@
         "/admin/product/action/delete" => "action/product_03_delete.php",
         "/admin/product/action/list" => "action/product_04_list.php",
 
+        "/admin/product-exclude" => "view/product-exclude_admin.php",
+        "/admin/product-exclude/action/insert" => "action/product-exclude_01_insert.php",
+        "/admin/product-exclude/action/update" => "action/product-exclude_02_update.php",
+        "/admin/product-exclude/action/delete" => "action/product-exclude_03_delete.php",
+        "/admin/product-exclude/action/list" => "action/product-exclude_04_list.php",
+
+        "/admin/product-father" => "view/product-father_admin.php",
+        "/admin/product-father/action/insert" => "action/product-father_01_insert.php",
+        "/admin/product-father/action/update" => "action/product-father_02_update.php",
+        "/admin/product-father/action/delete" => "action/product-father_03_delete.php",
+        "/admin/product-father/action/list" => "action/product-father_04_list.php",
+
         "/edital" => "view/edital.php",
         "/edital/action" => "action/edital.php",
         "/edital/confirmacao" => "view/edital_confirmacao.php",
@@ -64,7 +76,6 @@
         "/pagamento/metodo" => "view/payment_method.php",
         "/pagamento/metodo/late" => "view/payment_method_late.php",
         "/pagamento" => "view/payment.php",
-
 
         "/admin/transaction/transfer" => "view/transaction_transfer_admin.php",
         "/admin/transaction/action/transfer" => "action/transaction_01_transfer.php",
