@@ -1,14 +1,11 @@
 <?php
 
-//******************************************************************************
-// Cancel all transactions older than interval set on config
   $genericDAO = new GenericDAO;
 
+//******************************************************************************
+// Cancel all transactions older than interval set on config
   $limit = new DateTime();
-  var_dump($limit);
-
   $limit->sub(new DateInterval(TRANSACTION_CANCEL_INTERVAL));
-  var_dump($limit);
 
   $transaction = new Transaction();
   $transaction->set('status', 3);
@@ -17,7 +14,6 @@
 
 //******************************************************************************
 // Confirm all transaction payments that have transaction confirmed
-
   $transactionPayment = new TransactionPayment();
   $transactionPayment->set('status', 1);
 
@@ -26,10 +22,7 @@
 //******************************************************************************
 // Cancel all transaction payments older than 3 days
   $limit = new DateTime();
-  var_dump($limit);
-
   $limit->sub(new DateInterval('P5D'));
-  var_dump($limit);
 
   $transactionPayment = new TransactionPayment();
   $transactionPayment->set('status', 3);
