@@ -31,7 +31,7 @@
     define('CEDENTE_CEP', '');
     define('CEDENTE_CIDADE', '');
     define('CEDENTE_ESTADO', '');
-    
+
     // PAYPAL
     define('PAYPAL_EMAIL', '');
     define('PAYPAL_ITEM_NAME', '');
@@ -52,4 +52,6 @@
 
     define('TRANSACTION_CANCEL_INTERVAL', 'P7D');
     define('PAYMENT_CANCEL_INTERVAL', 'P3D');
+
+    define('GOOGLE_ANALYTICS', 'UA-XXXXXX-X');
 ?>
