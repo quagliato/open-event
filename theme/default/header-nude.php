@@ -18,14 +18,14 @@
         <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/<?=THEME?>/_css/open-event.css" />
 
         <!-- Third-party libs -->
-        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_libs/jquery-2.0.3.min.js"></script>
-        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_libs/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
+        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_libs/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_libs/jquery.easing-1.3.min.js"></script>
         <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_libs/jquery.mask.min.js"></script>
+        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_libs/jquery-ui-1.11.2/jquery-ui.min.js"></script>
         <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_libs/datetimepicker/jquery.datetimepicker.js"></script>
-        <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/<?=THEME?>/_libs/jquery-ui/jquery-ui-1.10.3.custom.min.css" />
-        <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/<?=THEME?>/_libs/datetimepicker/jquery.datetimepicker.css" />
+        <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/<?=THEME?>/_libs/jquery-ui-1.11.2/jquery-ui.min.css" />
         <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/<?=THEME?>/_libs/font-awesome-4.3.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="<?=APP_URL?>/theme/<?=THEME?>/_libs/datetimepicker/jquery.datetimepicker.css" />
         <!-- /Third-party libs -->
 
         <script>
@@ -33,11 +33,11 @@
             var templateURL = "<?=APP_URL?>";
         </script>
 
-        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_js/notification.js"></script>
-        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_js/data_binding.js"></script>
-        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_js/submit.js"></script>
-        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_js/events.js"></script>
-        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_js/js.js"></script>
+        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_js/noisy-cricket/notification.js"></script>
+        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_js/noisy-cricket/data_binding.js"></script>
+        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_js/noisy-cricket/submit.js"></script>
+        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_js/noisy-cricket/events.js"></script>
+        <script type="text/javascript" src="<?=APP_URL?>/theme/<?=THEME?>/_js/noisy-cricket/js.js"></script>
 
         <!-- Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>

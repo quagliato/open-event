@@ -51,8 +51,13 @@ function bindData(form, values) {
                 } else {
                     
                     if (values[name] != null) {
-                        var newValues = new Array();
-                        newValues = values[name];
+                        var newValues = null;
+                        if (values[name].constructor === Array) {
+                            newValues = values[name];
+                        } else {
+                            newValues = new Array();
+                            newValues[0] = values[name];
+                        }
                         newValues[newValues.length] = $(this).val();
                         values[name] = newValues;
                     } else {

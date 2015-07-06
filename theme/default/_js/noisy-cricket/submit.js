@@ -6,6 +6,7 @@
  *
  */
  function genericSubmit(action, method, values) {
+    closeNotification();
     var success = function(data){
         var result = JSON.parse(data);
 
@@ -17,6 +18,9 @@
                 case 'message':
                 case 'error':
                     openNotification(action, entry[originalAction]);
+                    break;
+                case 'alert':
+                    alert(entry[originalAction]);
                     break;
                 case 'redir':
                     window.location.href = rootURL + entry[originalAction];

@@ -16,7 +16,7 @@ function openLightbox(href) {
         // alert(data);
         $('#lightbox #content').html(data);
     };
-    
+
     $.get(href, values, success);
 
     $('#lightbox_overlay').css('position', 'fixed');
