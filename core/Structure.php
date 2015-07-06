@@ -34,7 +34,7 @@ class Structure {
                         $where2goAux .= "$key=$value";
                     }
                 }
-                
+
                 $_SESSION['OPENEVENT_goto'] = $where2goAux;
             }
             if ($verbose) {
@@ -46,7 +46,7 @@ class Structure {
             $usuario_dao = new UsuarioDAO;
             $usuario = $usuario_dao->getUserById($_SESSION['user_id']);
             if (!$usuario) {
-                
+
                 if ($verbose) {
                     Structure::redirWithMessage("Você não foi encontrado no sistema.","/");
                 } else {
@@ -65,7 +65,7 @@ class Structure {
             return $usuario;
         }
 
-        Structure::redirWithMessage("Área restrita.", "/");
+        Structure::redirWithMessage("Area restrita.", "/"); //TODO: Adicionar acento
     }
 
 
@@ -73,20 +73,21 @@ class Structure {
         return Structure::verifySpecificRole('ADM');
     }
 
-    public static function header() {
-        include_once("theme/header.php");
+    public static function header($header = null) {
+        if ($header && !is_null($header) && strlen($header) > 0) {
+            include_once("theme/".THEME."/header-$header.php");
+        } else {
+            include_once("theme/".THEME."/header.php");
+        }
+
     }
 
-    public static function customHeader($header) {
-        include_once("theme/header-$header.php");
-    }
-
-    public static function footer() {
-        include_once("theme/footer.php");
-    }
-
-    public static function customFooter($footer) {
-        include_once("theme/footer-$footer.php");
+    public static function footer($footer = null) {
+        if ($footer && !is_null($footer) && strlen($footer) > 0) {
+            include_once("theme/".THEME."/footer-$footer.php");
+        } else {
+            include_once("theme/".THEME."/footer.php");
+        }
     }
 }
 ?>

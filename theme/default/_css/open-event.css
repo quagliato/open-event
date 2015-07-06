@@ -1,0 +1,74 @@
+/******************************************************************************/
+/* Edital */
+#edital_info{
+    color: #333333;
+    display: block;
+    height: auto;
+    margin: 0 auto;
+    min-height: 80px;
+    width: 645px; /* TODO: Corrigir essa implementação. */
+}
+
+#edital_info .metric_info{
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+ul#edital_list{
+    margin-top: 10px;
+}
+
+ul#edital_list li{
+    border-bottom: 1px solid #CCCCCC;
+    color: #333333;
+    display: block;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+ul#edital_list li .note{
+    font-size: 12px;
+    margin-left: 30px;
+}
+
+/******************************************************************************/
+/* INFO */
+ul#info {
+    overflow: hidden;
+}
+
+ul#info li{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+ul#info .title{
+    font-size: 16px;
+}
+
+ul#info .number{
+    border-bottom: 1px solid #CCCCCC;
+    font-size: 40px;
+    padding-bottom: 10px;
+}
+
+/******************************************************************************/
+/* TABLE */
+td .btn {
+    font-size: 24px !important;
+}
+td .btn.dark_green{
+    color: #1DA075 !important;
+}
+td .btn.black{
+    color: #000000 !important;
+}
+td .btn.dark_red{
+    color: #D0351B !important;
+}
+td .btn.light_gray{
+    color: #666666 !important;
+}

@@ -38,6 +38,9 @@
     define('DB_USER', '');
     define('DB_PASS', '');
     define('DB_NAME', '');
+    
+    // THEME DEFINITION
+    define('THEME', 'default');
 
     // Default SQL log filename (with path, if you want).
     // ALL SQL activity is logged.
