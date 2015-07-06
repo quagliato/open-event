@@ -1,6 +1,9 @@
 <?php
     // CONFIGS
 
+    // *** ATENTION ***
+    // THIS FILE SHOULD BE RENAMED TO config.php
+
     // The directory of the domain where app is running;
     // If it is running on root domain, leave it blank.
     define('APP_DIR', '/open-event');
@@ -23,10 +26,12 @@
     // The full path to the directory where files will be uploaded
     define('FILES_DIR', '/var/www/open-event/uploads/');
     // The same, but for failsafe
-    define('FILES_DIR_FAILSAFE', '/var/www/open-event/uploads/failsafe/');
+    define('FILES_DIR_FAILSAFE', FILES_DIR.'failsafe/');
 
     // Maximun filesize for uploaded files
     define('MAX_FILESIZE', '50MB');
+    // Defines if database will store UTF-8 encoded data
+    define('UTF8ENCODED', true);
 
     // DB Settings
     define('DB_HOST', '');
@@ -58,6 +63,13 @@
     // Default e-mail subject
     define('DEFAULT_EMAIL_SUBJECT', APP_TITLE);
 
-    // Include custom configs
-    include_once("custom/custom_config.php");
+    // Includes custom configs
+    if (file_exists("custom/configs") && is_dir("custom/configs")) {
+      $configFiles = scandir("custom/configs");
+      foreach ($configFiles as $configFile) {
+        if (preg_match_all("~\.php$~", $configFile)) {
+          include_once("custom/configs/$configFile");
+        }
+      }
+    }
 ?>
