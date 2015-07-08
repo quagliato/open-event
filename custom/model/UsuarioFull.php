@@ -31,7 +31,7 @@ class Usuario extends GenericClass{
     protected $dt_registro;
     protected $dt_ultimo_login;
     protected $privilegio;
-    
+
     protected $sys_type = array(
         'id' => 'int',
         'nome' => 'str',
@@ -62,37 +62,38 @@ class Usuario extends GenericClass{
         'privilegio' => 'str'
     );
 
-    // protected static $createSQL = "
-    //     CREATE TABLE IF NOT EXISTS ".self::sys_tablename." (
-    //         id int(11) NOT NULL AUTO_INCREMENT,
-    //         nome VARCHAR(100) NOT NULL,
-    //         cpf VARCHAR(14) NOT NULL,
-    //         data_nasc VARCHAR(10) NOT NULL,
-    //         deficiencia VARCHAR(200),
-    //         senha VARCHAR(64) NOT NULL,
-    //         email VARCHAR(100) NOT NULL,
-    //         telefone_residencial VARCHAR(16),
-    //         telefone_celular VARCHAR(16),
-    //         inst_ens VARCHAR(100) NOT NULL,
-    //         curso VARCHAR(100) NOT NULL,
-    //         periodo VARCHAR(4) NOT NULL,
-    //         end_logradouro VARCHAR(200) NOT NULL,
-    //         end_numero VARCHAR(10) NOT NULL,
-    //         end_complemento VARCHAR(50),
-    //         end_bairro VARCHAR(50) NOT NULL,
-    //         end_cidade VARCHAR(100) NOT NULL,
-    //         end_estado VARCHAR(2) NOT NULL,
-    //         end_cep VARCHAR(9) NOT NULL,
-    //         responsavel_nome VARCHAR(100) NOT NULL,
-    //         responsavel_telefone VARCHAR(16) NOT NULL,
-    //         alergias VARCHAR(200),
-    //         medicacao_continua VARCHAR(200),
-    //         plano_saude VARCHAR(100),
-    //         dt_registro timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-    //         dt_ultimo_login timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-    //         privilegio VARCHAR(3) NOT NULL DEFAULT 'USR',
-    //         PRIMARY KEY (id)
-    //   );";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS usuario (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        nome VARCHAR(100) NOT NULL,
+        cpf VARCHAR(14) NOT NULL,
+        data_nasc VARCHAR(10) NOT NULL,
+        deficiencia VARCHAR(200),
+        senha VARCHAR(64) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        telefone_residencial VARCHAR(16),
+        telefone_celular VARCHAR(16),
+        inst_ens VARCHAR(100) NOT NULL,
+        curso VARCHAR(100) NOT NULL,
+        periodo VARCHAR(4) NOT NULL,
+        end_logradouro VARCHAR(200) NOT NULL,
+        end_numero VARCHAR(10) NOT NULL,
+        end_complemento VARCHAR(50),
+        end_bairro VARCHAR(50) NOT NULL,
+        end_cidade VARCHAR(100) NOT NULL,
+        end_estado VARCHAR(2) NOT NULL,
+        end_cep VARCHAR(9) NOT NULL,
+        responsavel_nome VARCHAR(100) NOT NULL,
+        responsavel_telefone VARCHAR(16) NOT NULL,
+        alergias VARCHAR(200),
+        medicacao_continua VARCHAR(200),
+        plano_saude VARCHAR(100),
+        dt_registro timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+        dt_ultimo_login timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+        privilegio VARCHAR(3) NOT NULL DEFAULT 'USR',
+        PRIMARY KEY (id)
+      );
+    ";
 }
 
 ?>

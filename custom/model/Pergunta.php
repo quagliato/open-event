@@ -28,17 +28,18 @@ class Pergunta extends GenericClass{
         return array("text", "textarea-s", "textarea-m", "textarea-l");
     }
 
-    // protected static $createSQL = "
-    //     CREATE TABLE IF NOT EXISTS ".self::sys_tablename." (
-    //         id INT NOT NULL AUTO_INCREMENT,
-    //         id_edital INT NOT NULL,
-    //         titulo VARCHAR(200) NOT NULL,
-    //         descricao VARCHAR(500) NOT NULL,
-    //         exemplo VARCHAR(500) NOT NULL,
-    //         tipo_resposta VARCHAR(20) NOT NULL,
-    //         tamanho_resposta INT NOT NULL,
-    //         ordem_exibicao INT NOT NULL,
-    //         PRIMARY KEY (id)
-    //     );";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS pergunta (
+        id INT NOT NULL AUTO_INCREMENT,
+        id_edital INT NOT NULL,
+        titulo VARCHAR(200) NOT NULL,
+        descricao VARCHAR(500) NOT NULL,
+        exemplo VARCHAR(500) NOT NULL,
+        tipo_resposta VARCHAR(20) NOT NULL,
+        tamanho_resposta INT NOT NULL,
+        ordem_exibicao INT NOT NULL,
+        PRIMARY KEY (id)
+      );
+    ";
 }
 ?>

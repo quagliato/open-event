@@ -14,13 +14,13 @@ class ProductFather extends GenericClass{
         'id_product' => 'int'
     );
 
-    // protected static $createSQL = "
-        // CREATE TABLE IF NOT EXISTS product_father (
-        //     id INT NOT NULL AUTO_INCREMENT,
-        //     id_father INT NULL,
-        //     id_product INT NULL,
-        //     PRIMARY KEY (id)
-        // );
-    // ";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS product_father (
+        id INT NOT NULL AUTO_INCREMENT,
+        id_father INT NULL,
+        id_product INT NULL,
+        PRIMARY KEY (id)
+      );
+    ";
 }
 ?>

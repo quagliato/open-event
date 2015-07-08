@@ -16,14 +16,14 @@ class TransactionTransfer extends GenericClass{
         'id_user_destiny' => 'int',
     );
 
-    // protected static $createSQL = "
-        // CREATE TABLE IF NOT EXISTS transaction_transfer (
-        //     id INT NOT NULL AUTO_INCREMENT,
-        //     id_transaction INT NULL,
-        //     id_user_origin INT NULL,
-        //     id_user_destiny INT NULL,
-        //     PRIMARY KEY (id)
-        // ) ENGINE=InnoDB;
-    // ";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS transaction_transfer (
+        id INT NOT NULL AUTO_INCREMENT,
+        id_transaction INT NULL,
+        id_user_origin INT NULL,
+        id_user_destiny INT NULL,
+        PRIMARY KEY (id)
+      ) ENGINE=InnoDB;
+    ";
 }
 ?>

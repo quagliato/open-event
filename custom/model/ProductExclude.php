@@ -14,13 +14,13 @@ class ProductExclude extends GenericClass{
         'id_product2' => 'int'
     );
 
-    // protected static $createSQL = "
-        // CREATE TABLE IF NOT EXISTS product_exclude (
-        //     id INT NOT NULL AUTO_INCREMENT,
-        //     id_product1 INT NOT NULL,
-        //     id_product2 INT NOT NULL,
-        //     PRIMARY KEY (id)
-        // );
-    // ";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS product_exclude (
+        id INT NOT NULL AUTO_INCREMENT,
+        id_product1 INT NOT NULL,
+        id_product2 INT NOT NULL,
+        PRIMARY KEY (id)
+      );
+    ";
 }
 ?>

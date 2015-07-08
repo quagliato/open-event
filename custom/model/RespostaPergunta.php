@@ -16,13 +16,14 @@ class RespostaPergunta extends GenericClass{
         'vl_resposta' => 'str',
     );
 
-    // protected static $createSQL = "
-    //     CREATE TABLE IF NOT EXISTS resposta_pergunta (
-    //         id INT NOT NULL AUTO_INCREMENT,
-    //         id_resposta_edital INT NOT NULL,
-    //         id_pergunta INT NOT NULL,
-    //         vl_resposta VARCHAR(10000) NOT NULL,
-    //         PRIMARY KEY (id)
-    //     );";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS resposta_pergunta (
+        id INT NOT NULL AUTO_INCREMENT,
+        id_resposta_edital INT NOT NULL,
+        id_pergunta INT NOT NULL,
+        vl_resposta VARCHAR(10000) NOT NULL,
+        PRIMARY KEY (id)
+      );
+    ";
 }
 ?>

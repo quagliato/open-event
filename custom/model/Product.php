@@ -20,16 +20,16 @@ class Product extends GenericClass{
         'price' => 'float'
     );
 
-    // protected static $createSQL = "
-//         CREATE TABLE IF NOT EXISTS product (
-//             id INT NOT NULL AUTO_INCREMENT,
-//             dt_begin TIMESTAMP NOT NULL,
-//             dt_end TIMESTAMP NOT NULL,
-//             max_quantity INT NOT NULL DEFAULT 1,
-//             description VARCHAR(500) NOT NULL,
-//             price FLOAT NOT NULL DEFAULT 0,
-//             PRIMARY KEY (id)
-//         );
-    // ";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS product (
+        id INT NOT NULL AUTO_INCREMENT,
+        dt_begin TIMESTAMP NOT NULL,
+        dt_end TIMESTAMP NOT NULL,
+        max_quantity INT NOT NULL DEFAULT 1,
+        description VARCHAR(500) NOT NULL,
+        price FLOAT NOT NULL DEFAULT 0,
+        PRIMARY KEY (id)
+      );
+    ";
 }
 ?>

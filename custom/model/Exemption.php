@@ -16,14 +16,14 @@ class Exemption extends GenericClass{
         'modifier' => 'float',
     );
 
-    // protected static $createSQL = "
-        // CREATE TABLE IF NOT EXISTS exemption (
-        //     id INT NOT NULL AUTO_INCREMENT,
-        //     id_edital INT NOT NULL,
-        //     id_product INT NOT NULL,
-        //     modifier FLOAT NOT NULL DEFAULT 1,
-        //     PRIMARY KEY (id)
-        // );
-    // ";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS exemption (
+        id INT NOT NULL AUTO_INCREMENT,
+        id_edital INT NOT NULL,
+        id_product INT NOT NULL,
+        modifier FLOAT NOT NULL DEFAULT 1,
+        PRIMARY KEY (id)
+      );
+    ";
 }
 ?>
