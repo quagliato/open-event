@@ -82,7 +82,7 @@ table.noline thead td{ border: none; }
 ?>
 </table>
 <?php if (!isMaxReached()) : ?>
-    <p><h3><a href="<?=APP_URL?>/pacotes">Faça sua inscrição ou compre pacotes adicionais.</a></h3></p>
+    <h3 class="mb20 mt20"><center><a class="submit positive" href="<?=APP_URL?>/pacotes">Faça sua inscrição ou compre pacotes adicionais.</a></center></h3>
 <?php else: ?>
     <p><h3>Inscrições fechadas no momento.</h3></p>
 <?php endif; ?>
