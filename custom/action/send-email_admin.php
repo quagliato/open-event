@@ -92,6 +92,57 @@
                 }
             }
         }
+    } elseif ($criteria == "edital_approved_not_buyers") {
+      $respostasEdital = $genericDAO->selectAll("RespostaEdital", "status = 1");
+      if ($respostasEdital) {
+        if (!is_array($respostasEdital)) $respostasEdital = array($respostasEdital);
+        foreach ($respostasEdital as $respostaEdital) {
+          $users = $genericDAO->selectAll("Usuario", "id = ".$respostaEdital->get('id_user'));
+          if ($users) {
+            if (!is_array($users)) $users = array($users);
+            foreach ($users as $user) {
+              if (!$genericDAO->selectAll("Transaction", "id_user = {$user->get('id')} AND status = 1")) {
+                $email = $user->get('email');
+                $email = trim($email);
+                $email = strtolower($email);
+                if ($email != "" && !in_array($email, $emails)) {
+                  $emails[] = $email;
+                }
+              }
+            }
+          }
+        }
+      }
+      $exemptionsEmail = $genericDAO->selectAll("ExemptionEmail");
+      if ($exemptionsEmail) {
+        if (!is_array($exemptionsEmail)) $exemptionsEmail = array($exemptionsEmail);
+        foreach ($exemptionsEmail as $exemptionEmail) {
+          $users = $genericDAO->selectAll("Usuario", "email = '{$exemptionEmail->get('email')}'");
+          if ($users) {
+            if (!is_array($users)) $users = array($users);
+            foreach ($users as $user) {
+              if (!$genericDAO->selectAll("Transaction", "id_user = {$user->get('id')} AND status = 1")) {
+                $email = $user->get('email');
+                $email = trim($email);
+                $email = strtolower($email);
+                if ($email != "" && !in_array($email, $emails)) {
+                  $emails[] = $email;
+                }
+              }
+            }
+          /*  
+          } else {
+            $email = $exemptionEmail->get('email');
+            $email = trim($email);
+            $email = strtolower($email);
+            if ($email != "" && !in_array($email, $emails)) {
+              $emails[] = $email;
+            }
+          */
+          }
+        }
+      }
+
     } elseif ($criteria == "exemptions") {
         $respostasEdital = $genericDAO->selectAll("RespostaEdital", "status = 1");
         if ($respostasEdital) {
