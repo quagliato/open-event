@@ -17,14 +17,15 @@ class Request extends GenericClass{
         'status' => 'int'
     );
 
-    // protected static $createSQL = "
-    //     CREATE TABLE IF NOT EXISTS ".self::sys_tablename." (
-    //         code VARCHAR(60) NOT NULL,
-    //         id_user INT NOT NULL,
-    //         email_sent VARCHAR(100) NOT NULL,
-    //         sent_time VARCHAR(30) NOT NULL,
-    //         status INT NOT NULL,
-    //         PRIMARY KEY (code)
-    //   );";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS request (
+        code VARCHAR(60) NOT NULL,
+        id_user INT NOT NULL,
+        email_sent VARCHAR(100) NOT NULL,
+        sent_time VARCHAR(30) NOT NULL,
+        status INT NOT NULL,
+        PRIMARY KEY (code)
+      );
+    ";
 }
 ?>

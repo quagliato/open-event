@@ -27,15 +27,15 @@ class RespostaEditalStatus extends GenericClass{
         }
     }
 
-    // protected static $createSQL = "
-    //     CREATE TABLE IF NOT EXISTS resposta_edital_status (
-    //         id INT NOT NULL AUTO_INCREMENT,
-    //         id_resposta_edital INT NOT NULL,
-    //         id_user INT NOT NULL,
-    //         dt_update TIMESTAMP NOT NULL,
-    //         status INT NOT NULL DEFAULT 0,
-    //         PRIMARY KEY (id)
-    //     );
-    // ";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS resposta_edital_status (
+        id INT NOT NULL AUTO_INCREMENT,
+        id_resposta_edital INT NOT NULL,
+        id_user INT NOT NULL,
+        dt_update TIMESTAMP NOT NULL,
+        status INT NOT NULL DEFAULT 0,
+        PRIMARY KEY (id)
+      );
+    ";
 }
 ?>

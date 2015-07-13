@@ -22,17 +22,17 @@ class Transaction extends GenericClass{
         'status' => 'int',
     );
 
-    // protected static $createSQL = "
-//         CREATE TABLE IF NOT EXISTS transaction (
-//             id INT NOT NULL AUTO_INCREMENT,
-//             id_user INT NULL,
-//             dt_transaction TIMESTAMP NOT NULL,
-//             total_value FLOAT NOT NULL DEFAULT 0,
-//             value_exemption FLOAT NOT NULL DEFAULT 0,
-//             id_last_payment INT NULL,
-//             status INT NOT NULL DEFAULT 0,
-//             PRIMARY KEY (id)
-//         ) ENGINE=InnoDB AUTO_INCREMENT=30000;
-    // ";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS transaction (
+        id INT NOT NULL AUTO_INCREMENT,
+        id_user INT NULL,
+        dt_transaction TIMESTAMP NOT NULL,
+        total_value FLOAT NOT NULL DEFAULT 0,
+        value_exemption FLOAT NOT NULL DEFAULT 0,
+        id_last_payment INT NULL,
+        status INT NOT NULL DEFAULT 0,
+        PRIMARY KEY (id)
+      ) ENGINE=InnoDB AUTO_INCREMENT=30000;
+    ";
 }
 ?>

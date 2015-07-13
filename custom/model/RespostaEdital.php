@@ -20,16 +20,16 @@ class RespostaEdital extends GenericClass{
         'status' => 'int',
     );
 
-    // protected static $createSQL = "
-    //     CREATE TABLE IF NOT EXISTS resposta_edital (
-    //         id INT NOT NULL AUTO_INCREMENT,
-    //         id_edital INT NOT NULL,
-    //         id_user INT NOT NULL,
-    //         dt_inicio_resposta TIMESTAMP NOT NULL,
-    //         dt_fim_resposta TIMESTAMP NOT NULL,
-    //         PRIMARY KEY (id)
-    //     );";
-
-    // ALTER TABLE resposta_edital ADD COLUMN status INT NOT NULL DEFAULT 0 AFTER dt_fim_resposta;
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS resposta_edital (
+        id INT NOT NULL AUTO_INCREMENT,
+        id_edital INT NOT NULL,
+        id_user INT NOT NULL,
+        dt_inicio_resposta TIMESTAMP NOT NULL,
+        dt_fim_resposta TIMESTAMP NOT NULL,
+        PRIMARY KEY (id)
+      );
+      ALTER TABLE resposta_edital ADD COLUMN status INT NOT NULL DEFAULT 0 AFTER dt_fim_resposta;
+    ";
 }
 ?>

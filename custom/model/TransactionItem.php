@@ -18,15 +18,15 @@ class TransactionItem extends GenericClass{
         'vl_item' => 'float',
     );
 
-    // protected static $createSQL = "
-        // CREATE TABLE IF NOT EXISTS transaction_item (
-        //     id INT NOT NULL AUTO_INCREMENT,
-        //     id_transaction INT NULL,
-        //     id_product INT NULL,
-        //     vl_exemption FLOAT NOT NULL DEFAULT 0,
-        //     vl_item FLOAT NOT NULL DEFAULT 0,
-        //     PRIMARY KEY (id)
-        // ) ENGINE=InnoDB AUTO_INCREMENT=40000;
-    // ";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS transaction_item (
+        id INT NOT NULL AUTO_INCREMENT,
+        id_transaction INT NULL,
+        id_product INT NULL,
+        vl_exemption FLOAT NOT NULL DEFAULT 0,
+        vl_item FLOAT NOT NULL DEFAULT 0,
+        PRIMARY KEY (id)
+      ) ENGINE=InnoDB AUTO_INCREMENT=40000;
+    ";
 }
 ?>

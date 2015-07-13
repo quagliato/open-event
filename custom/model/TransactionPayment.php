@@ -24,18 +24,18 @@ class TransactionPayment extends GenericClass{
         'status' => 'int',
     );
 
-    // protected static $createSQL = "
-//         CREATE TABLE IF NOT EXISTS transaction_payment (
-//             id INT NOT NULL AUTO_INCREMENT,
-//             id_transaction INT NULL,
-//             dt_payment TIMESTAMP NOT NULL,
-//             type VARCHAR(10) NOT NULL,
-//             info VARCHAR(500) NOT NULL,
-//             obs VARCHAR(4000) NULL,
-//             total_value FLOAT NOT NULL DEFAULT 0,
-//             status INT NOT NULL DEFAULT 0,
-//             PRIMARY KEY (id)
-//         ) ENGINE=InnoDB AUTO_INCREMENT=50000;
-    // ";
+    protected static $createSQL = "
+      CREATE TABLE IF NOT EXISTS transaction_payment (
+        id INT NOT NULL AUTO_INCREMENT,
+        id_transaction INT NULL,
+        dt_payment TIMESTAMP NOT NULL,
+        type VARCHAR(10) NOT NULL,
+        info VARCHAR(500) NOT NULL,
+        obs VARCHAR(4000) NULL,
+        total_value FLOAT NOT NULL DEFAULT 0,
+        status INT NOT NULL DEFAULT 0,
+        PRIMARY KEY (id)
+      ) ENGINE=InnoDB AUTO_INCREMENT=50000;
+    ";
 }
 ?>
