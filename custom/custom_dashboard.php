@@ -51,7 +51,7 @@ table.noline thead td{ border: none; }
         <td class="right">R$ <?=$transaction->get('total_value')?></td>
         <td class="right">R$ <?=$transaction->get('value_exemption')?></td>
         <td><?=$transactionStatus?></td>
-        <?php if($transaction->get('status') == 0) : ?>
+        <?php if($transaction->get('status') == 0 && $transaction->get('total_value') > 0) : ?>
             <?php if($payment) : ?>
                 <td><a href="<?=$payment->get('info')?>">Pagar</a></td>
             <?php else : ?>
