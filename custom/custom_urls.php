@@ -82,6 +82,8 @@
         "/admin/transaction/action/search_by_user" => "action/transaction_00_search_by_user.php",
         "/admin/usuario/action/search" => "action/usuario_00_search.php",
 
+        "/admin/resposta-edital/action/export" => "action/resposta-edital_export.php",
+
     );
 
 ?>
