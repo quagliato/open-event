@@ -35,7 +35,7 @@
                             <label for="id_product1">Pacote 1</label>
                             <select name="ProductExclude-id_product1" id="id_product1" required>
                                 <?php
-                                    $products = $genericDAO->get("Product", NULL);
+                                    $products = $genericDAO->selectAll("Product", NULL);
                                     if ($products) :
                                         if (!is_array($products)) $products = array($products);
                                         foreach ($products as $product) :
@@ -55,7 +55,7 @@
                             <label for="id_product2">Pacote 2</label>
                             <select name="ProductExclude-id_product2" id="id_product2" required>
                                 <?php
-                                    $products = $genericDAO->get("Product", NULL);
+                                    $products = $genericDAO->selectAll("Product", NULL);
                                     if ($products) :
                                         if (!is_array($products)) $products = array($products);
                                         foreach ($products as $product) :

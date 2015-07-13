@@ -35,7 +35,7 @@
                             <label for="id_father">Pacote-Pai</label>
                             <select name="ProductExclude-id_father" id="id_father" required>
                                 <?php
-                                    $products = $genericDAO->get("Product", NULL);
+                                    $products = $genericDAO->selectAll("Product", NULL);
                                     if ($products) :
                                         if (!is_array($products)) $products = array($products);
                                         foreach ($products as $product) :
@@ -55,7 +55,7 @@
                             <label for="id_product">Pacote</label>
                             <select name="ProductExclude-id_product" id="id_product" required>
                                 <?php
-                                    $products = $genericDAO->get("Product", NULL);
+                                    $products = $genericDAO->selectAll("Product", NULL);
                                     if ($products) :
                                         if (!is_array($products)) $products = array($products);
                                         foreach ($products as $product) :
