@@ -142,7 +142,34 @@
           }
         }
       }
+    } elseif ($criteria == "edital_with_exemption_approved") {
+      $exemptions = $genericDAO->selectAll("Exemption", NULL);
+      if ($exemptions) {
+        if (!is_array($exemptions)) $exemptions = array($exemptions);
+        foreach ($exemptions as $exemption) {
+          $respostasEdital = $genericDAO->selectAll("RespostaEdital", "status = 1 AND id_edital = ".$exemption->get('id_edital'));
+          if ($respostasEdital) {
+            if (!is_array($respostasEdital)) $respostasEdital = array($respostasEdital);
+            $userIDs = "";
+            foreach ($respostasEdital as $respostaEdital) {
+              if (strlen($userIDs) > 0) $userIDs .= ", ";
+              $userIDs .= $respostaEdital->get('id_user');
+            }
 
+            $usuarios = $genericDAO->selectAll("Usuario", "id IN ($userIDs)");
+            if ($usuarios) {
+              if (!is_array($usuarios)) $usuarios = array($usuarios);
+              foreach ($usuarios as $usuario) {
+                $email = trim($usuario->get('email'));
+                $email = strtolower($email);
+                if ($email != "" && !in_array($email, $emails)) {
+                  $emails[] = $email;
+                }
+              }
+            }
+          }
+        }
+      }
     } elseif ($criteria == "exemptions") {
         $respostasEdital = $genericDAO->selectAll("RespostaEdital", "status = 1");
         if ($respostasEdital) {
@@ -208,37 +235,37 @@
                     <a href="#" class="submit negative cancel">Voltar</a>
                 </div>
                 <table style="font-size:12px;" class="jquerydatatable">
-                    <thead>
-                        <td style="width:10%; text-align:center;">Sequência</td>
-                        <td style="width:60%; text-align:left;">E-mail</td>
-                        <td style="width:20%; text-align:left;">Data/Hora do Envio</td>
-                        <td style="width:10%; text-align:left;">Status</td>
-                    </thead>
+                  <thead>
+                    <td style="width:10%; text-align:center;">Sequência</td>
+                    <td style="width:60%; text-align:left;">E-mail</td>
+                    <td style="width:20%; text-align:left;">Data/Hora do Envio</td>
+                    <td style="width:10%; text-align:left;">Status</td>
+                  </thead>
                     <?php
                         $count = 0;
                         $notification = new Notification;
                         foreach ($emails as $email) :
-                            $emailMessage = new EmailMessage;
-                            $emailMessage->set('email', $email);
-                            $emailMessage->set('subject', $subject);
-                            $emailMessage->set('message', $message);
+                          $emailMessage = new EmailMessage;
+                          $emailMessage->set('email', $email);
+                          $emailMessage->set('subject', $subject);
+                          $emailMessage->set('message', $message);
 
-                            $status = 0;
-                            if ($notification->sendEmail($email, $subject, $message)) {
-                                $status = 1;
-                                $emailMessage->set('status', $status);
-                            }
+                          $status = 0;
+                          if ($notification->sendEmail($email, $subject, $message)) {
+                            $status = 1;
+                            $emailMessage->set('status', $status);
+                          }
 
-                            $genericDAO->insert($emailMessage);
+                          $genericDAO->insert($emailMessage);
                     ?>
-                        <tr <?php if ($count % 2 == 0) { echo 'style="background-color: #CCCCCC;"'; } ?>>
-                            <td style="text-align:center;"><?=$count?></td>
-                            <td style="text-align:left;"><?=$email?></td>
-                            <td style="text-align:left;"><?=date('d/m/Y H:i:s')?></td>
-                            <td style="text-align:left;"><?=$status == 1 ? 'E-mail enviado' : 'E-mail não enviado'?></td>
-                        </tr>
+                    <tr <?php if ($count % 2 == 0) { echo 'style="background-color: #CCCCCC;"'; } ?>>
+                      <td style="text-align:center;"><?=$count?></td>
+                      <td style="text-align:left;"><?=$email?></td>
+                      <td style="text-align:left;"><?=date('d/m/Y H:i:s')?></td>
+                      <td style="text-align:left;"><?=$status == 1 ? 'E-mail enviado' : 'E-mail não enviado'?></td>
+                    </tr>
                     <?php 
-                            $count++; 
+                          $count++;
                         endforeach;
                     ?>
                 </table>
