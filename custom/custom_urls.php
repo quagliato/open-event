@@ -84,6 +84,9 @@
 
         "/admin/resposta-edital/action/export" => "action/resposta-edital_export.php",
 
+        "/transaction/search" => "view/transaction_search.php",
+        "/transaction/action/search" => "action/transaction_search.php"
+
     );
 
 ?>

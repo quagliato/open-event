@@ -72,3 +72,7 @@ td .btn.dark_red{
 td .btn.light_gray{
     color: #666666 !important;
 }
+
+.input_container label{
+    display: inline-block;
+}
