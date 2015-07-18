@@ -34,6 +34,12 @@
                     <li><a href="<?=APP_URL?>/admin/transaction/transfer">Transferir inscrição</a></li>
                 </ul>
             </div>
+            <div class="menu_block fourth fleft">
+                <h3>Credenciamento</h3>
+                <ul>
+                    <li><a href="<?=APP_URL?>/admin/transaction/search">Buscar inscrição</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>

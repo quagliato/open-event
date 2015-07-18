@@ -88,6 +88,9 @@
         "/transaction/action/search" => "action/transaction_search.php",
 
         "/admin/transaction/search" => "view/transaction_admin_search.php",
+        "/admin/transaction/action/search" => "action/transaction_02_admin_search.php",
+        "/admin/transaction" => "view/transaction.php",
+        "/admin/transaction/action/confirm" => "action/transaction_03_credenciamento.php",
 
     );
 
