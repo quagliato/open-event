@@ -12,7 +12,7 @@ function isMaxReached() {
     if ($fatherProducts) {
         if (!is_array($fatherProducts)) $fatherProducts = array($fatherProducts);
         foreach ($fatherProducts as $product) {
-            if ($genericDAO->selectAll("ProductFather", "id_father = ".$product->get('id'). " AND id_product <> ".$product->get('id'))) {
+            if ($genericDAO->selectAll("ProductFather", "id_father = ".$product->get('id'). " AND (id_product IS NULL OR id_product <> ".$product->get('id').")")) {
                 $max = $product->get('max_quantity');
                 $count = 0;
                 $transactionItems = $genericDAO->selectAll("TransactionItem", "id_product = ".$product->get('id'));

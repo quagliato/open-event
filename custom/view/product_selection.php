@@ -75,6 +75,11 @@
             <section class="wrapper">
                 <form method="POST" action="<?=APP_URL?>/pagamento/metodo">
                     <div class="input_line">
+                      <div class="input_container full">
+                        <p class="fg-red">Após selecionar o pacote e ir para a próxima tela, <strong>sua opção não poderá ser alterada</strong>.</p>
+                      </div>
+                    </div>
+                    <div class="input_line">
                         <div class="input_container two-thirds fnone">
                             <ul class="checkbox">
                             <?php
@@ -129,9 +134,10 @@
                                         if (strlen($strChildren) > 0) $strChildren .= ", ";
                                         $strChildren .= $child->get('id_product');
                                     }
-                                    if (strlen($strChildren) > 0) $children = $strChildren;
+                                    //if (strlen($strChildren) > 0) $children = $strChildren;
+                                    $children = $strChildren;
                                 }
-                                $children = $genericDAO->selectAll("Product", "id IN ($children)");
+                                $children = $genericDAO->selectAll("Product", (strlen($children) > 0 ? "id IN ($children)" : ""));
                                 if ($children):
                                     if (!is_array($children)) $children = array($children);
                                     foreach ($children as $child) :

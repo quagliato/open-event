@@ -22,7 +22,7 @@ class StrGenerator {
             $particle = $obj->get($key); //define a particula (valor daquela propriedade)
             if (!is_null($particle) && strlen($particle) > 0) { //verifica se o valor não é nulo
                 if (in_array($obj->type($key), array('str','date'))) { //se o valor for string
-                    $particle = str_replace("'", "\'", $particle);
+                    $particle = mysql_real_escape_string($particle);
                     $particle = "'$particle'"; //adiciona apostrofo no começo e no fim
                 }
 
@@ -133,7 +133,7 @@ class StrGenerator {
                 $particle = $obj->get($key); //define a particula (valor daquela propriedade)
                 if (!is_null($particle) && strlen($particle) > 0) { //verifica se o valor não é nulo
                     if (in_array($obj->type($key), array('str','date'))) { //se o valor for string
-                        $particle = str_replace("'", "\'", $particle);
+                        $particle = mysql_real_escape_string($particle);
                         $particle = "'$particle'"; //adiciona apostrofo no começo e no fim
                     }
                     $sql .= "$particle,"; //adiciona o valor na string
@@ -164,7 +164,7 @@ class StrGenerator {
                 $particle = $obj->get($key); //define a particula (valor daquela propriedade)
                 if (!is_null($particle) && strlen($particle) > 0) { //verifica se o valor não é nulo
                     if (in_array($obj->type($key), array('str','date'))) { //se o valor for string
-                        $particle = str_replace("'", "\'", $particle);
+                        $particle = mysql_real_escape_string($particle);
                         $particle = "'$particle'"; //adiciona apostrofo no começo e no fim
                     }
                     $sql .= "$particle,"; //adiciona o valor na string

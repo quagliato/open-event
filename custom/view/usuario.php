@@ -65,6 +65,13 @@
                         </div>
                     </div>
 
+                    <div class="input_line">
+                      <div class="input_container half">
+                        <label for="facebook">Facebook</label>
+                        <input name="Usuario-facebook" type="text" id="facebook">
+                      </div>
+                    </div>
+
                     <h2>Informações Acadêmicas</h2>
                     <div class="input_line">
                         <div class="input_container third">
