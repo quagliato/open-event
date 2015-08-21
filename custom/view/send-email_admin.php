@@ -17,6 +17,7 @@
                             <select name="criteria" id="criteria">
                                 <option value="all">Todos os cadastrados</option>
                                 <option value="buyers">Todos os inscritos</option>
+                                <option value="buyers_cancelled">Todos os inscritos cancelados</option>
                                 <option value="edital">Todos os inscritos em editais</option>
                                 <option value="edital_approved">Todos os selecionados em edital</option>
                                 <option value="edital_approved_not_buyers">Todos os selecionados em edital não inscritos</option>
