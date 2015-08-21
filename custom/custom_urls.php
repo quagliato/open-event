@@ -6,6 +6,8 @@
         "/usuario/cadastrar" => "view/usuario.php",
         "/action/usuario/cadastrar" => "action/usuario_cadastrar.php",
 
+        "/infopanel" => "view/infopanel.php",
+
         "/admin/edital" => "view/edital_admin.php",
         "/admin/edital/action/insert" => "action/edital_01_insert.php",
         "/admin/edital/action/update" => "action/edital_02_update.php",

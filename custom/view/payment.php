@@ -1,6 +1,10 @@
 <?php
   $user = Structure::verifySession();
   Structure::header();
+
+  if (!array_key_exists('id_transaction', $_POST) || !isset($_POST['id_transaction']) || $_POST['id_transaction'] == "") {
+    Structure::redirWithMessage("Transação não encontrada.", "/");
+  }
   
   $idTransaction = $_POST['id_transaction'];
   $paymentMethod = $_POST['payment'];
