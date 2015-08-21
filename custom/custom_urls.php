@@ -94,6 +94,9 @@
         "/admin/transaction" => "view/transaction.php",
         "/admin/transaction/action/confirm" => "action/transaction_03_credenciamento.php",
 
+        "/admin/transaction/export" => "view/transaction_export_list.php",
+        "/admin/transaction/action/export" => "action/transaction_04_export_list.php",
+
     );
 
 ?>
