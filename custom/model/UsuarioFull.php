@@ -11,6 +11,7 @@ class Usuario extends GenericClass{
     protected $deficiencia;
     protected $senha;
     protected $email;
+    protected $facebook;
     protected $telefone_residencial;
     protected $telefone_celular;
     protected $inst_ens;
@@ -40,6 +41,7 @@ class Usuario extends GenericClass{
         'deficiencia' => 'str',
         'senha' => 'str',
         'email' => 'str',
+        'facebook' => 'str', 
         'telefone_residencial' => 'str',
         'telefone_celular' => 'str',
         'inst_ens' => 'str',
@@ -93,6 +95,7 @@ class Usuario extends GenericClass{
         privilegio VARCHAR(3) NOT NULL DEFAULT 'USR',
         PRIMARY KEY (id)
       );
+      ALTER TABLE usuario ADD COLUMN facebook VARCHAR(500) NULL AFTER email;
     ";
 }
 

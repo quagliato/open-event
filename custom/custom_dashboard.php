@@ -12,6 +12,10 @@ table.noline thead td{ border: none; }
 .bb1s{ border-bottom: #666666 1px solid !important; }
 .bt1s{ border-top: #666666 1px solid !important; }
 </style>
+<?php
+    $transactions = $genericDAO->selectAll("Transaction", "id_user = ".$user->get('id'));
+    if ($transactions) {
+?>
 <table class="noline">
     <thead>
         <td class="center tenth">Código</td>
@@ -21,9 +25,8 @@ table.noline thead td{ border: none; }
         <td class="third">Status</td>
         <td class="tenth">Pagamento</td>
     </thead>
+
 <?php
-    $transactions = $genericDAO->selectAll("Transaction", "id_user = ".$user->get('id'));
-    if ($transactions) {
         if (!is_array($transactions)) $transactions = array($transactions);
         foreach ($transactions as $transaction) {
             $payment  = false;
@@ -88,7 +91,7 @@ table.noline thead td{ border: none; }
 <?php endif; ?>
 
 <hr>
-
+<!--
 <?php
     $editalDAO = new editalDAO;
     $respostaEditalDAO = new RespostaEditalDAO;
@@ -128,3 +131,4 @@ table.noline thead td{ border: none; }
 <?php
     endif;
 ?>
+-->

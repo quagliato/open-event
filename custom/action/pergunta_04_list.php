@@ -41,7 +41,7 @@
                     ?>
                         <tr <?php if ($count % 2 == 0) { echo 'style="background-color: #CCCCCC;"'; } ?>>
                             <td style="text-align:center;"><?=$pergunta->get('id')?></td>
-                            <td style="text-align:left;"><?=$edital->get('nome')?></td>
+                            <td style="text-align:left;"><?=$edital ? $edital->get('nome') : ''?></td>
                             <td style="text-align:left;"><?=$pergunta->get('titulo')?></td>
                             <td style="text-align:left;"><?=$pergunta->get('tipo_resposta')?></td>
                             <td style="text-align:center;"><a href="<?=APP_URL?>/admin/pergunta?id=<?=$pergunta->get('id')?>">Editar</a></td>

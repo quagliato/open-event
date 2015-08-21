@@ -75,6 +75,11 @@
             <section class="wrapper">
                 <form method="POST" action="<?=APP_URL?>/pagamento/metodo">
                     <div class="input_line">
+                      <div class="input_container full">
+                        <p class="fg-red">Após selecionar o pacote e ir para a próxima tela, <strong>sua opção não poderá ser alterada</strong>.</p>
+                      </div>
+                    </div>
+                    <div class="input_line">
                         <div class="input_container two-thirds fnone">
                             <ul class="checkbox">
                             <?php
@@ -129,69 +134,72 @@
                                         if (strlen($strChildren) > 0) $strChildren .= ", ";
                                         $strChildren .= $child->get('id_product');
                                     }
-                                    if (strlen($strChildren) > 0) $children = $strChildren;
+                                    //if (strlen($strChildren) > 0) $children = $strChildren;
+                                    $children = $strChildren;
                                 }
-                                $children = $genericDAO->selectAll("Product", "id IN ($children)");
-                                if ($children):
-                                    if (!is_array($children)) $children = array($children);
-                                    foreach ($children as $child) :
-                                        $productId = $child->get('id');
-                                        $exclude = $genericDAO->selectAll("ProductExclude", "id_product1 = $productId OR id_product2 = $productId");
+                                if (strlen($children) > 0) :
+                                  $children = $genericDAO->select("Product", array('id','description','price'), "id IN ($children)");
+                                  if ($children):
+                                      if (!is_array($children)) $children = array($children);
+                                      foreach ($children as $child) :
+                                          $productId = $child->get('id');
+                                          $exclude = $genericDAO->selectAll("ProductExclude", "id_product1 = $productId OR id_product2 = $productId");
 
-                                        $disabled = true;
-                                        $checked = false;
-                                        if ($hasFather) $disabled = false;
-                                        if (userHasProduct($user->get('id'), $child->get('id'))) {
-                                            $disabled = true;
-                                            $checked = true;
-                                        }
-                                        
-                                        if (!is_array($exclude)) $exclude = array($exclude);
-                                        $exclude = onlyOpenProductExclude($exclude);
-                                        foreach ($exclude as $excludeItem) {
-                                          if (($excludeItem->get('id_product1') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product2'))) ||
-                                            ($excludeItem->get('id_product2') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product1')))) {
+                                          $disabled = true;
+                                          $checked = false;
+                                          if ($hasFather) $disabled = false;
+                                          if (userHasProduct($user->get('id'), $child->get('id'))) {
                                               $disabled = true;
-                                              $exclude = $excludeItem;
+                                              $checked = true;
                                           }
-                                        }
+                                          
+                                          if (!is_array($exclude)) $exclude = array($exclude);
+                                          $exclude = onlyOpenProductExclude($exclude);
+                                          foreach ($exclude as $excludeItem) {
+                                            if (($excludeItem->get('id_product1') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product2'))) ||
+                                              ($excludeItem->get('id_product2') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product1')))) {
+                                                $disabled = true;
+                                                $exclude = $excludeItem;
+                                            }
+                                          }
 
-                                ?>
-                                <li>
-                                    <input 
-                                        type="checkbox" 
-                                        id="product<?=$child->get('id')?>" 
-                                        name="<?=userHasProduct($user->get('id'), $child->get('id')) ? 'alreadyOwn[]' : 'products[]'?>" 
-                                        value="<?=$child->get('id')?>"
-                                        class="product child  <?=$exclude ? 'exclude' : ''?>"
-                                        data-father="product<?=$product->get('id')?>"
-                                        <?=$exclude && !is_array($exclude) ? 'data-exclude="'.$exclude->get('id').'"' : ''?>
-                                        <?=$disabled ? 'disabled' : ''?>
-                                        <?=$checked ? 'checked' : ''?>
-                                    >
-                                        <label 
-                                            for="product<?=$child->get('id')?>"
-                                            <?=$disabled ? 'class="disabled"' : ''?>
-                                        >
-                                            <?=$child->get('description')?>
+                                  ?>
+                                  <li>
+                                      <input 
+                                          type="checkbox" 
+                                          id="product<?=$child->get('id')?>" 
+                                          name="<?=userHasProduct($user->get('id'), $child->get('id')) ? 'alreadyOwn[]' : 'products[]'?>" 
+                                          value="<?=$child->get('id')?>"
+                                          class="product child  <?=$exclude ? 'exclude' : ''?>"
+                                          data-father="product<?=$product->get('id')?>"
+                                          <?=$exclude && !is_array($exclude) ? 'data-exclude="'.$exclude->get('id').'"' : ''?>
+                                          <?=$disabled ? 'disabled' : ''?>
+                                          <?=$checked ? 'checked' : ''?>
+                                      >
+                                          <label 
+                                              for="product<?=$child->get('id')?>"
+                                              <?=$disabled ? 'class="disabled"' : ''?>
+                                          >
+                                              <?=$child->get('description')?>
 
-                                            <!-- PRICE -->
-                                             - <strong>R$ <span class="price" data-value="<?=$child->get('price')?>"><?=$child->get('price')?></span></strong>
-                                            <!-- /PRICE-->
+                                              <!-- PRICE -->
+                                               - <strong>R$ <span class="price" data-value="<?=$child->get('price')?>"><?=$child->get('price')?></span></strong>
+                                              <!-- /PRICE-->
 
-                                            <!--EXEMPTION -->
-                                            <?php 
-                                            $exemption = userHasExemption($user->get('id'), $child->get('id'));
-                                            if ($exemption) :
-                                                $value = floatval($child->get('price')) * floatval($exemption->get('modifier'));
-                                            ?>
-                                            (Isenção: <strong>R$ <span class="exemption" data-value="<?=$value?>"><?=$value?></span></strong>)
-                                            <?php endif; ?>
-                                            <!--/EXEMPTION -->
-                                        </label>
-                                    </li>
+                                              <!--EXEMPTION -->
+                                              <?php 
+                                              $exemption = userHasExemption($user->get('id'), $child->get('id'));
+                                              if ($exemption) :
+                                                  $value = floatval($child->get('price')) * floatval($exemption->get('modifier'));
+                                              ?>
+                                              (Isenção: <strong>R$ <span class="exemption" data-value="<?=$value?>"><?=$value?></span></strong>)
+                                              <?php endif; ?>
+                                              <!--/EXEMPTION -->
+                                          </label>
+                                      </li>
                                 <?php
-                                    endforeach;
+                                      endforeach;
+                                  endif;
                                 endif;
                                 ?>
                             <?php endforeach; ?>
