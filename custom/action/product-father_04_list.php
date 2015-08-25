@@ -34,8 +34,8 @@
                     ?>
                         <tr <?php if ($count % 2 == 0) { echo 'style="background-color: #CCCCCC;"'; } ?>>
                             <td style="text-align:center;"><?=$productFatherItem->get('id')?></td>
-                            <td style="text-align:left;"><?=$product1->get('description')?></td>
-                            <td style="text-align:left;"><?=$product2->get('description')?></td>
+                            <td style="text-align:left;"><?=$product1 ? $product1->get('description') : ''?></td>
+                            <td style="text-align:left;"><?=$product2 ? $product2->get('description') : ''?></td>
                             <td style="text-align:center;"><a href="<?=APP_URL?>/admin/product-father?id=<?=$productFatherItem->get('id')?>">Editar</a></td>
                             <td style="text-align:center;"><a class="post" id="<?=$productFatherItem->get('id')?>" href="<?=APP_URL?>/admin/product-father/action/delete">Excluir</a></td>
                         </tr>

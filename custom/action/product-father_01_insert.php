@@ -3,7 +3,7 @@
     $genericDAO = new GenericDAO;
     $return = array();
 
-    $productFather = DataBinder::bind($_POST, "ProductExclude");
+    $productFather = DataBinder::bind($_POST, "ProductFather");
 
     if ($productFather->get('id_father') == $productFather->get('id_product')) {
         $return[] = array(
