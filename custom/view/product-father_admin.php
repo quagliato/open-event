@@ -33,7 +33,7 @@
                     <div class="input_line">
                         <div class="input_container half fnone">
                             <label for="id_father">Pacote-Pai</label>
-                            <select name="ProductExclude-id_father" id="id_father" required>
+                            <select name="ProductFather-id_father" id="id_father" required>
                                 <?php
                                     $products = $genericDAO->selectAll("Product", NULL);
                                     if ($products) :
@@ -53,7 +53,7 @@
                     <div class="input_line">
                         <div class="input_container half fnone">
                             <label for="id_product">Pacote</label>
-                            <select name="ProductExclude-id_product" id="id_product" required>
+                            <select name="ProductFather-id_product" id="id_product" required>
                                 <?php
                                     $products = $genericDAO->selectAll("Product", NULL);
                                     if ($products) :
