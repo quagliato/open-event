@@ -23,11 +23,14 @@
         }
     }
     
+        $products = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'".(strlen($productsFatherStr) > 0 ? " AND id IN ($productsFatherStr)" : ""));
+    /*    
     if (!$isExempted) {
         $products = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'".(strlen($productsFatherStr) > 0 ? " AND id IN ($productsFatherStr)" : ""));
     } else {
         $products = $genericDAO->selectAll("Product", (strlen($productsFatherStr) > 0 ? " id IN ($productsFatherStr)" : " 1=1")." ORDER BY id LIMIT 1");
     }
+    */
 
     if (!$products) Structure::redirWithMessage("Nenhum item cadastrado", "/dashboard");
 
@@ -84,6 +87,7 @@
                             <ul class="checkbox">
                             <?php
                             foreach ($products as $product) :
+                              if (!isMaxReachedByProd($product->get('id'))) :
                                 $hasFather = false;
                                 $productId = $product->get('id');
                                 $exclude = $genericDAO->selectAll("ProductExclude", "id_product1 = $productId OR id_product2 = $productId");
@@ -142,6 +146,7 @@
                                   if ($children):
                                       if (!is_array($children)) $children = array($children);
                                       foreach ($children as $child) :
+                                        if (!isMaxReachedByProd($child->get('id'))) :
                                           $productId = $child->get('id');
                                           $exclude = $genericDAO->selectAll("ProductExclude", "id_product1 = $productId OR id_product2 = $productId");
 
@@ -198,11 +203,13 @@
                                           </label>
                                       </li>
                                 <?php
+                                        endif;
                                       endforeach;
                                   endif;
                                 endif;
-                                ?>
-                            <?php endforeach; ?>
+                              endif;
+                            endforeach; 
+                            ?>
                             </ul>
                         </div>
                     </div>
