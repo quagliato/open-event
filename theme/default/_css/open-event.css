@@ -46,7 +46,12 @@ ul#info li{
 }
 
 ul#info .title{
-    font-size: 16px;
+  display: inline-block;
+  font-size: 16px;
+  height: 70px;
+  text-align: center;
+  vertical-align: bottom;
+  width: 100%;
 }
 
 ul#info .number{

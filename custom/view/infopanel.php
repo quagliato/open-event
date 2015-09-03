@@ -45,6 +45,14 @@
           if ($products) {
             if (!is_array($products)) $products = array($products);
             $productCount = array();
+
+            $divisor = "full";
+            if (sizeof($products) % 5 === 0) $divisor = "fifth";
+            else if (sizeof($products) % 4 === 0) $divisor = "fourth";
+            else if (sizeof($products) % 3 === 0) $divisor = "third";
+            else if (sizeof($products) % 2 === 0) $divisor = "half";
+            else if (sizeof($products) > 5) $divisor = "third";
+
             foreach($products as $product) {
               $productCount[$product->get('id')] = 0;
               $transactionItems = $genericDAO->selectAll("TransactionItem", "id_product = {$product->get('id')}");
@@ -55,13 +63,6 @@
                   if ($transaction && $transaction->get('status') == $statusId) $productCount[$product->get('id')] += 1;
                 }
               }
-
-              $divisor = "full";
-              if (sizeof($products) % 5 === 0) $divisor = "fifth";
-              else if (sizeof($products) % 4 === 0) $divisor = "fourth";
-              else if (sizeof($products) % 3 === 0) $divisor = "third";
-              else if (sizeof($products) % 2 === 0) $divisor = "half";
-              else if (sizeof($products) > 5) $divisor = "third";
         ?>
               <li class="<?=$divisor?> fleft">
                 <p class="title center upper thin"><?=$product->get('description')?></p>
