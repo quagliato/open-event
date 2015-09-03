@@ -30,9 +30,9 @@
 
       <?php
         $status = array(
-          0 => "Pendente",
+          0 => "Pendentes",
           1 => "Confirmadas",
-          2 => "Credenciads",
+          2 => "Credenciadas",
           3 => "Canceladas"
         );
 
@@ -65,7 +65,7 @@
               }
         ?>
               <li class="<?=$divisor?> fleft">
-                <p class="title center upper thin"><?=$product->get('description')?></p>
+                <p class="title center upper thin"><?=$product->get('description')?>&nbsp;<strong>R$ <?=$product->get('price')?></strong></p>
                 <p class="number center light"><?=$productCount[$product->get('id')]?></p>
               </li>
         <?php
