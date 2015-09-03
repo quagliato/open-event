@@ -1,25 +1,8 @@
 <h1 class="center">Admin</h1>
 <section id="info">
     <header>
-        <h2 class="clickable fade-block" data-target="#info .content">Info</h2>
+      <a href="<?=APP_URL?>/infopanel"><h2>Infopanel</h2></a>
     </header>
-    <div class="content hidden mb80">
-        <?php
-            $editalDAO = new EditalDAO;
-            $editais = $editalDAO->selectAll("Edital", NULL);
-            if ($editais) :
-                if (!is_array($editais)) $editais = array($editais);
-        ?>
-        <ul id="info">
-            <?php foreach ($editais as $edital) : ?>
-            <li class="fourth fleft">
-                <p class="title center upper thin"><?=$edital->get('nome')?></p>
-                <p class="number center light"><?=$editalDAO->countAnswersPerEdital($edital->get('id'))?></p>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-        <?php endif; ?>
-    </div>
 </section>
 
 <section id="inscricoes">
@@ -27,33 +10,6 @@
         <h2 class="clickable fade-block" data-target="#inscricoes .content">Inscrições</h2>
     </header>
     <div class="content hidden mb80">
-        <div class="input_line">
-          <div class="menu_block three-fourths fleft">
-            <h3>Transações não canceladas por pacote</h3>
-            <ul>
-              <?php
-                $products = $genericDAO->selectAll("Product", NULL);
-                if ($products) {
-                  if (!is_array($products)) $products = array($products);
-                  $productCount = array();
-                  foreach($products as $product) {
-                    $productCount[$product->get('id')] = 0;
-                    $transactionItems = $genericDAO->selectAll("TransactionItem", "id_product = {$product->get('id')}");
-                    if ($transactionItems) {
-                      if (!is_array($transactionItems)) $transactionItems = array($transactionItems);
-                      foreach ($transactionItems as $transactionItem) {
-                        $transaction = $genericDAO->selectAll("Transaction", "id = {$transactionItem->get('id_transaction')}");
-                        if ($transaction && $transaction->get('status') != 3) $productCount[$product->get('id')] += 1;
-                      }
-                    }
-                    echo "<li>{$product->get('description')}<span class=\"fright\">{$productCount[$product->get('id')]}</span></li>";
-                  }
-                }
-              ?>
-              
-            </ul>
-          </div>
-        </div>
         <div class="input_line">
             <div class="menu_block fourth fleft">
                 <h3>Transferência</h3>
