@@ -57,21 +57,25 @@
 
     } elseif ($criteria == "buyers_cancelled_product") {
         $transactionItems = $genericDAO->selectAll("TransactionItem", "id_product IN ($specific)");
+        $transactionsStr = "";
         foreach ($transactionItems as $transactionItem) {
-            $transactions = $genericDAO->selectAll("Transaction", "status = 3 AND id_transaction = ".$transactionItem->get('id'));
-            if ($transactions) {
-                if (!is_array($transactions)) $transactions = array($transactions);
-                foreach ($transactions as $transaction) {
-                    $users = $genericDAO->selectAll("Usuario", "id = ".$transaction->get('id_user'));
-                    if ($users) {
-                        if (!is_array($users)) $users = array($users);
-                        foreach ($users as $user) {
-                            $email = $user->get('email');
-                            $email = trim($email);
-                            $email = strtolower($email);
-                            if ($email != "" && !in_array($email, $emails)) {
-                                $emails[] = $email;
-                            }
+            if (strlen($transactionsStr) > 0) $transactionsStr .= ", ";
+            $transactionsStr .= $transactionItem->get('id_transaction');
+        }
+
+        $transactions = $gernericDAO->selectAll("Transaction", "status = 3 AND id_transaction IN ($transactionsStr)");
+        if ($transactions) {
+            if (!is_array($transactions)) $transactions = array($transactions);
+            foreach ($transactions as $transaction) {
+                $users = $genericDAO->selectAll("Usuario", "id = ".$transaction->get('id_user'));
+                if ($users) {
+                    if (!is_array($users)) $users = array($users);
+                    foreach ($users as $user) {
+                        $email = $user->get('email');
+                        $email = trim($email);
+                        $email = strtolower($email);
+                        if ($email != "" && !in_array($email, $emails)) {
+                            $emails[] = $email;
                         }
                     }
                 }
