@@ -67,16 +67,13 @@
         if ($transactions) {
             if (!is_array($transactions)) $transactions = array($transactions);
             foreach ($transactions as $transaction) {
-                $users = $genericDAO->selectAll("Usuario", "id = ".$transaction->get('id_user'));
-                if ($users) {
-                    if (!is_array($users)) $users = array($users);
-                    foreach ($users as $user) {
-                        $email = $user->get('email');
-                        $email = trim($email);
-                        $email = strtolower($email);
-                        if ($email != "" && !in_array($email, $emails)) {
-                            $emails[] = $email;
-                        }
+                $user = $genericDAO->selectAll("Usuario", "id = ".$transaction->get('id_user'));
+                if ($user) {
+                    $email = $user->get('email');
+                    $email = trim($email);
+                    $email = strtolower($email);
+                    if ($email != "" && !in_array($email, $emails)) {
+                        $emails[] = $email;
                     }
                 }
             }
