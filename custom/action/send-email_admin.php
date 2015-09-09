@@ -63,7 +63,7 @@
             $transactionsStr .= $transactionItem->get('id_transaction');
         }
 
-        $transactions = $gernericDAO->selectAll("Transaction", "status = 3 AND id_transaction IN ($transactionsStr)");
+        $transactions = $genericDAO->selectAll("Transaction", "status = 3 AND id_transaction IN ($transactionsStr)");
         if ($transactions) {
             if (!is_array($transactions)) $transactions = array($transactions);
             foreach ($transactions as $transaction) {
