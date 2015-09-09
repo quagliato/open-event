@@ -295,12 +295,12 @@
                           $emailMessage->set('message', $message);
 
                           $status = 0;
-                          // if ($notification->sendEmail($email, $subject, $message)) {
-                          //   $status = 1;
-                          //   $emailMessage->set('status', $status);
-                          // }
+                          if ($notification->sendEmail($email, $subject, $message)) {
+                            $status = 1;
+                            $emailMessage->set('status', $status);
+                          }
 
-                          // $genericDAO->insert($emailMessage);
+                          $genericDAO->insert($emailMessage);
                     ?>
                     <tr <?php if ($count % 2 == 0) { echo 'style="background-color: #CCCCCC;"'; } ?>>
                       <td style="text-align:center;"><?=$count?></td>
