@@ -34,6 +34,6 @@
   $transaction = new Transaction();
   $transaction->set('status', 1);
 
-  $result = $genericDAO->updateWithFields($transaction, array('status'), "total_value = 0 AND value_exemption > 0";
+  $result = $genericDAO->updateWithFields($transaction, array('status'), "total_value = 0 AND value_exemption > 0");
 
 ?>
