@@ -22,7 +22,20 @@
 
     $emails = array();
 
-    if ($criteria == "all") {
+    if ($criteria == "specific") {
+        $users = $genericDAO->selectAll("Usuario", "$specific");
+        if ($users) {
+            if (!is_array($users)) $users = array($users);
+            foreach ($users as $user) {
+                $email = $user->get('email');
+                $email = trim($email);
+                $email = strtolower($email);
+                if ($email != "" && !in_array($email, $emails)) {
+                    $emails[] = $email;
+                }
+            }
+        }
+    } elseif ($criteria == "all") {
         $users = $genericDAO->selectAll("Usuario", NULL);
         if ($users) {
             if (!is_array($users)) $users = array($users);
