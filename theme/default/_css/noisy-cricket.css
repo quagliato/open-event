@@ -4,7 +4,7 @@
 
 body{
     background-color: #FFFFFF;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     padding-bottom: 100px;
     position: relative;
@@ -18,12 +18,13 @@ ul li{
     list-style: none;
 }
 
-a, a:visited{ color: #98F678; text-decoration: none; }
+a, a:visited{ color: #41D60E; text-decoration: none; }
 a:hover{ text-decoration: none; }
 
 .wrapper{
     margin: 0 auto;
-    width: 960px;
+    max-width: 960px;
+    width: 100%;
 }
 
 .hidden{ display: none !important; }
@@ -104,6 +105,7 @@ a:hover{ text-decoration: none; }
 .input_container input,
 .input_container select,
 .input_container textarea{
+    background-color: #FFFFFF;
     border: 1px solid #CCCCCC;
     color: #000000;
     font-size: 14px;
@@ -116,7 +118,8 @@ a:hover{ text-decoration: none; }
 .input_container input:focus,
 .input_container select:focus,
 .input_container textarea:focus{
-    outline: 1px solid #333333;
+    background-color: #FFFFFF;
+    border: 1px solid #98F678;
 }
 
 .input_container textarea.s{ height: 60px; }
@@ -277,7 +280,6 @@ button{
     border: none;
     border-radius: 25px;
     color: #FFFFFF;
-    font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     font-weight: bold;
     line-height: 14px;
@@ -290,11 +292,17 @@ button{
 }
 
 hr{
-    border-top: 1px solid #666666;
+    border: none;
+    border-top: 1px solid #CCCCCC;
     height: 1px;
-    margin: 20px 0 20px 0;
+    margin: 20px auto;
     width: 100%;
 }
+
+hr.90{ width: 90%; }
+hr.75{ width: 75%; }
+hr.50{ width: 50%; }
+hr.25{ width: 25%; }
 
 table{
     border: none;
@@ -450,6 +458,7 @@ header #topbanner{
 #notification_content{
     display: inline-block;
     max-width: 960px;
+    width: 100%;
 }
 
 #notification_content a,
@@ -486,6 +495,7 @@ header #topbanner{
     height: 500px;
     left: 50%;
     margin: -250px 0px 0px -450px;
+    max-width: 900px;
     position: fixed;
     top: 50%;
     width: 900px;

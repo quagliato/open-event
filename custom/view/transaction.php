@@ -23,12 +23,14 @@
 
     if ($user) {
       $respostasEdital = $genericDAO->selectAll("RespostaEdital", "id_user = {$user->get('id')}");
-      if (!is_array($respostasEdital)) $respostasEdital = array($respostasEdital);
-      $aux = array();
-      foreach ($respostasEdital as $respostaEdital) {
-        $edital = $genericDAO->selectAll("Edital", "id = {$respostaEdital->get('id_edital')}");
-        if ($edital) {
-          $aux[] = $edital;
+      if ($respostaEdital) {
+        if (!is_array($respostasEdital)) $respostasEdital = array($respostasEdital);
+        $aux = array();
+        foreach ($respostasEdital as $respostaEdital) {
+          $edital = $genericDAO->selectAll("Edital", "id = {$respostaEdital->get('id_edital')}");
+          if ($edital) {
+            $aux[] = $edital;
+          }
         }
       }
 
@@ -131,6 +133,7 @@
               $itensStr = "";
               $transactionItems = $genericDAO->selectAll("TransactionItem", "id_transaction = {$transaction->get('id')}");
               if ($transactionItems) {
+                if (!is_array($transactionItems)) $transactionItems = array($transactionItems);
                 foreach ($transactionItems as $transactionItem) {
                   $product = $genericDAO->selectAll("Product", "id = {$transactionItem->get('id_product')}");
                   if ($product && $product->get('price') > 0) {
@@ -158,7 +161,7 @@
               </div>
               <div class="input_container eigth">
                 <label>Data</label>
-                <p><?=$transaction->get('dt_transaction')?></p>
+                <p><?=Utils::sqlTimestamp2BrFormat($transaction->get('dt_transaction'))?></p>
               </div>
               <div class="input_container sixth">
                 <label>Status</label>
