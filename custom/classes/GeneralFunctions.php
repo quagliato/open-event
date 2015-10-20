@@ -73,7 +73,7 @@ function isMaxReachedByProd($idProduct) {
 
 function userHasProduct($idUser, $idProduct) {
     $genericDAO = new GenericDAO;
-    $transactions = $genericDAO->selectAll("Transaction", "id_user = $idUser AND (status = 1 OR status = 0)");
+    $transactions = $genericDAO->selectAll("Transaction", "id_user = $idUser AND (status <> 3)");
     if ($transactions) {
         if (!is_array($transactions)) $transactions = array($transactions);
         foreach ($transactions as $transaction) {
