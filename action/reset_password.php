@@ -22,8 +22,8 @@
                 'Error' => 'Esse código de restauração já foi utilizado.'
             );
         } else {
-            $userDAO = new UsuarioDAO;
-            $user = $userDAO->selectAll("Usuario", ("id = ".$request->get('id_user')));
+            $userDAO = new UserDAO;
+            $user = $userDAO->selectAll("User", ("id = ".$request->get('id_user')));
             if (!$user) {
                 $return[] = array(
                     'Action' => 'Error',

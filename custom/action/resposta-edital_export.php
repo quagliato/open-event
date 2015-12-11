@@ -1,5 +1,5 @@
 <?php
-  $usuario = Structure::verifyAdminSession();
+  $user = Structure::verifyAdminSession();
   Structure::header('nude');
   
   $idEdital = false;
@@ -31,7 +31,7 @@
     if (!is_array($respostasEdital)) $respostasEdital = array($respostasEdital);
     foreach ($respostasEdital as $respostaEdital) {
       $line = "";
-      $user = $genericDAO->selectAll("Usuario", "id = ".$respostaEdital->get('id_user'));
+      $user = $genericDAO->selectAll("User", "id = ".$respostaEdital->get('id_user'));
       
       $line .= "{$user->get('id')},";
       $line .= "\"{$user->get('nome')}\",";

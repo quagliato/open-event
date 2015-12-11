@@ -1,9 +1,4 @@
 <?php
-
-    session_start();
-    $_SESSION['user_id'] = "";
-    unset($_SESSION['user_id']);
-    session_destroy();
-
-    Structure::redir('/');
+  setcookie('user_id', '', (time()-1000), '/');
+  Structure::redir('/');
 ?>

@@ -11,7 +11,7 @@
     } else {
         $email = $_POST['email'];
 
-        $userDAO = new UsuarioDAO;
+        $userDAO = new UserDAO;
 
         $user = $userDAO->getUserByEmail($email);
 

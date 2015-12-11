@@ -22,11 +22,7 @@ class Structure {
     }
 
     public static function verifySession($where2go = false, $values = false, $verbose = true) {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-
-        if (!isset($_SESSION['user_id'])) {
+        if (!isset($_COOKIE['user_id'])) {
             if ($where2go) {
                 $where2goAux = $where2go."?";
                 if ($values) {
@@ -34,8 +30,8 @@ class Structure {
                         $where2goAux .= "$key=$value";
                     }
                 }
-
-                $_SESSION['OPENEVENT_goto'] = $where2goAux;
+                
+                setcookie('noisy-cricket_goto',$where2goAux->get('id'),0,'/');
             }
             if ($verbose) {
                 Structure::redirWithMessage("Não se esqueça de fazer login ou se cadastrar.", '/');
@@ -43,26 +39,26 @@ class Structure {
                 Structure::redir('/');
             }
         } else {
-            $usuario_dao = new UsuarioDAO;
-            $usuario = $usuario_dao->getUserById($_SESSION['user_id']);
-            if (!$usuario) {
-
+            $userDAO = new UserDAO;
+            $user = $userDAO->getUserById($_COOKIE['user_id']);
+            if (!$user) {
+                
                 if ($verbose) {
                     Structure::redirWithMessage("Você não foi encontrado no sistema.","/");
                 } else {
                     Structure::redir('/');
                 }
             } else {
-                return $usuario;
+                return $user;
             }
         }
     }
 
     public static function verifySpecificRole($role) {
-        $usuario = Structure::verifySession();
+        $user = Structure::verifySession();
 
-        if ($usuario->get('privilegio') == $role) {
-            return $usuario;
+        if ($user->get('role') == $role) {
+            return $user;
         }
 
         Structure::redirWithMessage("Area restrita.", "/"); //TODO: Adicionar acento
@@ -79,7 +75,7 @@ class Structure {
         } else {
             include_once("theme/".THEME."/header.php");
         }
-
+        
     }
 
     public static function footer($footer = null) {

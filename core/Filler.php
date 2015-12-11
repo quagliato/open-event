@@ -10,21 +10,23 @@ class Filler {
     public static function fill($rs, $classname) {
         $array = array();
 
-        while ($field_data = mysql_fetch_array($rs)) {
+        // Creates a array of all the fields on that resultset.
+        $fields = array();
+        while ($field = $rs->fetch_field()) {
+            $fields[] = $field->name;
+        }
+
+        while ($field_data = $rs->fetch_array()) {
             $obj = new $classname;
             // Iterate resultset columns.
-            for ($i = 0; $i < mysql_num_fields($rs); $i++) {
-                // Gets the name of the column.
-                $field = mysql_fetch_field($rs, $i);
-
+            foreach ($fields as $field) {
                 // Sets the value from the resultset to the property with the
                 // same name.
                 if (UTF8ENCODED === true) {
-                    $obj->set($field->name, utf8_encode($field_data[$field->name]));
+                    $obj->set($field, utf8_encode($field_data[$field]));
                 } else {
-                    $obj->set($field->name, $field_data[$field->name]);
+                    $obj->set($field, $field_data[$field]);
                 }
-
             }
             $array[] = $obj;
         }

@@ -25,8 +25,10 @@
                 case 'redir':
                     window.location.href = rootURL + entry[originalAction];
                     break;
-            } // switch end
+            } // switch end\
         }); // iteration end
+
+        closeProcessing();
     } // success end
 
     var fail = function() {

@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifyAdminSession();
+    $user = Structure::verifyAdminSession();
     Structure::header();
     $blacklist_dao = new BlacklistDAO;;
     $blacklist = $blacklist_dao->selectAll("Blacklist", NULL);

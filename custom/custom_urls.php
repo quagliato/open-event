@@ -3,8 +3,8 @@
     // Add your customized URLs as $custom_urlpatterns[key] = value.
     $custom_urlpatterns = array(
         // Override noisy-cricket
-        "/usuario/cadastrar" => "view/usuario.php",
-        "/action/usuario/cadastrar" => "action/usuario_cadastrar.php",
+        "/user/cadastrar" => "view/user.php",
+        "/action/user/cadastrar" => "action/user_cadastrar.php",
 
         "/infopanel" => "view/infopanel.php",
 
@@ -82,7 +82,7 @@
         "/admin/transaction/transfer" => "view/transaction_transfer_admin.php",
         "/admin/transaction/action/transfer" => "action/transaction_01_transfer.php",
         "/admin/transaction/action/search_by_user" => "action/transaction_00_search_by_user.php",
-        "/admin/usuario/action/search" => "action/usuario_00_search.php",
+        "/admin/user/action/search" => "action/user_00_search.php",
 
         "/admin/resposta-edital/action/export" => "action/resposta-edital_export.php",
 

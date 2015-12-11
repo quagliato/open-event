@@ -28,6 +28,14 @@ function openLightbox(href) {
     $('#lightbox').fadeIn('fast');
 }
 
+function openProcessing(){
+    $('#processing-layer').fadeIn(500);
+}
+
+function closeProcessing(){
+    $('#processing-layer').fadeOut(300);
+}
+
 function bindMasks() {
     $('.cpf').mask("999.999.999-99");
     $('.phone').mask("(00) 0000-0000");

@@ -16,13 +16,20 @@ class LogEngine {
         $this->logFilename = $filename;
     }
 
+    // name      : log
+    // params    : string $level, string $message
+    // desc      : Appends the $string to the file.
+    public function log($level, $message) {
+        $now = date("Y-m-d H:i:s");
+        $this->logIt("[$now] [$level] $message");
+    }
+
     // name      : logIt
     // params    : string $string
     // desc      : Appends the $string to the file.
     public function logIt($string) {
         $file = new TxtFile($this->logFilename);
         $file->loadlessAppendNewLine($string);
-
         $file = $this->compactLogFile($file);
     }
 

@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifyAdminSession();
+    $user = Structure::verifyAdminSession();
     $genericDAO = new GenericDAO;
     $return = array();
 
@@ -19,7 +19,7 @@
             if (!is_array($repostaEditalStatuses)) $repostaEditalStatuses = array($repostaEditalStatuses);
             echo "<h2>Log de Alterações de Status</h2>";
             foreach ($repostaEditalStatuses as $respostaEditalStatus) {
-                $user = $genericDAO->selectAll("Usuario", "id = ".$respostaEditalStatus->get('id_user'));
+                $user = $genericDAO->selectAll("User", "id = ".$respostaEditalStatus->get('id_user'));
                 echo '<p><strong>'.RespostaEditalStatus::getTextStatus($respostaEditalStatus->get('status'))."</strong> as <em>".Utils::sqlTimestamp2BrFormat($respostaEditalStatus->get('dt_update'))."</em> por <u>".$user->get('nome').'</u></p>';
             }
         } else {

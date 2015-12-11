@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifyAdminSession();
+    $user = Structure::verifyAdminSession();
     Structure::header();
 
     $genericDAO = new GenericDAO;
@@ -8,7 +8,7 @@
     $transactions = false;
     $editais = false;
     if (array_key_exists('idUser', $_GET) && !is_null($_GET['idUser']) && $_GET['idUser'] != "") {
-      $user = $genericDAO->selectAll("Usuario", "id = {$_GET['idUser']}");
+      $user = $genericDAO->selectAll("User", "id = {$_GET['idUser']}");
       if (!$user) {
         // error
       } else {

@@ -27,7 +27,7 @@
           Structure::redirWithMessage("Erro 305\nO metodo de pagamento BOLETO nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
       
-      $pagamento = $payment->pay($usuario->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
+      $pagamento = $payment->pay($user->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
       Structure::header();
       echo "<h1>Boleto</h1>";
       echo '<a target="_blank" href="'.$pagamento->get('info').'">Clique aqui para imprimir seu boleto</a>';
@@ -39,7 +39,7 @@
           Structure::redirWithMessage("Erro 305\nO metodo de pagamento DEPOSITO nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
       
-      $pagamento = $payment->pay($usuario->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
+      $pagamento = $payment->pay($user->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
       if ($pagamento) {
           Structure::header();
           echo "<h1>Depósito</h1>";
@@ -63,8 +63,7 @@
       if (!PAY_PAYPAL) {
           Structure::redirWithMessage("Erro 305\nO metodo de pagamento PAYPAL nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
-
-      $pagamento = $payment->pay($usuario->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
+user->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
       Structure::header();
       $paypal_html = '<h2>PayPal</h2>';
       $paypal_html .= '<h2>Clique no botão abaixo para realizar o pagamento de sua inscrição.</h2>';

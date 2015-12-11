@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifySession();
+    $user = Structure::verifySession();
     $genericDAO = new GenericDAO;
     $return = array();
 
@@ -69,7 +69,7 @@
 
     $respostaEdital = new RespostaEdital;
     $respostaEdital->set("id_edital", $editalId);
-    $respostaEdital->set("id_user", $usuario->get('id'));
+    $respostaEdital->set("id_user", $user->get('id'));
     $respostaEdital->set("dt_inicio_resposta", $dtInicioResposta);
     $respostaEdital->set("dt_fim_resposta", $now);
 
@@ -77,7 +77,7 @@
         $inserted = $genericDAO->selectAll(
             "RespostaEdital", 
             "id_edital = $editalId AND ".
-            "id_user = ".$usuario->get('id')." AND ".
+            "id_user = ".$user->get('id')." AND ".
             "dt_inicio_resposta = '$dtInicioResposta' AND ".
             "dt_fim_resposta = '$now'");
 

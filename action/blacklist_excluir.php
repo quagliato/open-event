@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifyAdminSession();
+    $user = Structure::verifyAdminSession();
     $return = array();
 
     $id = $_POST['id'];

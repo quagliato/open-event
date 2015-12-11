@@ -1,11 +1,11 @@
 <?php
-    $usuario = Structure::verifyAdminSession();
+    $user = Structure::verifyAdminSession();
     Structure::header();
     if (!array_key_exists('id', $_GET)) {
         Structure::redirWithMessage("Tenho que saber qual valor editar, né?", "/valor/listar");
     }
-    $blacklist_dao = new BlacklistDAO;
-    $blacklist = $blacklist_dao->getBlacklistedById($_GET['id']);
+    $blacklistDAO = new BlacklistDAO;
+    $blacklist = $blacklistDAO->getBlacklistedById($_GET['id']);
 ?>
                 <form method="POST" action="<?=APP_URL?>/admin/action/blacklist/editar" class="new_submit">
                     <h1>Blacklist > Editar e-mail</h1>

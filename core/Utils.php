@@ -34,9 +34,8 @@ class Utils {
     public static function defineLanguage($__GET) {
         $lang = "pt";
 
-        session_start();
-        if (isset($_SESSION['lang'])) {
-            $lang = $_SESSION['lang'];
+        if (isset($_COOKIE['lang'])) {
+            $lang = $_COOKIE['lang'];
         }
 
         if (array_key_exists("lang", $__GET)) {
@@ -45,8 +44,7 @@ class Utils {
             if ($lang != "es" && $lang != "pt") {
                 $lang = "pt";
             }
-
-            $_SESSION['lang'] = $lang;
+            setcookie('lang',$lang,0,'/');
         }
 
         return $lang;
@@ -108,7 +106,7 @@ class Utils {
         $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 
         return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
-
+   
     }
 
     // name      : getBrazilStateName
@@ -438,7 +436,7 @@ class Utils {
             $file_exists = true;
             $file_headers = @get_headers($ini_filename);
 
-            if ($file_headers[0] == 'HTTP/1.0 404 Not Found' ||
+            if ($file_headers[0] == 'HTTP/1.0 404 Not Found' || 
                 $file_headers[0] == 'HTTP/1.1 404 Not Found') {
                $file_exists = false;
             }
@@ -475,7 +473,7 @@ class Utils {
 
                 $heightRatio = $ini_y_size / $height;
                 $widthRatio  = $ini_x_size /  $width;
-
+             
                 if ($heightRatio < $widthRatio) {
                     $optimalRatio = $heightRatio;
                 } else {

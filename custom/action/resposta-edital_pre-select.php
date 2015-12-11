@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifyAdminSession();
+    $user = Structure::verifyAdminSession();
     $genericDAO = new GenericDAO;
     $return = array();
 
@@ -15,7 +15,7 @@
     if ($respostaEdital) {
         if ($respostaEdital->get('status') == 3) {
 
-            $respostaEditalStatuses = $genericDAO->selectAll('RespostaEditalStatus', "id_resposta_edital = $idRespostaEdital AND status = 3 AND id_user = ".$usuario->get('id'));
+            $respostaEditalStatuses = $genericDAO->selectAll('RespostaEditalStatus', "id_resposta_edital = $idRespostaEdital AND status = 3 AND id_user = ".$user->get('id'));
             if ($respostaEditalStatuses) {
                 $return[] = array(
                     "Action" => "Message",
@@ -26,7 +26,7 @@
 
                 $respostaEditalStatus = new RespostaEditalStatus;
                 $respostaEditalStatus->set('id_resposta_edital', $idRespostaEdital);
-                $respostaEditalStatus->set('id_user', $usuario->get('id'));
+                $respostaEditalStatus->set('id_user', $user->get('id'));
                 $respostaEditalStatus->set('dt_update', date('Y-m-d H:i:s'));
                 $respostaEditalStatus->set('status', 3);
 
@@ -43,7 +43,7 @@
             if ($genericDAO->update($respostaEdital, array(), "id = $idRespostaEdital")) {
                 $respostaEditalStatus = new RespostaEditalStatus;
                 $respostaEditalStatus->set('id_resposta_edital', $idRespostaEdital);
-                $respostaEditalStatus->set('id_user', $usuario->get('id'));
+                $respostaEditalStatus->set('id_user', $user->get('id'));
                 $respostaEditalStatus->set('dt_update', date('Y-m-d H:i:s'));
                 $respostaEditalStatus->set('status', 3);
 

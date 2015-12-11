@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifySession();
+    $user = Structure::verifySession();
     Structure::header();
 
     $genericDAO = new GenericDAO;
@@ -18,7 +18,7 @@
     $mailHTML .= "<h2>Parabéns! Sua submissão ao edital de {$edital->get('nome')} foi recebida.</h2>
         <p>Caso tenha dúvidas, entre em contato através de <a href=\"mailto:".DEFAULT_EMAIL_FROM_EDITAIS."\" alt=\"E-mail para ".DEFAULT_EMAIL_FROM_EDITAIS."\" title=\"E-mail para ".DEFAULT_EMAIL_FROM_EDITAIS."\" href=\"mailto:".DEFAULT_EMAIL_FROM_EDITAIS."\">".DEFAULT_EMAIL_FROM_EDITAIS."</a>.</p>";
 
-    $mailResult = $notification->sendEmail($usuario->get('email'), $subject, $mailHTML, DEFAULT_EMAIL_FROM_EDITAIS);
+    $mailResult = $notification->sendEmail($user->get('email'), $subject, $mailHTML, DEFAULT_EMAIL_FROM_EDITAIS);
 
 ?>
         <main>

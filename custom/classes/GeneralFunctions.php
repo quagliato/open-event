@@ -111,7 +111,7 @@ function getTotalValueExemptions($idUser) {
 function getUserExemptions($idUser) {
     $genericDAO = new GenericDAO;
 
-    $user = $genericDAO->selectAll("Usuario", "id = $idUser");
+    $user = $genericDAO->selectAll("User", "id = $idUser");
 
     $exemptionEmails = $genericDAO->selectAll("ExemptionEmail", "email = '".$user->get('email')."'");
     if ($exemptionEmails) {

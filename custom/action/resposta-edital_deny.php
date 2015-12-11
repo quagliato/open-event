@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifyAdminSession();
+    $user = Structure::verifyAdminSession();
     $genericDAO = new GenericDAO;
     $return = array();
 
@@ -17,7 +17,7 @@
             $respostaEditalStatusDAO = new RespostaEditalStatusDAO;
             $respostaEditalStatus = $respostaEditalStatusDAO->getLastStatus(2);
             if ($respostaEditalStatus) {
-                $user = $genericDAO->selectAll('Usuario', 'id = '.$respostaEditalStatus->get('id_user'));
+                $user = $genericDAO->selectAll('User', 'id = '.$respostaEditalStatus->get('id_user'));
                 $return[] = array(
                     "Action" => "Message",
                     "Message" => "Essa submissão já está negada por ".$user->get('nome')."."
@@ -34,7 +34,7 @@
             if ($genericDAO->update($respostaEdital, array(), "id = $idRespostaEdital")) {
                 $respostaEditalStatus = new RespostaEditalStatus;
                 $respostaEditalStatus->set('id_resposta_edital', $idRespostaEdital);
-                $respostaEditalStatus->set('id_user', $usuario->get('id'));
+                $respostaEditalStatus->set('id_user', $user->get('id'));
                 $respostaEditalStatus->set('dt_update', date('Y-m-d H:i:s'));
                 $respostaEditalStatus->set('status', 2);
 

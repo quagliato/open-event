@@ -72,7 +72,7 @@
 
                             var btn = $(this);
 
-                            var action = rootURL + "/admin/usuario/action/search";
+                            var action = rootURL + "/admin/user/action/search";
                             var values = {}
                             values['term'] = $('#' + $(this).attr('data-value')).val();
 

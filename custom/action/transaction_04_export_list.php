@@ -1,5 +1,5 @@
 <?php
-  $usuario = Structure::verifyAdminSession();
+  $user = Structure::verifyAdminSession();
   Structure::header('nude');
 
   $result = array();
@@ -26,7 +26,7 @@
     $usersStr .= $transaction->get('id_user');
   }
 
-  $people = $genericDAO->selectAll("Usuario", "id IN ($usersStr) ORDER BY nome");
+  $people = $genericDAO->selectAll("User", "id IN ($usersStr) ORDER BY nome");
 
   $count = 0;
   $lastFirstLetter = "";

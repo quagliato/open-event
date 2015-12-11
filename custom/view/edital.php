@@ -6,13 +6,13 @@
     $editalDAO = new EditalDAO;
     $respostaEditalDAO = new respostaEditalDAO;
 
-    $usuario = false;
+    $editalUser = false;
     $respostaEdital = false;
     $idEdital = false;
-    if (array_key_exists('idRespostaEdital', $_GET) && $user->get('privilegio') == 'ADM') {
+    if (array_key_exists('idRespostaEdital', $_GET) && $user->get('role') == 'ADM') {
         $respostaEdital = $genericDAO->selectAll('RespostaEdital', 'id = '.$_GET['idRespostaEdital']);
         if ($respostaEdital) {
-            $usuario = $genericDAO->selectAll('Usuario', 'id = '.$respostaEdital->get('id_user'));
+            $editalUser = $genericDAO->selectAll('User', 'id = '.$respostaEdital->get('id_user'));
             $idEdital = $respostaEdital->get('id_edital');
         }
     } else if (array_key_exists('id', $_GET)) {
@@ -38,14 +38,14 @@
                     <?php else : ?>
 
                     <div class="left">
-                        <p><strong>Nome: </strong><?=$usuario->get('nome')?></p>
-                        <p><strong>Cidade/UF: </strong><?=$usuario->get('end_cidade')?> / <?=$usuario->get('end_estado')?></p>
-                        <p><strong>Ensino: </strong><?=$usuario->get('inst_ens')?> / <?=$usuario->get('curso')?> - Período: <?=$usuario->get('periodo')?></p>
-                        <p><strong>E-mail: </strong><?=$usuario->get('email')?></p>
-                        <p><strong>Telefone Residencial: </strong><?=$usuario->get('telefone_residencial')?></p>
-                        <p><strong>Telefone Celular: </strong><?=$usuario->get('telefone_celular')?></p>
-                        <p><strong>Deficiência: </strong><?=strlen($usuario->get('deficiencia')) == 0 ? "Nenhuma" : $usuario->get('deficiencia')?></p>
-                        <p><strong>Alergia: </strong><?=strlen($usuario->get('alergias')) == 0 ? "Nenhuma" : $usuario->get('alergias')?></p>
+                        <p><strong>Nome: </strong><?=$editalUser->get('nome')?></p>
+                        <p><strong>Cidade/UF: </strong><?=$editalUser->get('end_cidade')?> / <?=$editalUser->get('end_estado')?></p>
+                        <p><strong>Ensino: </strong><?=$editalUser->get('inst_ens')?> / <?=$editalUser->get('curso')?> - Período: <?=$editalUser->get('periodo')?></p>
+                        <p><strong>E-mail: </strong><?=$editalUser->get('email')?></p>
+                        <p><strong>Telefone Residencial: </strong><?=$editalUser->get('telefone_residencial')?></p>
+                        <p><strong>Telefone Celular: </strong><?=$editalUser->get('telefone_celular')?></p>
+                        <p><strong>Deficiência: </strong><?=strlen($editalUser->get('deficiencia')) == 0 ? "Nenhuma" : $editalUser->get('deficiencia')?></p>
+                        <p><strong>Alergia: </strong><?=strlen($editalUser->get('alergias')) == 0 ? "Nenhuma" : $editalUser->get('alergias')?></p>
                     </div>
 
                     <?php endif; ?>

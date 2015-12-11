@@ -28,17 +28,17 @@
     }
 
   } else if (array_key_exists('cpf', $_POST) && !is_null($_POST['cpf']) && $_POST['cpf'] != '') {
-    $usuario = $genericDAO->selectAll("Usuario", "cpf = '{$_POST['cpf']}'");
-    if ($usuario) {
-      if (is_array($usuario)) $usuario = $usuario[0];
+    $user = $genericDAO->selectAll("User", "cpf = '{$_POST['cpf']}'");
+    if ($user) {
+      if (is_array($user)) $user = $user[0];
       $return[] = array(
         'Action' => 'Message',
-        'Message' => 'Usuário encontrada.'
+        'Message' => 'Usuário encontrado.'
       );
 
       $return[] = array(
         'Action' => 'Redir',
-        'Redir' => '/admin/transaction?idUser='.$usuario->get('id')
+        'Redir' => '/admin/transaction?idUser='.$user->get('id')
       );
     } else {
       $return[] = array(
@@ -48,9 +48,9 @@
     }
 
   } else if (array_key_exists('email', $_POST) && !is_null($_POST['email']) && $_POST['email'] != '') {
-    $usuario = $genericDAO->selectAll("Usuario", "email = '{$_POST['email']}'");
-    if ($usuario) {
-      if (is_array($usuario)) $usuario = $usuario[0];
+    $user = $genericDAO->selectAll("User", "email = '{$_POST['email']}'");
+    if ($user) {
+      if (is_array($user)) $user = $user[0];
       $return[] = array(
         'Action' => 'Message',
         'Message' => 'Usuário encontrada.'
@@ -58,7 +58,7 @@
 
       $return[] = array(
         'Action' => 'Redir',
-        'Redir' => '/admin/transaction?idUser='.$usuario->get('id')
+        'Redir' => '/admin/transaction?idUser='.$user->get('id')
       );
     } else {
       $return[] = array(

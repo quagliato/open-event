@@ -16,8 +16,8 @@
     $transactionsToTransfer[] = $transaction;
   }
 
-  $originUser = $genericDAO->selectAll("Usuario", "id = ".$originUserId);
-  $destinyUser = $genericDAO->selectAll("Usuario", "id = ".$destinyUserId);
+  $originUser = $genericDAO->selectAll("User", "id = ".$originUserId);
+  $destinyUser = $genericDAO->selectAll("User", "id = ".$destinyUserId);
 
   if (sizeof($transactionsToTransfer) > 0 && $originUser && $destinyUser) {
     foreach ($transactionsToTransfer as $transaction) {

@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifySession();
+    $user = Structure::verifySession();
     Structure::header();
 
     $genericDAO = new GenericDAO;
@@ -9,12 +9,12 @@
     if (array_key_exists('email', $_GET) && 
         !is_null($_GET['email']) && 
         $_GET['email'] != '') {
-        $usuario = $genericDAO->selectAll("Usuario", "email = '".$_GET['email']."'");
-        if ($usuario) {
-            if (is_array($usuario)) {
-                $usuario = $usuario[0];
+        $user = $genericDAO->selectAll("User", "email = '".$_GET['email']."'");
+        if ($user) {
+            if (is_array($user)) {
+                $user = $user[0];
             }
-            $where .= "id_user = ".$usuario->get('id');
+            $where .= "id_user = ".$user->get('id');
         }
     }
 
@@ -74,12 +74,12 @@
                         $count = 0;
                         foreach ($respostasEdital as $respostaEdital) :
                             $edital = $genericDAO->selectAll('Edital', 'id = '.$respostaEdital->get('id_edital'));
-                            $usuario = $genericDAO->selectAll('Usuario', 'id = '.$respostaEdital->get('id_user'));
+                            $user = $genericDAO->selectAll('User', 'id = '.$respostaEdital->get('id_user'));
                     ?>
                         <tr <?php if ($count % 2 == 0) { echo 'style="background-color: #CCCCCC;"'; } ?>>
                             <td class="center"><?=$respostaEdital->get('id')?></td>
                             <td class="left"><?=$edital->get('nome')?></td>
-                            <td class="left"><?=$usuario->get('nome')?></td>
+                            <td class="left"><?=$user->get('nome')?></td>
                             <td class="left"><?=Utils::sqlTimestamp2BrFormat($respostaEdital->get('dt_fim_resposta'))?></td>
                             <td class="left"><?=RespostaEditalStatus::getTextStatus($respostaEdital->get('status'))?></td>
                             <td class="center"><a class="btn black" target="_blank" href="<?=APP_URL?>/edital?idRespostaEdital=<?=$respostaEdital->get('id')?>"><i class="fa fa-eye"></a></td>
@@ -92,7 +92,7 @@
                                 <?php endif; ?>
                             </td>
                             <td class="center">
-                                <?php if (($respostaEdital->get('status') == 3 && $genericDAO->selectAll('RespostaEditalStatus', "id_resposta_edital = ".$respostaEdital->get('id')." AND id_user = ".$usuario->get('id'))) || $respostaEdital->get('status') == 1) : ?>
+                                <?php if (($respostaEdital->get('status') == 3 && $genericDAO->selectAll('RespostaEditalStatus', "id_resposta_edital = ".$respostaEdital->get('id')." AND id_user = ".$user->get('id'))) || $respostaEdital->get('status') == 1) : ?>
                                 <a class="btn light_gray"><i class="fa fa-dot-circle-o"></i></a>
                                 <?php else : ?>
                                 <a class="post btn black" id="<?=$respostaEdital->get('id')?>" href="<?=APP_URL?>/admin/resposta-edital/action/pre-select"><i class="fa fa-dot-circle-o"></i></a>

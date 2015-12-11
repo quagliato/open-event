@@ -23,6 +23,8 @@ function setSubmitEvents() {
     $('body').delegate('form.new_submit', 'submit', function(event){
         event.preventDefault();
 
+        openProcessing();
+
         var values = bindData($(this));
         if (!values) {
             alert('NENHUM VALOR!');
@@ -61,6 +63,8 @@ function setSubmitEvents() {
 
     $('body').delegate('a.post', 'click', function(event){
         event.preventDefault();
+
+        openProcessing();
 
         var href = $(this).attr('href');
         var id = $(this).attr('id');

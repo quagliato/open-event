@@ -1,23 +1,35 @@
 <?php
-    include_once("core/DBStuff.php");
-    include_once("core/Filler.php");
-    include_once("core/LogEngine.php");
-    include_once("core/Notification.php");
-    include_once("core/StrGenerator.php");
-    include_once("core/Structure.php");
-    include_once("core/DataBinder.php");
-    include_once("core/TxtFile.php");
-    include_once("core/Utils.php");
-    include_once("core/Validation.php");
 
-    include_once("model/GenericClass.php");
-    include_once("model/Blacklist.php");
-    include_once("model/Request.php");
-    // include_once("model/Usuario.php");
+  $classes = array(
+    // CORE
+    "DBStuff" => "core/DBStuff.php",
+    "Filler" => "core/Filler.php",
+    "LogEngine" => "core/LogEngine.php",
+    "Notification" => "core/Notification.php",
+    "StrGenerator" => "core/StrGenerator.php",
+    "Structure" => "core/Structure.php",
+    "DataBinder" => "core/DataBinder.php",
+    "TxtFile" => "core/TxtFile.php",
+    "Utils" => "core/Utils.php",
+    "Validation" => "core/Validation.php",
+
+    // MODEL
+    "GenericClass" => "model/GenericClass.php",
+    "Blacklist" => "model/Blacklist.php",
+    "Request" => "model/Request.php",
+    "User" => "model/User.php",
     
-    include_once("dao/GenericDAO.php");
-    include_once("dao/BlacklistDAO.php");
-    include_once("dao/UsuarioDAO.php");
+    // DAO
+    "GenericDAO" => "dao/GenericDAO.php",
+    "BlacklistDAO" => "dao/BlacklistDAO.php",
+    "UserDAO" => "dao/UserDAO.php"
+  );
 
-    include_once("custom/custom_app.php");
+  foreach ($custom_classes as $key => $value) {
+    $classes[$key] = "custom/".$value;
+  }
+
+  foreach ($classes as $key => $value) {
+    include_once($value);
+  }
 ?>

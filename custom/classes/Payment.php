@@ -12,34 +12,34 @@ class Payment {
         $transacao_dao->deleteTransacaoById($transacao->get('id')); // Rollback Transacao
     }
     
-    public function pay($usuario_id, $transacao_id, $payment, $valor_final) {
+    public function pay($userId, $transacao_id, $payment, $valor_final) {
         if ($payment == "BOL") {
-            return $this->payWithBoleto($usuario_id, $transacao_id, $valor_final);
+            return $this->payWithBoleto($userId, $transacao_id, $valor_final);
         } elseif ($payment == "PPL") {
-            return $this->payWithPayPal($usuario_id, $transacao_id, $valor_final);
+            return $this->payWithPayPal($userId, $transacao_id, $valor_final);
         } elseif ($payment == "PGS") {
-            return $this->payWithPagSeguro($usuario_id, $transacao_id, $valor_final);
+            return $this->payWithPagSeguro($userId, $transacao_id, $valor_final);
         } elseif ($payment == "DEP") {
-            return $this->payWithDeposito($usuario_id, $transacao_id, $valor_final);
+            return $this->payWithDeposito($userId, $transacao_id, $valor_final);
         } else {
             return false;
         }
     }
 
-    private function payWithBoleto($usuario_id, $transacao_id, $valor_final) {
-        $usuarioDAO = new UsuarioDAO;
-        $usuario = $usuarioDAO->getUserById($usuario_id);
+    private function payWithBoleto($userId, $transacao_id, $valor_final) {
+        $userDAO = new UserDAO;
+        $user = $userDAO->getUserById($userId);
 
         $transacaoDAO = new TransacaoDAO;
         $transacao = $transacaoDAO->getTransacaoById($transacao_id);
 
         $sacado = new Agente(
-            $usuario->get('nome'),
-            $usuario->get('cpf'),
-            $usuario->get('end_logradouro')." ".$usuario->get('end_numero')." ".$usuario->get('end_complemento')." ".$usuario->get('end_bairro'),
-            $usuario->get('end_cep'),
-            $usuario->get('end_cidade'),
-            $usuario->get('end_estado')
+            $user->get('nome'),
+            $user->get('cpf'),
+            $user->get('end_logradouro')." ".$user->get('end_numero')." ".$user->get('end_complemento')." ".$user->get('end_bairro'),
+            $user->get('end_cep'),
+            $user->get('end_cidade'),
+            $user->get('end_estado')
         );
 
         $cedente = new Agente(
@@ -86,12 +86,12 @@ class Payment {
             $boleto_output = new TempFile();
             $instance = new Converter(new PhantomJS(), $boleto_input, $boleto_output);
             $instance->convert();
-            $boleto_path = FILES_DIR.md5(($usuario->get('id').$transacao->get('id'))).".pdf"; 
+            $boleto_path = FILES_DIR.md5(($user->get('id').$transacao->get('id'))).".pdf"; 
             $boleto_output->save($boleto_path);
         } catch (Exception $e) {
         */
             $datahora = new DateTime('now');
-            $failsafe_boleto_name = md5(($usuario->get('id').$transacao->get('id').$datahora->format('Y-m-d H:i:s'))).".html";
+            $failsafe_boleto_name = md5(($user->get('id').$transacao->get('id').$datahora->format('Y-m-d H:i:s'))).".html";
             $failsafe_boleto_path = FILES_DIR_FAILSAFE.$failsafe_boleto_name;
             file_put_contents($failsafe_boleto_path, $boleto->getOutput());
             $boleto_path = FILES_URL_FAILSAFE.$failsafe_boleto_name;
@@ -111,7 +111,7 @@ class Payment {
             Structure::redirWithMessage("Erro304\nProblemas ao criar pagamento. Tente novamente, por favor.", "/dashboard");
         }
 
-        $to = $usuario->get('email');
+        $to = $user->get('email');
         $subject = DEFAULT_EMAIL_SUBJECT;
         $message = DEFAULT_EMAIL_GREETING;
         $message .= "<p>Sua inscrição no N_Goiânia foi realizada.</p>";
@@ -128,11 +128,11 @@ class Payment {
         return $pagamento;
     }
 
-    private function payWithPayPal($usuario_id, $transacao_id, $valor_final) {
+    private function payWithPayPal($userId, $transacao_id, $valor_final) {
         $valor_final = $valor_final * 1.1;
 
-        $usuarioDAO = new UsuarioDAO;
-        $usuario = $usuarioDAO->getUserByID($usuario_id);
+        $userDAO = new UserDAO;
+        $user = $userDAO->getUserByID($userId);
 
         $transacaoDAO = new TransacaoDAO;
         $transacao = $transacaoDAO->getTransacaoById($transacao_id);
@@ -166,7 +166,7 @@ class Payment {
             Structure::redirWithMessage("Erro 304\nProblemas ao criar pagamento. Tente novamente, por favor.", "/dashboard");       
         }
 
-        $to = $usuario->get('email');
+        $to = $user->get('email');
         $subject = DEFAULT_EMAIL_SUBJECT;
         $message = DEFAULT_EMAIL_GREETING;
         $message .= "<p>Sua inscrição no ".APP_TITLE." foi realizada.</p>";
@@ -188,9 +188,9 @@ class Payment {
         return $pagamento;
     }
 
-    private function payWithDeposito($usuario_id, $transacao_id, $valor_final) {
-        $usuarioDAO = new UsuarioDAO;
-        $usuario = $usuarioDAO->getUserByID($usuario_id);
+    private function payWithDeposito($userId, $transacao_id, $valor_final) {
+        $userDAO = new UserDAO;
+        $user = $userDAO->getUserByID($userId);
 
         $transacaoDAO = new TransacaoDAO;
         $transacao = $transacaoDAO->getTransacaoById($transacao_id);
@@ -207,7 +207,7 @@ class Payment {
             Structure::redirWithMessage("Erro 304\nProblemas ao criar pagamento. Tente novamente, por favor.", "/dashboard");       
         }
 
-        $to = $usuario->get('email');
+        $to = $user->get('email');
         $subject = DEFAULT_EMAIL_SUBJECT;
         $message = DEFAULT_EMAIL_GREETING;
         $message .= "<p>Sua inscrição no ".APP_TITLE." foi realizada.</p>";
@@ -241,8 +241,8 @@ class Payment {
 
     private function payWithPagSeguro($userId, $transactionId, $totalValue) {
         $genericDAO = new GenericDAO;
-        $usuarioDAO = new UsuarioDAO;
-        $user = $usuarioDAO->getUserByID($userId);
+        $userDAO = new UserDAO;
+        $user = $userDAO->getUserByID($userId);
 
         $transaction = $genericDAO->selectAll("Transaction", "id = $transactionId");
         $transactionItems = $genericDAO->selectAll("TransactionItem", "id_transaction = $transactionId");

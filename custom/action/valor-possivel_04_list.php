@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifySession();
+    $user = Structure::verifySession();
     Structure::header();
 
     $genericDAO = new GenericDAO;

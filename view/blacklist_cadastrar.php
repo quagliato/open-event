@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifyAdminSession();
+    $user = Structure::verifyAdminSession();
     Structure::header();
 ?>
                 <form method="POST" action="<?=APP_URL?>/admin/action/blacklist/cadastrar" class="new_submit">

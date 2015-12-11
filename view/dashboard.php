@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifySession();
+    $user = Structure::verifySession();
     Structure::header();
 ?>
         <main>
@@ -8,7 +8,7 @@
             </header>
             <section class="wrapper">
                 <?php include_once("custom/custom_dashboard.php"); ?>
-                <?php if($usuario->get('privilegio') == 'ADM') : ?>
+                <?php if($user->get('role') == 'ADM') : ?>
                 <?php include_once("custom/custom_dashboard_admin.php"); ?>
                 <?php endif; ?>
             </section>

@@ -75,7 +75,7 @@ class GenericDAO {
         $rs = $db->execute($sql); //executa a string
 
         if ($rs) { //se nao der erro
-            $row = mysql_fetch_row($rs); //pega a linha
+            $row = $rs->fetch_row(); //pega a linha
             return $row[0]; //retorna a soma
         }
         return false; //se der algum erro, retorna falso
@@ -101,7 +101,7 @@ class GenericDAO {
         $rs = $db->execute($sql); //executa a string
 
         if ($rs) { //se nao der erro
-            $row = mysql_fetch_row($rs); //pega a linha
+            $row = $rs->fetch_row(); //pega a linha
             return $row[0]; //retorna a soma
         }
         return false; //se der algum erro, retorna falso

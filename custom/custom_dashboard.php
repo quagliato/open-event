@@ -1,6 +1,6 @@
 <?php
   $genericDAO = new GenericDAO;
-  $user = $genericDAO->selectAll("Usuario", "id = ".$_SESSION['user_id']);
+  $user = $genericDAO->selectAll("User", "id = ".$_COOKIE['user_id']);
 ?>
 <h2>Inscrições</h2>
 <style>
@@ -91,7 +91,7 @@ table.noline thead td{ border: none; }
 <?php endif; ?>
 
 <hr>
-<!--
+
 <?php
     $editalDAO = new editalDAO;
     $respostaEditalDAO = new RespostaEditalDAO;
@@ -106,7 +106,7 @@ table.noline thead td{ border: none; }
           $editais = array($editais);
         endif;
         foreach ($editais as $edital) :
-            $hasAnsweredEdital = $respostaEditalDAO->hasAnsweredEdital($usuario->get('id'), $edital->get('id'));
+            $hasAnsweredEdital = $respostaEditalDAO->hasAnsweredEdital($user->get('id'), $edital->get('id'));
 ?>
         <li>
             <span class="upper"><?=$edital->get('nome')?>
@@ -131,4 +131,3 @@ table.noline thead td{ border: none; }
 <?php
     endif;
 ?>
--->

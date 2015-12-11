@@ -15,7 +15,7 @@
         }
         $this->filename = $filename;
     }
-
+    
     // name      : fileExists
     // params    : void
     // desc      : Verify if the file exists.
@@ -34,7 +34,7 @@
         if ($this->fileExists()) {
             return filesize($this->filename);
         }
-
+        
         return -1;
     }
 
@@ -73,14 +73,14 @@
             $handle = fopen($this->filename, "r");
             if ($handle) {
                 while (($line = fgets($handle)) != false) {
-                    $this->writtenContent[] = $line;
+                    $this->writtenContent[] = $line;        
                 }
             } else {
                 throw new Exception("TxtFile could not load file content.");
             }
             fclose($handle);
         }
-
+            
         return $this->writtenContent;
     }
 
@@ -101,7 +101,7 @@
         if (!is_array($this->buffer) || is_null($this->buffer)) {
             $this->buffer = array();
         }
-
+        
         $this->buffer[] = $string;
     }
 

@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifyAdminSession();
+    $user = Structure::verifyAdminSession();
     Structure::header();
 
     $genericDAO = new GenericDAO;
@@ -36,7 +36,7 @@
 
                         foreach ($respostasEdital as $respostaEdital) :
                             $edital = $genericDAO->selectAll('Edital', 'id = '.$respostaEdital->get('id_edital'));
-                            $usuario = $genericDAO->selectAll('Usuario', 'id = '.$respostaEdital->get('id_user'));
+                            $user = $genericDAO->selectAll('User', 'id = '.$respostaEdital->get('id_user'));
                             $message = "";
                             $message .= "<p>Parabéns! Você foi aprovado no edital de <strong>".$edital->get('nome')."</strong> do ".APP_TITLE."!</p>";
                             $message .= "<p>Gostaríamos de te agradecer por essa vontade de nos ajudar na construção do nosso encontro. Caso não tenha marcado na sua agenda, o ".APP_TITLE." vai acontecer dos dias ".DATE_EVENT_STR.". :D</p>";
@@ -47,12 +47,12 @@
                             $notification = new Notification;
                             $subject = DEFAULT_EMAIL_SUBJECT." / ".$edital->get("nome")." - ".$respostaEdital->get('id')." - Confirmação";
 
-                            $mailResult = $notification->sendEmail($usuario->get('email'), $subject, $message, DEFAULT_EMAIL_FROM_EDITAIS);
+                            $mailResult = $notification->sendEmail($user->get('email'), $subject, $message, DEFAULT_EMAIL_FROM_EDITAIS);
                     ?>
                         <tr <?php if ($count % 2 == 0) { echo 'style="background-color: #CCCCCC;"'; } ?>>
                             <td class="center"><?=$respostaEdital->get('id')?></td>
                             <td class="left"><?=$edital->get('nome')?></td>
-                            <td class="left"><?=$usuario->get('nome')?></td>
+                            <td class="left"><?=$user->get('nome')?></td>
                             <td class="left"><?=Utils::sqlTimestamp2BrFormat($respostaEdital->get('dt_fim_resposta'))?></td>
                             <td class="left"><?=RespostaEditalStatus::getTextStatus($respostaEdital->get('status'))?></td>
                             <td class="center"><?=$mailResult ? "E-mail enviado." : "E-mail não enviado."?></td>

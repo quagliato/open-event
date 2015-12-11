@@ -7,7 +7,7 @@
   if ($id) {
     $transaction = $genericDAO->selectAll("Transaction", "id = $id AND status = 1");
     if ($transaction) {
-      $user = $genericDAO->selectAll("Usuario", "id = ".$transaction->get('id_user'));
+      $user = $genericDAO->selectAll("User", "id = ".$transaction->get('id_user'));
       if (user) {
         echo json_encode(array("status" => "CONFIRMADA", "name" => $user->get('nome')));
       }

@@ -4,7 +4,7 @@
 
 body{
     background-color: #FFFFFF;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif; 
     font-size: 14px;
     padding-bottom: 100px;
     position: relative;
@@ -18,13 +18,12 @@ ul li{
     list-style: none;
 }
 
-a, a:visited{ color: #41D60E; text-decoration: none; }
+a, a:visited{ color: #98F678; text-decoration: none; }
 a:hover{ text-decoration: none; }
 
 .wrapper{
     margin: 0 auto;
-    max-width: 960px;
-    width: 100%;
+    width: 960px;
 }
 
 .hidden{ display: none !important; }
@@ -64,8 +63,6 @@ a:hover{ text-decoration: none; }
 .no-transform { text-transform: none !important; }
 
 .clickable { cursor: pointer; }
-
-.disabled { opacity: 0.6; }
 
 /******************************************************************************/
 /* INPUTS */
@@ -118,8 +115,7 @@ a:hover{ text-decoration: none; }
 .input_container input:focus,
 .input_container select:focus,
 .input_container textarea:focus{
-    background-color: #FFFFFF;
-    border: 1px solid #98F678;
+    outline: 1px solid #333333;
 }
 
 .input_container textarea.s{ height: 60px; }
@@ -171,19 +167,19 @@ a:hover{ text-decoration: none; }
 
 .submit_line { margin-top: 25px; }
 
-.full          { width: 100.0%; }
-.half          { width:  49.0%; }
-.third         { width:  32.0%; }
-.third.last    { width:  33.0%; }
-.fourth        { width:  24.0%; }
-.fifth         { width:  20.0%; }
-.sixth         { width:  16.6%; }
-.sixth.last    { width:  17.0%; }
-.eighth        { width:  12.5%; }
-.tenth         { width:  10.0%; }
+.full          { width: 100.0% !important; }
+.half          { width:  49.0% !important; }
+.third         { width:  32.0% !important; }
+.third.last    { width:  33.0% !important; }
+.fourth        { width:  24.0% !important; }
+.fifth         { width:  20.0% !important; }
+.sixth         { width:  16.6% !important; }
+.sixth.last    { width:  17.0% !important; }
+.eighth        { width:  12.5% !important; }
+.tenth         { width:  10.0% !important; }
 
-.two-thirds    { width:  66.0%; }
-.three-fourths { width:  73.0%; }
+.two-thirds    { width:  66.0% !important; }
+.three-fourths { width:  73.0% !important; }
 
 /******************************************************************************/
 /* LOGIN */
@@ -252,7 +248,7 @@ main h6{
 .positive { background-color: #98F678 !important; color: #000000 !important; }
 
 .f-negative { color: #FE938F !important; }
-.f-positive { color: #98F678 !important; }
+.f-positive { color: #00E7EB !important; }
 
 input[type=submit],
 button.submit,
@@ -280,6 +276,7 @@ button{
     border: none;
     border-radius: 25px;
     color: #FFFFFF;
+    font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     font-weight: bold;
     line-height: 14px;
@@ -292,17 +289,11 @@ button{
 }
 
 hr{
-    border: none;
-    border-top: 1px solid #CCCCCC;
+    border-top: 1px solid #666666;
     height: 1px;
-    margin: 20px auto;
+    margin: 20px 0 20px 0;
     width: 100%;
 }
-
-hr.90{ width: 90%; }
-hr.75{ width: 75%; }
-hr.50{ width: 50%; }
-hr.25{ width: 25%; }
 
 table{
     border: none;
@@ -424,7 +415,7 @@ header #topbanner{
 /******************************************************************************/
 /* NOTIFICATIONS */
 
-.notification {
+.notification {  
     border-top: 3px solid #000000;
     bottom: 0;
     color: #000000;
@@ -442,7 +433,7 @@ header #topbanner{
 .notification a,
 .notification a:hover,
 .notification a:visited{
-    color: inherit;
+    color: #000000;
 }
 
 .error {
@@ -458,7 +449,6 @@ header #topbanner{
 #notification_content{
     display: inline-block;
     max-width: 960px;
-    width: 100%;
 }
 
 #notification_content a,
@@ -495,7 +485,6 @@ header #topbanner{
     height: 500px;
     left: 50%;
     margin: -250px 0px 0px -450px;
-    max-width: 900px;
     position: fixed;
     top: 50%;
     width: 900px;
@@ -504,18 +493,20 @@ header #topbanner{
 
 #lightbox #close{
     background-color: #000000;
-    border: 1px solid #FFFFFF;
     border-radius: 30px;
+    border: 2px solid #CCCCCC;
     color: #FFFFFF;
     display: block;
-    font-size: 14px;
+    font-size: 20px;
+    font-weight: bold;
     height: 30px;
-    line-height: 30px;
+    line-height: 25px;
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: -15px;
+    top: -15px;
     width: 30px;
     text-align: center;
+    text-decoration: none;
     text-transform: uppercase;
     vertical-align: middle;
     z-index: 101;
@@ -525,4 +516,38 @@ header #topbanner{
     height: 100%;
     padding: 10px;
     width: 100%;
+}
+
+/******************************************************************************/
+/* PROCESSING */
+
+#processing-layer{
+    background: rgba(255, 255, 255, 0.85);
+    display: none;
+    height: 100%;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    z-index: 99;
+}
+
+#processing-layer #content{
+    color: #000000;
+    height: 100px;
+    margin: -50px -100px 0 0;
+    position: fixed;
+    right: 50%;
+    text-align: center;
+    top: 50%;
+    width: 200px;
+}
+
+#processing-layer #content #icon{
+    font-size: 50px;
+}
+
+#processing-layer #content #text{
+    font-size: 20px;
+    font-weight: 300;
 }

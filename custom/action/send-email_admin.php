@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifySession();
+    $user = Structure::verifySession();
     Structure::header();
 
     $genericDAO = new GenericDAO;
@@ -23,7 +23,7 @@
     $emails = array();
 
     if ($criteria == "specific") {
-        $users = $genericDAO->selectAll("Usuario", "$specific");
+        $users = $genericDAO->selectAll("User", "$specific");
         if ($users) {
             if (!is_array($users)) $users = array($users);
             foreach ($users as $user) {
@@ -36,7 +36,7 @@
             }
         }
     } elseif ($criteria == "all") {
-        $users = $genericDAO->selectAll("Usuario", NULL);
+        $users = $genericDAO->selectAll("User", NULL);
         if ($users) {
             if (!is_array($users)) $users = array($users);
             foreach ($users as $user) {
@@ -53,7 +53,7 @@
         if ($transactions) {
             if (!is_array($transactions)) $transactions = array($transactions);
             foreach ($transactions as $transaction) {
-                $users = $genericDAO->selectAll("Usuario", "id = ".$transaction->get('id_user'));
+                $users = $genericDAO->selectAll("User", "id = ".$transaction->get('id_user'));
                 if ($users) {
                     if (!is_array($users)) $users = array($users);
                     foreach ($users as $user) {
@@ -80,7 +80,7 @@
         if ($transactions) {
             if (!is_array($transactions)) $transactions = array($transactions);
             foreach ($transactions as $transaction) {
-                $user = $genericDAO->selectAll("Usuario", "id = ".$transaction->get('id_user'));
+                $user = $genericDAO->selectAll("User", "id = ".$transaction->get('id_user'));
                 if ($user) {
                     $email = $user->get('email');
                     $email = trim($email);
@@ -97,7 +97,7 @@
         if ($transactions) {
             if (!is_array($transactions)) $transactions = array($transactions);
             foreach ($transactions as $transaction) {
-                $users = $genericDAO->selectAll("Usuario", "id = ".$transaction->get('id_user'));
+                $users = $genericDAO->selectAll("User", "id = ".$transaction->get('id_user'));
                 if ($users) {
                     if (!is_array($users)) $users = array($users);
                     foreach ($users as $user) {
@@ -116,7 +116,7 @@
         if ($respostasEdital) {
             if (!is_array($respostasEdital)) $respostasEdital = array($respostasEdital);
             foreach ($respostasEdital as $respostaEdital) {
-                $users = $genericDAO->selectAll("Usuario", "id = ".$respostaEdital->get('id_user'));
+                $users = $genericDAO->selectAll("User", "id = ".$respostaEdital->get('id_user'));
                 if ($users) {
                     if (!is_array($users)) $users = array($users);
                     foreach ($users as $user) {
@@ -135,7 +135,7 @@
         if ($respostasEdital) {
             if (!is_array($respostasEdital)) $respostasEdital = array($respostasEdital);
             foreach ($respostasEdital as $respostaEdital) {
-                $users = $genericDAO->selectAll("Usuario", "id = ".$respostaEdital->get('id_user'));
+                $users = $genericDAO->selectAll("User", "id = ".$respostaEdital->get('id_user'));
                 if ($users) {
                     if (!is_array($users)) $users = array($users);
                     foreach ($users as $user) {
@@ -154,7 +154,7 @@
       if ($respostasEdital) {
         if (!is_array($respostasEdital)) $respostasEdital = array($respostasEdital);
         foreach ($respostasEdital as $respostaEdital) {
-          $users = $genericDAO->selectAll("Usuario", "id = ".$respostaEdital->get('id_user'));
+          $users = $genericDAO->selectAll("User", "id = ".$respostaEdital->get('id_user'));
           if ($users) {
             if (!is_array($users)) $users = array($users);
             foreach ($users as $user) {
@@ -174,7 +174,7 @@
       if ($exemptionsEmail) {
         if (!is_array($exemptionsEmail)) $exemptionsEmail = array($exemptionsEmail);
         foreach ($exemptionsEmail as $exemptionEmail) {
-          $users = $genericDAO->selectAll("Usuario", "email = '{$exemptionEmail->get('email')}'");
+          $users = $genericDAO->selectAll("User", "email = '{$exemptionEmail->get('email')}'");
           if ($users) {
             if (!is_array($users)) $users = array($users);
             foreach ($users as $user) {
@@ -213,11 +213,11 @@
               $userIDs .= $respostaEdital->get('id_user');
             }
 
-            $usuarios = $genericDAO->selectAll("Usuario", "id IN ($userIDs)");
-            if ($usuarios) {
-              if (!is_array($usuarios)) $usuarios = array($usuarios);
-              foreach ($usuarios as $usuario) {
-                $email = trim($usuario->get('email'));
+            $users = $genericDAO->selectAll("User", "id IN ($userIDs)");
+            if ($users) {
+              if (!is_array($users)) $users = array($users);
+              foreach ($users as $users) {
+                $email = trim($users->get('email'));
                 $email = strtolower($email);
                 if ($email != "" && !in_array($email, $emails)) {
                   $emails[] = $email;
@@ -232,7 +232,7 @@
         if ($respostasEdital) {
             if (!is_array($respostasEdital)) $respostasEdital = array($respostasEdital);
             foreach ($respostasEdital as $respostaEdital) {
-                $users = $genericDAO->selectAll("Usuario", "id = ".$respostaEdital->get('id_user'));
+                $users = $genericDAO->selectAll("User", "id = ".$respostaEdital->get('id_user'));
                 if ($users) {
                     if (!is_array($users)) $users = array($users);
                     foreach ($users as $user) {
@@ -264,7 +264,7 @@
         if ($transactions) {
             if (!is_array($transactions)) $transactions = array($transactions);
             foreach ($transactions as $transaction) {
-                $users = $genericDAO->selectAll("Usuario", "id = ".$transaction->get('id_user'));
+                $users = $genericDAO->selectAll("User", "id = ".$transaction->get('id_user'));
                 if ($users) {
                     if (!is_array($users)) $users = array($users);
                     foreach ($users as $user) {

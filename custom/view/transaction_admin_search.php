@@ -1,5 +1,5 @@
 <?php
-    $usuario = Structure::verifyAdminSession();
+    $user = Structure::verifyAdminSession();
     Structure::header();
 
     $genericDAO = new GenericDAO;
@@ -11,7 +11,7 @@
           <section class="wrapper center">
             <form method="POST" action="<?=APP_URL?>/admin/transaction/action/search" class="new_submit">
               <div class="input_line">
-                <p class="note"><em>Preencha pelo menos um dos três</em></p>
+                <p class="note"><em>Preencha pelo menos um dos dois</em></p>
               </div>
               <div class="input_line center">
                 <!-- <div class="input_container fourth fnone">
