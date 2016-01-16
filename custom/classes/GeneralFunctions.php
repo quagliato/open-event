@@ -8,30 +8,38 @@ function isMaxReached() {
 
     $genericDAO = new GenericDAO;
     $now = date('Y-m-d H:i:s');
-    $fatherProducts = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'");
-    if ($fatherProducts) {
-        if (!is_array($fatherProducts)) $fatherProducts = array($fatherProducts);
-        foreach ($fatherProducts as $product) {
-            if ($genericDAO->selectAll("ProductFather", "id_father = ".$product->get('id'). " AND (id_product IS NULL OR id_product <> ".$product->get('id').")") ||
-                !$genericDAO->selectAll("ProductFather", "id_product <> ".$product->get('id'))) {
-                $max = $product->get('max_quantity');
-                $count = 0;
-                $transactionItems = $genericDAO->selectAll("TransactionItem", "id_product = ".$product->get('id'));
-                if ($transactionItems) {
-                    if (!is_array($transactionItems)) $transactionItems = array($transactionItems);
-                    $inStr = "";
-                    foreach ($transactionItems as $transactionItem) {
-                        if (strlen($inStr) > 0) $inStr .= ', ';
-                        $inStr .= $transactionItem->get('id_transaction');
-                    }
 
-                    $transactionCount = $genericDAO->selectCount("Transaction", "id", "value_exemption = 0 && status <> 3 AND id IN ($inStr)");
-                    $count = $transactionCount;
-                }
-                if ($count <= $max) {
-                    $isClosed = false;
-                }
+    $productsFatherStr = "";
+    $productsFather = $genericDAO->selectAll("ProductFather", NULL);
+    if ($productsFather) {
+        if (!is_array($productsFather)) $productsFather = array($productsFather);
+        foreach ($productsFather as $productFather) {
+            if (!$genericDAO->selectAll("ProductFather", "id_product = {$productFather->get('id_father')}")) {
+                if (strlen($productsFatherStr) > 0) $productsFatherStr .= ", ";
+                $productsFatherStr .= $productFather->get('id_father');
             }
+        }
+    }
+    
+    $fatherProducts = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'".(strlen($productsFatherStr) > 0 ? " AND id IN ($productsFatherStr)" : ""));
+    if (!is_array($fatherProducts)) $fatherProducts = array($fatherProducts);
+    foreach ($fatherProducts as $product) {
+        $max = $product->get('max_quantity');
+        $count = 0;
+        $transactionItems = $genericDAO->selectAll("TransactionItem", "id_product = ".$product->get('id'));
+        if ($transactionItems) {
+            if (!is_array($transactionItems)) $transactionItems = array($transactionItems);
+            $inStr = "";
+            foreach ($transactionItems as $transactionItem) {
+                if (strlen($inStr) > 0) $inStr .= ', ';
+                $inStr .= $transactionItem->get('id_transaction');
+            }
+
+            $transactionCount = $genericDAO->selectCount("Transaction", "id", "value_exemption = 0 && status <> 3 AND id IN ($inStr)");
+            $count = $transactionCount;
+        }
+        if ($count <= $max) {
+            $isClosed = false;
         }
     }
 
