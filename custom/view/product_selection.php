@@ -18,8 +18,10 @@
     if ($productsFather) {
         if (!is_array($productsFather)) $productsFather = array($productsFather);
         foreach ($productsFather as $productFather) {
-            if (strlen($productsFatherStr) > 0) $productsFatherStr .= ", ";
-            $productsFatherStr .= $productFather->get('id_father');
+            if (!$genericDAO->selectAll("ProductFather", "id_product = {$productFather->get('id_father')}")) {
+                if (strlen($productsFatherStr) > 0) $productsFatherStr .= ", ";
+                $productsFatherStr .= $productFather->get('id_father');
+            }
         }
     }
     
