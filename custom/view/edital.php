@@ -158,6 +158,7 @@
                                 <?php
                                     $valorPossivelDAO = new ValorPossivelDAO;
                                     $valoresPossiveis = $valorPossivelDAO->getValorPossivelByPergunta($pergunta->get('id'));
+                                    if ($valoresPossiveis && !is_array($valoresPossiveis)) $valoresPossiveis = array($valoresPossiveis);
                                     foreach ($valoresPossiveis as $valorPossivel) :
                                         $checked = false;
                                         if ($respostaPergunta) {
