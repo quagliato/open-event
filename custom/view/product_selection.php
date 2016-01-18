@@ -1,77 +1,172 @@
 <?php
-    $user = Structure::verifySession();
-    Structure::header();
+  $user = Structure::verifySession();
+  Structure::header();
 
-    if (isMaxReached()) {
-        Structure::redirWithMessage("Lote encerrado.", "/dashboard");
+  if (isMaxReached()) {
+    Structure::redirWithMessage("Lote encerrado.", "/dashboard");
+  }
+
+  $genericDAO = new GenericDAO;
+
+  $isExempted = getUserExemptions($user->get('id'));
+  $now = date("Y-m-d H:i:s");
+
+  $products = false;
+
+  $productsFatherStr = "";
+  $productsFather = $genericDAO->selectAll("ProductFather", NULL);
+  if ($productsFather) {
+    if (!is_array($productsFather)) $productsFather = array($productsFather);
+    foreach ($productsFather as $productFather) {
+      if (!$genericDAO->selectAll("ProductFather", "id_product = {$productFather->get('id_father')}")) {
+        if (strlen($productsFatherStr) > 0) $productsFatherStr .= ", ";
+        $productsFatherStr .= $productFather->get('id_father');
+      }
     }
+  }
+  
+  $products = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'".(strlen($productsFatherStr) > 0 ? " AND id IN ($productsFatherStr)" : ""));
+  /*    
+  if (!$isExempted) {
+      $products = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'".(strlen($productsFatherStr) > 0 ? " AND id IN ($productsFatherStr)" : ""));
+  } else {
+      $products = $genericDAO->selectAll("Product", (strlen($productsFatherStr) > 0 ? " id IN ($productsFatherStr)" : " 1=1")." ORDER BY id LIMIT 1");
+  }
+  */
+  if (!$products) Structure::redirWithMessage("Nenhum item cadastrado", "/dashboard");
+  if (!is_array($products)) $products = array($products);
 
+
+  function onlyOpenProductExclude($exclude) {
     $genericDAO = new GenericDAO;
+    if ($exclude && is_array($exclude)) {
+      $aux = array();
 
-    $isExempted = getUserExemptions($user->get('id'));
-    $now = date("Y-m-d H:i:s");
+      foreach ($exclude as $excludeItem) {
+        $product1 = $genericDAO->selectAll("Product", "id = ".$excludeItem->get('id_product1'));
+        $product2 = $genericDAO->selectAll("Product", "id = ".$excludeItem->get('id_product2'));
 
-    $products = false;
+        $productToFind = false;
 
-    $productsFatherStr = "";
-    $productsFather = $genericDAO->selectAll("ProductFather", NULL);
-    if ($productsFather) {
-        if (!is_array($productsFather)) $productsFather = array($productsFather);
-        foreach ($productsFather as $productFather) {
-            if (!$genericDAO->selectAll("ProductFather", "id_product = {$productFather->get('id_father')}")) {
-                if (strlen($productsFatherStr) > 0) $productsFatherStr .= ", ";
-                $productsFatherStr .= $productFather->get('id_father');
-            }
-        }
-    }
-    
-        $products = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'".(strlen($productsFatherStr) > 0 ? " AND id IN ($productsFatherStr)" : ""));
-    /*    
-    if (!$isExempted) {
-        $products = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'".(strlen($productsFatherStr) > 0 ? " AND id IN ($productsFatherStr)" : ""));
-    } else {
-        $products = $genericDAO->selectAll("Product", (strlen($productsFatherStr) > 0 ? " id IN ($productsFatherStr)" : " 1=1")." ORDER BY id LIMIT 1");
-    }
-    */
-
-    if (!$products) Structure::redirWithMessage("Nenhum item cadastrado", "/dashboard");
-
-    if (!is_array($products)) $products = array($products);
-
-
-    function onlyOpenProductExclude($exclude) {
-        $genericDAO = new GenericDAO;
-        if ($exclude && is_array($exclude)) {
-            $aux = array();
-
-            foreach ($exclude as $excludeItem) {
-                $product1 = $genericDAO->selectAll("Product", "id = ".$excludeItem->get('id_product1'));
-                $product2 = $genericDAO->selectAll("Product", "id = ".$excludeItem->get('id_product2'));
-
-                $productToFind = false;
-
-                if ($product1->get('id') == $productId) {
-                    $productToFind = $product2;
-                } else {
-                    $productToFind = $product1;
-                }
-
-                $begin = new DateTime($productToFind->get('dt_begin'));
-                $end = new DateTime($productToFind->get('dt_end'));
-
-                $now = new DateTime();
-
-                if ($now > $begin && $now < $end) {
-                    $aux[] = $excludeItem;
-                }
-            }
-            
-            if (sizeof($aux) == 1) return $aux[0];
-            else return false;
+        if ($product1->get('id') == $productId) {
+          $productToFind = $product2;
+        } else {
+          $productToFind = $product1;
         }
 
-        return $exclude;
+        $begin = new DateTime($productToFind->get('dt_begin'));
+        $end = new DateTime($productToFind->get('dt_end'));
+
+        $now = new DateTime();
+
+        if ($now > $begin && $now < $end) {
+          $aux[] = $excludeItem;
+        }
+      }
+      
+      if (sizeof($aux) == 1) return $aux[0];
+      else return false;
     }
+
+    return $exclude;
+  }
+
+  function printProducts($products, $hasFather, $level, $fatherId){
+    $user = Structure::verifySession();
+    $genericDAO = new GenericDAO;
+    foreach ($products as $product) {
+      if (!isMaxReachedByProd($product->get('id'))) {
+        $productId = $product->get('id');
+
+        $disabled = true;
+        $checked = false;
+        if ($hasFather) $disabled = false;
+        $hasProduct = false;
+        if (userHasProduct($user->get('id'), $productId)) {
+            $disabled = true;
+            $checked = true;
+            $hasProduct = true;
+        }
+        
+        $exclude = $genericDAO->selectAll("ProductExclude", "id_product1 = $productId OR id_product2 = $productId");
+        if (!is_array($exclude)) $exclude = array($exclude);
+        $exclude = onlyOpenProductExclude($exclude);
+        foreach ($exclude as $excludeItem) {
+          if (($excludeItem->get('id_product1') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product2'))) ||
+            ($excludeItem->get('id_product2') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product1')))) {
+              $disabled = true;
+              $exclude = $excludeItem;
+          }
+        }
+        
+        
+        $isChild = false;
+        if ($level > 0) $isChild = true;
+        $hasChildren = false;
+        if ($genericDAO->selectAll("ProductFather", "id_father = $productId")) $hasChildren = true;
+
+        ?>
+
+        <li>
+            <input 
+                type="checkbox" 
+                id="product<?=$productId?>" 
+                name="<?=userHasProduct($user->get('id'), $productId) ? 'alreadyOwn[]' : 'products[]'?>" 
+                value="<?=$productId?>"
+                class="
+                  product
+                  <?=$isChild === true? "child" : ""?>
+                  <?=$hasChildren === true ? "father" : ""?> 
+                  <?=$exclude ? 'exclude' : ''?>
+                "
+                
+                <?=$fatherId && $isChild ? 'data-father="product'.$fatherId.'"' : ''?>
+                <?=$exclude && !is_array($exclude) ? 'data-exclude="'.$exclude->get('id').'"' : ''?>
+                <?=$disabled ? 'disabled' : ''?>
+                <?=$checked ? 'checked' : ''?>
+            >
+            <label 
+                for="product<?=$product->get('id')?>"
+            >
+                <?=$product->get('description')?>
+                <!--PRICE -->
+                - <strong>R$ <span class="price" data-value="<?=$product->get('price')?>"><?=$product->get('price')?></span></strong>
+                <!--/PRICE -->
+
+                <!--EXEMPTION -->
+                <?php 
+                $exemption = userHasExemption($user->get('id'), $product->get('id'));
+                if ($exemption) :
+                    $value = floatval($product->get('price')) * floatval($exemption->get('modifier'));
+                ?>
+                (Isenção: <strong>R$ <span class="exemption" data-value="<?=$value?>"><?=$value?></span></strong>)
+                <?php endif; ?>
+                <!--/EXEMPTION -->
+
+            </label>
+        </li>
+        <?php
+        $children = $genericDAO->selectAll("ProductFather", "id_father = ".$productId);
+        if ($children) {
+          $strChildren = "";
+          if (!is_array($children)) $children = array($children);
+          foreach ($children as $child) {
+            if (strlen($strChildren) > 0) $strChildren .= ", ";
+            $strChildren .= $child->get('id_product');
+          }
+          $children = $strChildren;
+        }
+        if (strlen($children) > 0) {
+          $children = $genericDAO->selectAll("Product", "id IN ($children)");
+          if ($children) {
+            if (!is_array($children)) $children = array($children);
+            $nextLevel = $level + 1;
+            printProducts($children, $hasProduct, $nextLevel, $productId);
+          }
+        }
+      }
+    }
+  }
 ?>
         <main>
             <header class="center">
@@ -88,129 +183,7 @@
                         <div class="input_container two-thirds fnone">
                             <ul class="checkbox">
                             <?php
-                            foreach ($products as $product) :
-                              if (!isMaxReachedByProd($product->get('id'))) :
-                                $hasFather = false;
-                                $productId = $product->get('id');
-                                $exclude = $genericDAO->selectAll("ProductExclude", "id_product1 = $productId OR id_product2 = $productId");
-
-                                // Search for ProductExcludes just for open Products
-                                $exclude = onlyOpenProductExclude($exclude);
-                            ?>
-                                <li>
-                                    <input 
-                                        type="checkbox" 
-                                        id="product<?=$product->get('id')?>" 
-                                        name="<?=userHasProduct($user->get('id'), $product->get('id')) ? 'alreadyOwn[]' : 'products[]'?>" 
-                                        value="<?=$product->get('id')?>"
-                                        class="product father <?=$exclude ? 'exclude' : ''?>"
-                                        <?=$exclude ? 'data-exclude="'.$exclude->get('id').'"' : ''?>
-                                        <?php if (userHasProduct($user->get('id'), $product->get('id'))) : ?> 
-                                            <?php $hasFather = true; ?>
-                                        disabled
-                                        checked
-                                        <?php endif; ?>
-                                    >
-                                    <label 
-                                        for="product<?=$product->get('id')?>"
-                                    >
-                                        <?=$product->get('description')?>
-                                        <!--PRICE -->
-                                        - <strong>R$ <span class="price" data-value="<?=$product->get('price')?>"><?=$product->get('price')?></span></strong>
-                                        <!--/PRICE -->
-
-                                        <!--EXEMPTION -->
-                                        <?php 
-                                        $exemption = userHasExemption($user->get('id'), $product->get('id'));
-                                        if ($exemption) :
-                                            $value = floatval($product->get('price')) * floatval($exemption->get('modifier'));
-                                        ?>
-                                        (Isenção: <strong>R$ <span class="exemption" data-value="<?=$value?>"><?=$value?></span></strong>)
-                                        <?php endif; ?>
-                                        <!--/EXEMPTION -->
-
-                                    </label>
-                                </li>
-                                <?php 
-                                $children = $genericDAO->selectAll("ProductFather", "id_father = ".$product->get('id'));
-                                if ($children) {
-                                    $strChildren = "";
-                                    if (!is_array($children)) $children = array($children);
-                                    foreach ($children as $child) {
-                                        if (strlen($strChildren) > 0) $strChildren .= ", ";
-                                        $strChildren .= $child->get('id_product');
-                                    }
-                                    //if (strlen($strChildren) > 0) $children = $strChildren;
-                                    $children = $strChildren;
-                                }
-                                if (strlen($children) > 0) :
-                                  $children = $genericDAO->select("Product", array('id','description','price'), "id IN ($children)");
-                                  if ($children):
-                                      if (!is_array($children)) $children = array($children);
-                                      foreach ($children as $child) :
-                                        if (!isMaxReachedByProd($child->get('id'))) :
-                                          $productId = $child->get('id');
-                                          $exclude = $genericDAO->selectAll("ProductExclude", "id_product1 = $productId OR id_product2 = $productId");
-
-                                          $disabled = true;
-                                          $checked = false;
-                                          if ($hasFather) $disabled = false;
-                                          if (userHasProduct($user->get('id'), $child->get('id'))) {
-                                              $disabled = true;
-                                              $checked = true;
-                                          }
-                                          
-                                          if (!is_array($exclude)) $exclude = array($exclude);
-                                          $exclude = onlyOpenProductExclude($exclude);
-                                          foreach ($exclude as $excludeItem) {
-                                            if (($excludeItem->get('id_product1') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product2'))) ||
-                                              ($excludeItem->get('id_product2') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product1')))) {
-                                                $disabled = true;
-                                                $exclude = $excludeItem;
-                                            }
-                                          }
-
-                                  ?>
-                                  <li>
-                                      <input 
-                                          type="checkbox" 
-                                          id="product<?=$child->get('id')?>" 
-                                          name="<?=userHasProduct($user->get('id'), $child->get('id')) ? 'alreadyOwn[]' : 'products[]'?>" 
-                                          value="<?=$child->get('id')?>"
-                                          class="product child  <?=$exclude ? 'exclude' : ''?>"
-                                          data-father="product<?=$product->get('id')?>"
-                                          <?=$exclude && !is_array($exclude) ? 'data-exclude="'.$exclude->get('id').'"' : ''?>
-                                          <?=$disabled ? 'disabled' : ''?>
-                                          <?=$checked ? 'checked' : ''?>
-                                      >
-                                          <label 
-                                              for="product<?=$child->get('id')?>"
-                                              <?=$disabled ? 'class="disabled"' : ''?>
-                                          >
-                                              <?=$child->get('description')?>
-
-                                              <!-- PRICE -->
-                                               - <strong>R$ <span class="price" data-value="<?=$child->get('price')?>"><?=$child->get('price')?></span></strong>
-                                              <!-- /PRICE-->
-
-                                              <!--EXEMPTION -->
-                                              <?php 
-                                              $exemption = userHasExemption($user->get('id'), $child->get('id'));
-                                              if ($exemption) :
-                                                  $value = floatval($child->get('price')) * floatval($exemption->get('modifier'));
-                                              ?>
-                                              (Isenção: <strong>R$ <span class="exemption" data-value="<?=$value?>"><?=$value?></span></strong>)
-                                              <?php endif; ?>
-                                              <!--/EXEMPTION -->
-                                          </label>
-                                      </li>
-                                <?php
-                                        endif;
-                                      endforeach;
-                                  endif;
-                                endif;
-                              endif;
-                            endforeach; 
+                              printProducts($products, true, true, 0);
                             ?>
                             </ul>
                         </div>
