@@ -84,11 +84,11 @@ function bindMasks() {
 }
 
 function validatePassword() {
-    if (document.getElementById('senha').value != document.getElementById('confirmacao_senha').value) {
-        document.getElementById('senha').className = 'error';
+    if (document.getElementById('password').value != document.getElementById('confirmacao_senha').value) {
+        document.getElementById('password').className = 'error';
         document.getElementById('confirmacao_senha').className = 'error';
     } else {
-        document.getElementById('senha').className = 'good';
+        document.getElementById('password').className = 'good';
         document.getElementById('confirmacao_senha').className = 'good';
     }
 }

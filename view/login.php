@@ -14,8 +14,8 @@
 
                     <div class="input_line">
                         <div class="input_container full last">
-                            <label for="senha">Senha</label>
-                            <input name="User-senha" type="password" id="password" required="required">
+                            <label for="password">Senha</label>
+                            <input name="User-password" type="password" id="password" required="required">
                         </div>
                     </div>
 

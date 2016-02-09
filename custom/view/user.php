@@ -37,8 +37,8 @@
 
                     <div class="input_line">
                         <div class="input_container third">
-                            <label for="senha">Senha*</label>
-                            <input name="User-senha" type="password" id="senha" required="required">
+                            <label for="password">Senha*</label>
+                            <input name="User-password" type="password" id="password" required="required">
                         </div>
 
                         <div class="input_container third last">

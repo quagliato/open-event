@@ -14,8 +14,8 @@
 
                     <div class="input_line">
                         <div class="input_container third fnone">
-                            <label for="senha">Senha</label>
-                            <input id="senha" type="password" name="senha" required />
+                            <label for="password">Senha</label>
+                            <input id="password" type="password" name="password" required />
                         </div>
                     </div>
 

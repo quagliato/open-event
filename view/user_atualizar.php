@@ -25,8 +25,8 @@
 
                     <div class="input_line">
                         <div class="input_container fourth fnone">
-                            <label for="senha">Senha</label>
-                            <input name="User-senha" type="password" id="senha" placeholder="Senha difícil">
+                            <label for="password">Senha</label>
+                            <input name="User-password" type="password" id="password" placeholder="Senha difícil">
                         </div>
 
                         <div class="input_container fourth fnone">

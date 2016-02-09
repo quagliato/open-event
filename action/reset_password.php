@@ -3,7 +3,7 @@
     $return = array();
 
     $code = $_POST['code'];
-    $senha = $_POST['senha'];
+    $password = $_POST['password'];
     $confirmacao_senha = $_POST['confirmacao_senha'];
 
     $dao = new GenericDAO;
@@ -30,8 +30,8 @@
                     'Error' => 'Não conseguimos localizar seu usuário em nosso sistema. Por favor, tente novamente.'
                 );
             } else {
-                $user->set('senha',md5($_POST['senha']));
-                if (!$userDAO->updateWithFields($user, array('senha'), ("id = ".$user->get('id')))) {
+                $user->set('password',md5($_POST['password']));
+                if (!$userDAO->updateWithFields($user, array('password'), ("id = ".$user->get('id')))) {
                     $return[] = array(
                         'Action' => 'Error',
                         'Error' => 'Não conseguimos atualizar sua senha. Por favor, tente novamente.'
