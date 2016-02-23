@@ -1,6 +1,0 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /open-event/
-    RewriteRule ^index\.php$ - [L]
-    RewriteRule !\.(js|ico|gif|jpg|png|pdf|css|otf|ttf|eot|woff|svg|txt|html)$ /open-event/index.php [L]
-</IfModule>
