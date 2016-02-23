@@ -14,10 +14,12 @@ noisy-cricket framework and adding some features.
 - User subscription;
 - E-mail notifications;
 - Dynamic-management "Editais" (aka "Chamada de trabalhos", aka "Call for works");
+- Subscription and package management;
+- Payment management;
 
 ## Backlog
-- Subscription and package management *(already created, pending import)*;
-- Payment management *(already created, pending import)*;
+- Certificate creation;
+  - Question form before certificade download;
 - Custom questions on user subscriptions;
 - Multilanguage *(pending noisy-cricket development)*;
 
