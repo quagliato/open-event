@@ -63,7 +63,8 @@
       if (!PAY_PAYPAL) {
           Structure::redirWithMessage("Erro 305\nO metodo de pagamento PAYPAL nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
-user->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
+      
+      $pagamento = $payment->pay($user->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
       Structure::header();
       $paypal_html = '<h2>PayPal</h2>';
       $paypal_html .= '<h2>Clique no botão abaixo para realizar o pagamento de sua inscrição.</h2>';
