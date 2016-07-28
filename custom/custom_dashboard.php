@@ -96,6 +96,7 @@ table.noline thead td{ border: none; }
     $editalDAO = new editalDAO;
     $respostaEditalDAO = new RespostaEditalDAO;
     $editais = $editalDAO->getOpenEdital();
+    if ($user->get('role') == 'ADM') $editais = $editalDAO->selectAll("Edital", "1=1 ORDER BY dt_abertura, nome ASC");
     if ($editais) :
 ?>
     <h2>Editais</h2>
