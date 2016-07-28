@@ -21,7 +21,7 @@
 
     $edital = $genericDAO->selectAll("Edital", "id = $idEdital");
 
-    if (!$respostaEdital && (!$edital || !$editalDAO->getOpenEdital($idEdital))) {
+    if ($user->get('role') !== 'ADM' && (!$respostaEdital && (!$edital || !$editalDAO->getOpenEdital($idEdital)))) {
         Structure::redirWithMessage("O edital requisitado não existe ou está fechado.", "/dashboard");
     }
 
