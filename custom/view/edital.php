@@ -120,19 +120,19 @@
                             <label for="<?=$id?>"><?=$pergunta->get('titulo')?> <?=$descricao ? "<em>($descricao)</em>" : ""?></label>
                             <?php $tamanhoResposta = $pergunta->get('tamanho_resposta'); ?>
                             <?php if ($tipoResposta == "text") : ?>
-                                <input name="<?=$name?>" type="text" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="'.$tamanhoResposta.'" ' : ''?>placeholder="<?=$pergunta->get('exemplo')?>"<?=$respostaPergunta ? ' value="'.$respostaPergunta->get('vl_resposta').'"' : ''?>>
+                                <input required name="<?=$name?>" type="text" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="'.$tamanhoResposta.'" ' : ''?>placeholder="<?=$pergunta->get('exemplo')?>"<?=$respostaPergunta ? ' value="'.$respostaPergunta->get('vl_resposta').'"' : ''?>>
 
                             <?php elseif ($tipoResposta == "textarea-s") : ?>
-                                <textarea name="<?=$name?>" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="'.$tamanhoResposta.'" ' : ''?> placeholder="<?=$pergunta->get('exemplo')?>" class="s"><?=$respostaPergunta ? $respostaPergunta->get('vl_resposta') : ''?></textarea>
+                                <textarea required name="<?=$name?>" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="'.$tamanhoResposta.'" ' : ''?> placeholder="<?=$pergunta->get('exemplo')?>" class="s"><?=$respostaPergunta ? $respostaPergunta->get('vl_resposta') : ''?></textarea>
 
                             <?php elseif ($tipoResposta == "textarea-m") : ?>
-                                <textarea name="<?=$name?>" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="'.$tamanhoResposta.'" ' : ''?> placeholder="<?=$pergunta->get('exemplo')?>" class="m"><?=$respostaPergunta ? $respostaPergunta->get('vl_resposta') : ''?></textarea>
+                                <textarea required name="<?=$name?>" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="'.$tamanhoResposta.'" ' : ''?> placeholder="<?=$pergunta->get('exemplo')?>" class="m"><?=$respostaPergunta ? $respostaPergunta->get('vl_resposta') : ''?></textarea>
 
                             <?php elseif ($tipoResposta == "textarea-l") : ?>
-                                <textarea name="<?=$name?>" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="$'.$tamanhoResposta.'" ' : ''?> placeholder="<?=$pergunta->get('exemplo')?>" class="l"><?=$respostaPergunta ? $respostaPergunta->get('vl_resposta') : ''?></textarea>
+                                <textarea required name="<?=$name?>" id="<?=$id?>" <?=$tamanhoResposta && $tamanhoResposta > 0 ? 'maxlength="$'.$tamanhoResposta.'" ' : ''?> placeholder="<?=$pergunta->get('exemplo')?>" class="l"><?=$respostaPergunta ? $respostaPergunta->get('vl_resposta') : ''?></textarea>
 
                             <?php elseif ($tipoResposta == "number") : ?>
-                                <input name="<?=$name?>" type="number" id="<?=$id?>" placeholder="<?=$pergunta->get('exemplo')?>"<?=$respostaPergunta ? ' value="'.$respostaPergunta->get('vl_resposta').'"' : ''?>>
+                                <input required name="<?=$name?>" type="number" id="<?=$id?>" placeholder="<?=$pergunta->get('exemplo')?>"<?=$respostaPergunta ? ' value="'.$respostaPergunta->get('vl_resposta').'"' : ''?>>
 
                             <?php elseif ($tipoResposta == "datepicker") : ?>
                                 <input name="<?=$name?>" type="text" id="<?=$id?>" placeholder="<?=$pergunta->get('exemplo')?>" class="datepicker date"<?=$respostaPergunta ? ' value="'.Utils::sqlDate2SimpleDate($respostaPergunta->get('vl_resposta')).'"' : ''?>>
