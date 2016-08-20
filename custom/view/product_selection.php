@@ -24,9 +24,9 @@
       }
     }
   }
-  
+
   $products = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'".(strlen($productsFatherStr) > 0 ? " AND id IN ($productsFatherStr)" : ""));
-  /*    
+  /*
   if (!$isExempted) {
       $products = $genericDAO->selectAll("Product", "dt_begin < '$now' AND dt_end > '$now'".(strlen($productsFatherStr) > 0 ? " AND id IN ($productsFatherStr)" : ""));
   } else {
@@ -63,8 +63,9 @@
           $aux[] = $excludeItem;
         }
       }
-      
+
       if (sizeof($aux) == 1) return $aux[0];
+      elseif (sizeof($aux) > 1) return ($aux);
       else return false;
     }
 
@@ -87,45 +88,51 @@
             $checked = true;
             $hasProduct = true;
         }
-        
+
         $exclude = $genericDAO->selectAll("ProductExclude", "id_product1 = $productId OR id_product2 = $productId");
         if (!is_array($exclude)) $exclude = array($exclude);
         $exclude = onlyOpenProductExclude($exclude);
+        $excludeStr = "";
         foreach ($exclude as $excludeItem) {
           if (($excludeItem->get('id_product1') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product2'))) ||
             ($excludeItem->get('id_product2') == $productId && userHasProduct($user->get('id'), $excludeItem->get('id_product1')))) {
               $disabled = true;
-              $exclude = $excludeItem;
+              // $exclude = $excludeItem;
           }
+
+          if (strlen($excludeStr) > 0) $excludeStr .= ",";
+          $excludeStr .= $excludeItem->get('id');
         }
-        
-        
+
+
         $isChild = false;
         if ($level > 0) $isChild = true;
         $hasChildren = false;
         if ($genericDAO->selectAll("ProductFather", "id_father = $productId")) $hasChildren = true;
 
+        $minorDisabled = false;
         ?>
 
         <li>
-            <input 
-                type="checkbox" 
-                id="product<?=$productId?>" 
-                name="<?=userHasProduct($user->get('id'), $productId) ? 'alreadyOwn[]' : 'products[]'?>" 
+            <input
+                type="checkbox"
+                id="product<?=$productId?>"
+                name="<?=userHasProduct($user->get('id'), $productId) ? 'alreadyOwn[]' : 'products[]'?>"
                 value="<?=$productId?>"
                 class="
                   product
                   <?=$isChild === true? "child" : ""?>
-                  <?=$hasChildren === true ? "father" : ""?> 
+                  <?=$hasChildren === true ? "father" : ""?>
                   <?=$exclude ? 'exclude' : ''?>
+                  <?=$minorDisabled ? 'minor-disabled' : ""?>
                 "
-                
+
                 <?=$fatherId && $isChild ? 'data-father="product'.$fatherId.'"' : ''?>
-                <?=$exclude && !is_array($exclude) ? 'data-exclude="'.$exclude->get('id').'"' : ''?>
+                <?=$exclude ? (is_array($exclude) ? 'data-exclude="'.$excludeStr.'"' : 'data-exclude="'.$exclude->get('id').'"') : ''?>
                 <?=$disabled ? 'disabled' : ''?>
                 <?=$checked ? 'checked' : ''?>
             >
-            <label 
+            <label
                 for="product<?=$product->get('id')?>"
             >
                 <?=$product->get('description')?>
@@ -134,7 +141,7 @@
                 <!--/PRICE -->
 
                 <!--EXEMPTION -->
-                <?php 
+                <?php
                 $exemption = userHasExemption($user->get('id'), $product->get('id'));
                 if ($exemption) :
                     $value = floatval($product->get('price')) * floatval($exemption->get('modifier'));
@@ -259,7 +266,7 @@
                             var thisProduct = $(this).attr('value');
                             var dataFather = $(this).attr('data-father');
                             $('input.child').each(function(){
-                                if ($(this).attr('data-father') == dataFather && $(this).attr('value') != thisProduct && $(this).attr("checked")) {
+                                if ($(this).attr('data-father') == dataFather && $(this).attr('value') != thisProduct && $(this).attr("checked") || $(this).hasClass("minor-disabled")) {
                                     canEnable = false;
                                 }
                             });
@@ -284,9 +291,16 @@
             });
 
             $('input.exclude').change(function(){
+                if ($(this).hasClass("minor-disabled")) {
+                  $(this).removeAttr("checked");
+                  $(this).attr("disabled", "disabled");
+                  return;
+                }
+
+
                 var clickSource = $(this);
 
-                var excludeId = $(this).attr('data-exclude');
+                var excludeIds = $(this).attr('data-exclude').split(",");
                 var thisId = $(this).attr('id');
                 var isChecked = false;
 
@@ -294,21 +308,31 @@
 
                 $('input.exclude').each(function(){
                     // Search the other pair of exclude
-                    if ($(this).attr('data-exclude') != undefined && $(this).attr('data-exclude') == excludeId && $(this).attr('id') != thisId) {
-                    console.log(isChecked);
-                    console.log(!$(this).is(":disabled"));
-                    console.log($(this).attr('name').indexOf('alreadyOwn') === -1);
-                    console.log(isChecked && !$(this).is(":disabled") && $(this).attr('name').indexOf('alreadyOwn') === -1);
+                    var foundEqual = false;
+                    var thisExcludeIds = $(this).attr('data-exclude').split(",");
+                    for (var i = 0; i < excludeIds.length; i++) {
+                      for (var j = 0; j < thisExcludeIds.length; j++) {
+                        if (excludeIds[i] == thisExcludeIds[j]) foundEqual = true;
+                      }
+                    }
+
+                    if ($(this).attr('data-exclude') != undefined && foundEqual == true && $(this).attr('id') != thisId) {
+                        <?php if (DEBUG !== false): ?>
+                        console.log(isChecked);
+                        console.log(!$(this).is(":disabled"));
+                        console.log($(this).attr('name').indexOf('alreadyOwn') === -1);
+                        console.log(isChecked && !$(this).is(":disabled") && $(this).attr('name').indexOf('alreadyOwn') === -1);
+                        <?php endif; ?>
 
                         // If the click source it's checked and this is now disabled
-                        if (isChecked && 
+                        if (isChecked &&
                             (
                               (
-                                !$(this).is(":disabled") && 
+                                !$(this).is(":disabled") &&
                                 $(this).attr('name').indexOf('alreadyOwn') == -1
-                              ) || 
+                              ) ||
                               (
-                                $(this).is(":disabled") && 
+                                $(this).is(":disabled") &&
                                 $(this).attr('name').indexOf('product') > -1
                               )
                             )

@@ -29,7 +29,7 @@
         <main>
             <header class="center">
                 <h1 class="edital"><?=$edital->get('nome')?></h1>
-                
+
                 <div id="edital_info">
                     <?php if (!$respostaEdital) : ?>
 
@@ -79,7 +79,7 @@
                         <?php endif; ?>
                     </div>
                 </div>
-                
+
             </header>
             <section class="wrapper center">
                 <form method="POST" action="<?=APP_URL?>/edital/action" class="new_submit needs-confirmation" data-confirm-msg="Você realmente terminou de preencher esse edital? Se sim, pressione OK.">
@@ -172,7 +172,7 @@
                                                 }
                                             }
                                         }
-                                        
+
                                 ?>
 
                                     <li><input type="checkbox" id="valor<?=$valorPossivel->get('id')?>" name="<?=$name?>" value="<?=$valorPossivel->get('valor')?>"<?=$checked ? ' checked' : ''?>><label for="valor<?=$valorPossivel->get('id')?>"><?=$valorPossivel->get('label')?></label></li>
@@ -209,7 +209,7 @@
                                                 value: select[ 0 ].selectedIndex + 1,
                                                 slide: function( event, ui ) {
                                                     select[ 0 ].selectedIndex = ui.value - 1;
-                                                    
+
                                                     var count = 0;
                                                     select.children("option").each(function(){
                                                         if (count == select[0].selectedIndex) {

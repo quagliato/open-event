@@ -5,14 +5,14 @@
   if (!array_key_exists('id_transaction', $_POST) || !isset($_POST['id_transaction']) || $_POST['id_transaction'] == "") {
     Structure::redirWithMessage("Transação não encontrada.", "/");
   }
-  
+
   $idTransaction = $_POST['id_transaction'];
   $paymentMethod = $_POST['payment'];
 
   $genericDAO = new GenericDAO;
   $transaction = $genericDAO->selectAll("Transaction", "id = $idTransaction");
  ?>
- 
+
           <main>
             <header class="center">
                 <h1>Pagamento</h1>
@@ -26,7 +26,7 @@
       if (!PAY_BOLETO) {
           Structure::redirWithMessage("Erro 305\nO metodo de pagamento BOLETO nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
-      
+
       $pagamento = $payment->pay($user->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
       Structure::header();
       echo "<h1>Boleto</h1>";
@@ -38,7 +38,7 @@
       if (!PAY_DEPOSITO) {
           Structure::redirWithMessage("Erro 305\nO metodo de pagamento DEPOSITO nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
-      
+
       $pagamento = $payment->pay($user->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
       if ($pagamento) {
           Structure::header();
@@ -63,7 +63,7 @@
       if (!PAY_PAYPAL) {
           Structure::redirWithMessage("Erro 305\nO metodo de pagamento PAYPAL nao esta disponivel.", "/dashboard"); //TODO: Adicionar acento
       }
-      
+
       $pagamento = $payment->pay($user->get('id'), $transacao->get('id'), $paymentMethod, $valor_final);
       Structure::header();
       $paypal_html = '<h2>PayPal</h2>';
@@ -86,7 +86,7 @@
       if ($transactionPayment) {
           Structure::header();
           $html = '<h2>PagSeguro</h2>';
-          $html .= '<p><strong>R$ '.(floatval($transaction->get('total_value')) * PAGSEGURO_MULTIPLIER).'</strong> <a class="submit positive" href="'.$transactionPayment->get('info').'">Pagar</a></p>';
+          $html .= '<p><strong>R$ '.number_format((floatval($transaction->get('total_value')) * PAGSEGURO_MULTIPLIER), 2).'</strong> <a class="submit positive" href="'.$transactionPayment->get('info').'">Pagar</a></p>';
           $html .= '<p><em>Utilize o mesmo e-mail que você utilizou em seu cadastro.</em></p>';
           $html .= '<p><em>Aguarde a confirmação de seu pagamento em até 3 dias úteis.</em></p>';
           echo $html;
