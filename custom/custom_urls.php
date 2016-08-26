@@ -97,6 +97,7 @@
         "/admin/transaction/export" => "view/transaction_export_list.php",
         "/admin/transaction/action/export" => "action/transaction_04_export_list.php",
 
+        "/admin/custom_jobs" => "custom_jobs.php"
     );
 
 ?>
