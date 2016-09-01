@@ -1,6 +1,10 @@
 <?php
     $user = Structure::verifySession();
     Structure::header();
+
+    if (isMaxReached()) {
+      Structure::redirWithMessage("Lote encerrado.", "/dashboard");
+    }
 ?>
 
         <main>
