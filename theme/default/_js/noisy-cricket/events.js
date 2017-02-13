@@ -23,9 +23,14 @@ function setSubmitEvents() {
     $('body').delegate('form.new_submit', 'submit', function(event){
         event.preventDefault();
 
+        var form = $(this);
+
         openProcessing();
         $(this).find('input').each(function(){
-            $(this).attr('disabled','disabled');
+          if ($(this).attr('disabled')) {
+            $(this).addClass('already_disabled');
+          }
+          $(this).attr('disabled','disabled');
         });
 
         var values = bindData($(this));
@@ -61,7 +66,7 @@ function setSubmitEvents() {
             if (!confirm(message)) goodToGo = false;
         }
 
-        if (goodToGo) genericSubmit(action, method, values);
+        if (goodToGo) genericSubmit(action, method, values, form);
     });
 
     $('body').delegate('a.post', 'click', function(event){

@@ -31,7 +31,7 @@ class Structure {
                     }
                 }
                 
-                setcookie('noisy-cricket_goto',$where2goAux->get('id'),0,'/');
+                setcookie('noisy-cricket_goto', $where2goAux, 0, '/');
             }
             if ($verbose) {
                 Structure::redirWithMessage("Não se esqueça de fazer login ou se cadastrar.", '/');

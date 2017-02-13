@@ -5,7 +5,7 @@
  *     returns: none
  *
  */
- function genericSubmit(action, method, values) {
+ function genericSubmit(action, method, values, form) {
     closeNotification();
     var success = function(data){
         var result = JSON.parse(data);
@@ -29,6 +29,12 @@
         }); // iteration end
 
         closeProcessing();
+
+        form.find('input').each(function(){
+          if (!$(this).hasClass('already_disabled')) {
+            $(this).removeAttr('disabled');
+          }
+        });
     } // success end
 
     var fail = function() {

@@ -30,7 +30,7 @@
 
                     <div class="input_line">
                         <div class="input_container half">
-                            <label for="deficiencia">Portador de deficiência?</label>
+                            <label for="deficiencia">Pessoa com deficiência?</label>
                             <input name="User-deficiencia" type="text" id="deficiencia">
                         </div>
                     </div>
@@ -116,7 +116,7 @@
 
                         <div class="input_container fourth last">
                             <label for="end_complemento">Complemento*</label>
-                            <input name="User-end_complemento" type="text" id="end_complemento" required="required">
+                            <input name="User-end_complemento" type="text" id="end_complemento">
                         </div>
                     </div>
 
@@ -171,7 +171,7 @@
                         </div>
                     </div>
 
-                    <h2>Informações do Responsável</h2>
+                    <h2>Contato de Emergência</h2>
                     <div class="input_line">
                         <div class="input_container half">
                             <label for="responsavel_nome">Nome*</label>
