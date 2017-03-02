@@ -79,6 +79,8 @@
         "/pagamento/metodo/late" => "view/payment_method_late.php",
         "/pagamento" => "view/payment.php",
 
+        "/pagamento/pagseguro/notification" => "action/pagseguro_notification.php",
+
         "/admin/transaction/transfer" => "view/transaction_transfer_admin.php",
         "/admin/transaction/action/transfer" => "action/transaction_01_transfer.php",
         "/admin/transaction/action/search_by_user" => "action/transaction_00_search_by_user.php",
