@@ -16,6 +16,7 @@
     "EmailMessage" => "model/EmailMessage.php",
     "Exemption" => "model/Exemption.php",
     "ExemptionEmail" => "model/ExemptionEmail.php",
+    "PagSeguroNotification" => "model/PagSeguroNotification.php",
     "Pergunta" => "model/Pergunta.php",
     "Product" => "model/Product.php",
     "ProductExclude" => "model/ProductExclude.php",

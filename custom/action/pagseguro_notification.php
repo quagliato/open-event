@@ -64,7 +64,7 @@
 
         if ($xml->status != 3) {
           $pagSeguroNotification->set('status', 1);
-          $genericDAO->updateWithFields($pagSeguroNotification, array("status"), "notification_code = {$_POST['notification_code']}");
+          $genericDAO->updateWithFields($pagSeguroNotification, array("status"), "notification_code = {$_POST['notificationCode']}");
 
           $return[] = array(
             "Action" => "Message",
