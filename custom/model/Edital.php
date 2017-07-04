@@ -11,7 +11,6 @@ class Edital extends GenericClass{
     protected $desc_resumida;
     protected $desc_completa;
     protected $tempo_preenchimento;
-    protected $video_link;
 
     protected $sys_type = array(
         'id' => 'int',
@@ -20,8 +19,7 @@ class Edital extends GenericClass{
         'dt_fechamento' => 'date',
         'desc_resumida' => 'str',
         'desc_completa' => 'str',
-        'tempo_preenchimento' => 'int',
-        'video_link' => 'str'
+        'tempo_preenchimento' => 'int'
     );
 
     protected static $createSQL = "
@@ -35,7 +33,6 @@ class Edital extends GenericClass{
         tempo_preenchimento INT NOT NULL,
         PRIMARY KEY (id)
       );
-      ALTER TABLE edital ADD COLUMN video_link VARCHAR(1000) NULL AFTER tempo_preenchimento;
     ";
 }
 ?>

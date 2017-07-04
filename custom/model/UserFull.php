@@ -34,7 +34,6 @@ class User extends GenericClass{
     protected $role;
     protected $tipo_alimentacao;
     protected $restricao_alimentar;
-    protected $usara_alojamento;
 
     protected $sys_type = array(
         'id' => 'int',
@@ -66,8 +65,7 @@ class User extends GenericClass{
         'dt_last_login' => 'date',
         'role' => 'str',
         'tipo_alimentacao' => 'str',
-        'restricao_alimentar' => 'str',
-        'usara_alojamento' => 'int'
+        'restricao_alimentar' => 'str'
     );
 
     protected static $createSQL = "
@@ -104,7 +102,6 @@ class User extends GenericClass{
       ALTER TABLE user ADD COLUMN facebook VARCHAR(500) NULL AFTER email;
       ALTER TABLE user ADD COLUMN tipo_alimentacao VARCHAR(50) NULL AFTER role;
       ALTER TABLE user ADD COLUMN restricao_alimentar VARCHAR(200) NULL AFTER tipo_alimentacao;
-      ALTER TABLE user ADD COLUMN usara_alojamento INT NOT NULL DEFAULT 1 AFTER restricao_alimentar;
     ";
 }
 
