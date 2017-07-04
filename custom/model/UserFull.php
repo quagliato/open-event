@@ -32,6 +32,9 @@ class User extends GenericClass{
     protected $dt_register;
     protected $dt_last_login;
     protected $role;
+    protected $tipo_alimentacao;
+    protected $restricao_alimentar;
+    protected $usara_alojamento;
 
     protected $sys_type = array(
         'id' => 'int',
@@ -61,7 +64,10 @@ class User extends GenericClass{
         'plano_saude' => 'str',
         'dt_register' => 'date',
         'dt_last_login' => 'date',
-        'role' => 'str'
+        'role' => 'str',
+        'tipo_alimentacao' => 'str',
+        'restricao_alimentar' => 'str',
+        'usara_alojamento' => 'int'
     );
 
     protected static $createSQL = "
@@ -96,6 +102,9 @@ class User extends GenericClass{
         PRIMARY KEY (id)
       );
       ALTER TABLE user ADD COLUMN facebook VARCHAR(500) NULL AFTER email;
+      ALTER TABLE user ADD COLUMN tipo_alimentacao VARCHAR(50) NULL AFTER role;
+      ALTER TABLE user ADD COLUMN restricao_alimentar VARCHAR(200) NULL AFTER tipo_alimentacao;
+      ALTER TABLE user ADD COLUMN usara_alojamento INT NOT NULL DEFAULT 1 AFTER restricao_alimentar;
     ";
 }
 

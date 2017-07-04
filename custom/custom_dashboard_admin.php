@@ -5,6 +5,23 @@
     </header>
 </section>
 
+<section id="users">
+    <header>
+        <h2 class="clickable fade-block" data-target="#users .content">Usuários</h2>
+    </header>
+    <div class="content hidden mb80">
+        <div class="input_line">
+            <div class="menu_block fourth fleft">
+                <h3>Exportação</h3>
+                <ul>
+                    <li><a href="<?=APP_URL?>/admin/user/full-export">Exportar todos os usuários</a></li>
+                    <li><a href="<?=APP_URL?>/admin/user/full-csv-export">Exportar todos os usuários - CSV</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section id="inscricoes">
     <header>
         <h2 class="clickable fade-block" data-target="#inscricoes .content">Inscrições</h2>
@@ -21,6 +38,15 @@
                 <h3>Credenciamento</h3>
                 <ul>
                     <li><a href="<?=APP_URL?>/admin/transaction/search">Buscar inscrição</a></li>
+                    <li><a href="<?=APP_URL?>/admin/transaction/full-export">Exportação completa</a></li>
+                    <li><a href="<?=APP_URL?>/admin/transaction/full-csv-export">Exportação completa - CSV</a></li>
+                </ul>
+            </div>
+
+            <div class="menu_block fourth fleft">
+                <h3>Outras listas</h3>
+                <ul>
+                    <li><a href="<?=APP_URL?>/admin/transaction/non-converted-full-csv-export">Exportação completa de não convertidos - CSV</a></li>
                 </ul>
             </div>
         </div>

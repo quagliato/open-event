@@ -91,6 +91,14 @@
 
         $exclude = $genericDAO->selectAll("ProductExclude", "id_product1 = $productId OR id_product2 = $productId");
         if (!is_array($exclude)) $exclude = array($exclude);
+        foreach ($exclude as $excludeItem) {
+          if (userHasProduct($user->get('id'), $excludeItem->get('id_product1')) || userHasProduct($user->get('id'), $excludeItem->get('id_product2'))) {
+            $hasProduct = true;
+            $checked = true;
+            $disabled = true;
+          }
+        }
+
         $exclude = onlyOpenProductExclude($exclude);
         $excludeStr = "";
         foreach ($exclude as $excludeItem) {
@@ -117,7 +125,7 @@
             <input
                 type="checkbox"
                 id="product<?=$productId?>"
-                name="<?=userHasProduct($user->get('id'), $productId) ? 'alreadyOwn[]' : 'products[]'?>"
+                name="<?=$hasProduct || userHasProduct($user->get('id'), $productId) ? 'alreadyOwn[]' : 'products[]'?>"
                 value="<?=$productId?>"
                 class="
                   product
@@ -379,6 +387,7 @@
             $('input.product').change(function(){
                 updatePrice();
             });
+            updatePrice();
         });
         </script>
 <?php Structure::footer(); ?>

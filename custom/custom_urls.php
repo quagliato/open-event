@@ -4,6 +4,7 @@
     $custom_urlpatterns = array(
         // Override noisy-cricket
         "/user/cadastrar" => "view/user.php",
+        "/user/atualizar" => "view/user_atualizar.php",
         "/action/user/cadastrar" => "action/user_cadastrar.php",
 
         "/infopanel" => "view/infopanel.php",
@@ -98,6 +99,12 @@
 
         "/admin/transaction/export" => "view/transaction_export_list.php",
         "/admin/transaction/action/export" => "action/transaction_04_export_list.php",
+        "/admin/transaction/full-export" => "action/transaction_05_export_list.php",
+        "/admin/transaction/full-csv-export" => "action/transaction_06_export_list_csv.php",
+        "/admin/transaction/non-converted-full-csv-export" => "action/transaction_07_export_non_converted_csv.php",
+
+        "/admin/user/full-export" => "action/user_01_export_list.php",
+        "/admin/user/full-csv-export" => "action/user_02_export_list_csv.php",
 
         "/admin/custom_jobs" => "custom_jobs.php"
     );

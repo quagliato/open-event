@@ -115,7 +115,7 @@
                         </div>
 
                         <div class="input_container fourth last">
-                            <label for="end_complemento">Complemento*</label>
+                            <label for="end_complemento">Complemento</label>
                             <input name="User-end_complemento" type="text" id="end_complemento">
                         </div>
                     </div>
@@ -184,6 +184,23 @@
                         </div>
                     </div>
 
+                    <h2>Informações alimentares</h2>
+                    <div class="input_line">
+                        <div class="input_container half">
+                            <label for="tipo_alimentacao">Tipo de Alimentação</label>
+                            <select id="tipo_alimentacao" name="User-tipo_alimentacao" required="required">
+                                <option value="vegana">Vegana</option>
+                                <option value="vegetariano">Vegetariana</option>
+                                <option value="onivoro">Onívora</option>
+                            </select>
+                        </div>
+
+                        <div class="input_container fourth last">
+                            <label for="restricao_alimenta">Alguma restrição alimentar?</label>
+                            <input type="text" id="restricao_alimentar" name="User-restricao_alimentar">
+                        </div>
+                    </div>
+
                     <h2>Informações Médicas</h2>
                     <div class="input_line">
                         <div class="input_container third">
@@ -201,7 +218,7 @@
                             <input name="User-plano_saude" type="text" id="plano_saude">
                         </div>
                     </div>
-
+                    
                     <div class="input_line submit_line right">
                         <a href="#" class="submit negative cancel">Cancelar</a>
                         <input type="submit" name="cadastrar" value="Cadastrar" class="positive">

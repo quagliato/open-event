@@ -4,7 +4,7 @@ function isMaxReached() {
     $isClosed = true;
     $genericDAO = new GenericDAO;
 
-//    if (getUserExemptions($_SESSION['user_id']) || $genericDAO->selectAll("RespostaEdital", "status = 1 AND id_user = ".$_SESSION['user_id'])) return false;
+   //if (getUserExemptions($_COOKIE['user_id']) || $genericDAO->selectAll("RespostaEdital", "status = 1 AND id_user = ".$_COOKIE['user_id'])) return false;
 
     $genericDAO = new GenericDAO;
     $now = date('Y-m-d H:i:s');
@@ -47,6 +47,9 @@ function isMaxReached() {
 }
 
 function isMaxReachedByProd($idProduct) {
+
+  //if (getUserExemptions($_COOKIE['user_id']) || $genericDAO->selectAll("RespostaEdital", "status = 1 AND id_user = ".$_COOKIE['user_id'])) return false;
+
   $isClosed = true;
   $now = date('Y-m-d H:i:s');
   $genericDAO = new GenericDAO;

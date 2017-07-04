@@ -29,8 +29,9 @@
     if (STATIC_FILES) {
       // We suggest that you move this rules to you webserver config file
       $staticFiles = array();
-      if (preg_match_all('~(js|css|html|txt|svg|ico|gif|jpg|png|pdf|otf|ttf|eot|woff|woff2)$~', $request_uri_no_param, $staticFiles)) {
+      if (preg_match_all('~(csv|js|css|html|txt|svg|ico|gif|jpg|png|pdf|otf|ttf|eot|woff|woff2)$~', $request_uri_no_param, $staticFiles)) {
         switch ($staticFiles[0][0]) {
+          case "csv":
           case "css":
           case "js":
           case "txt":
