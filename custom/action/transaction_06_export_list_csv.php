@@ -36,7 +36,7 @@
 
   foreach ($people as $person) {
 
-    $transactions = $genericDAO->selectAll("Transaction", "status = 1 AND id_user = ".$person->get('id'));
+    $transactions = $genericDAO->selectAll("Transaction", "status IN (1,2) AND id_user = ".$person->get('id'));
     if (!$transactions) continue;
 
     $isencaoTotal = 0;

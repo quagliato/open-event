@@ -60,12 +60,12 @@
               </div>
 
               <div class="input_container fourth">
-                <label>Responsável</label>
+                <label>Contato de Emergência</label>
                 <p><?=$user->get('responsavel_nome')?></p>
               </div>
 
               <div class="input_container fourth last">
-                <label>Responsável Telefone</label>
+                <label>Contato de Emergência - Telefone</label>
                 <p><?=$user->get('responsavel_telefone')?></p>
               </div>
               
@@ -90,6 +90,10 @@
             </div>
             <div class="input_line">
               <div class="input_container fourth">
+                <label>Alimentação</label>
+                <p><?=$user->get('tipo_alimentacao')?></p>
+              </div>
+              <div class="input_container fourth">
                 <label>E-mail</label>
                 <p><?=$user->get('email')?></p>
               </div>
@@ -97,7 +101,7 @@
                 <label>Telefone Residencial</label>
                 <p><?=$user->get('telefone_residencial')?></p>
               </div>
-              <div class="input_container fourth">
+              <div class="input_container fourth last">
                 <label>Telefone Celular</label>
                 <p><?=$user->get('telefone_celular')?></p>
               </div>

@@ -27,10 +27,11 @@ function setSubmitEvents() {
 
         openProcessing();
         $(this).find('input').each(function(){
-          if ($(this).attr('disabled')) {
-            $(this).addClass('already_disabled');
-          }
-          $(this).attr('disabled','disabled');
+            if ($(this).attr('disabled')) {
+                $(this).addClass('already_disabled');
+            }
+
+            $(this).attr('disabled','disabled');
         });
 
         var values = bindData($(this));

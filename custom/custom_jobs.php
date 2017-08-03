@@ -22,7 +22,7 @@
 //******************************************************************************
 // Cancel all transaction payments older than 3 days
   $limit = new DateTime();
-  $limit->sub(new DateInterval('P3D'));
+  $limit->sub(new DateInterval('P1D'));
 
   $transactionPayment = new TransactionPayment();
   $transactionPayment->set('status', 3);

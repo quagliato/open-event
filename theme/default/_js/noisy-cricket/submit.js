@@ -26,14 +26,14 @@
                     window.location.href = rootURL + entry[originalAction];
                     break;
             } // switch end\
-        }); // iteration end
 
+        }); // iteration end
         closeProcessing();
 
         form.find('input').each(function(){
-          if (!$(this).hasClass('already_disabled')) {
-            $(this).removeAttr('disabled');
-          }
+            if (!$(this).hasClass('already_disabled')) {
+                $(this).removeAttr('disabled');
+            }
         });
     } // success end
 

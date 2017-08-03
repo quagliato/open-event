@@ -38,14 +38,15 @@
                 <h3>Credenciamento</h3>
                 <ul>
                     <li><a href="<?=APP_URL?>/admin/transaction/search">Buscar inscrição</a></li>
-                    <li><a href="<?=APP_URL?>/admin/transaction/full-export">Exportação completa</a></li>
-                    <li><a href="<?=APP_URL?>/admin/transaction/full-csv-export">Exportação completa - CSV</a></li>
+                    <li><a href="<?=APP_URL?>/admin/transaction/export">Listas de Credenciamento impressas</a></li>
                 </ul>
             </div>
 
             <div class="menu_block fourth fleft">
-                <h3>Outras listas</h3>
+                <h3>Outros</h3>
                 <ul>
+                    <li><a href="<?=APP_URL?>/admin/transaction/full-export">Exportação completa</a></li>
+                    <li><a href="<?=APP_URL?>/admin/transaction/full-csv-export">Exportação completa - CSV</a></li>
                     <li><a href="<?=APP_URL?>/admin/transaction/non-converted-full-csv-export">Exportação completa de não convertidos - CSV</a></li>
                 </ul>
             </div>
