@@ -6,10 +6,9 @@ use OpenBoleto\Agente;
 class Payment {
 
     private function rollbackTransacaoAndItems($transacao) {
-        $transacao_dao = new TransacaoDAO;
-        $transacao_item_dao = new TransacaoItemDAO;
-        $transacao_item_dao->deleteTransacaoItemByTransacaoId($transacao->get('id')); // Rollback TransacaoItem
-        $transacao_dao->deleteTransacaoById($transacao->get('id')); // Rollback Transacao
+        $genericDAO = new GenericDAO();
+        $genericDAO->delete("Transaction", "id = ".$transacao->get('id'));
+        $genericDAO->delete("TransactionItem", "id_transaction = ".$transacao->get('id'));
     }
     
     public function pay($userId, $transacao_id, $payment, $valor_final) {
@@ -29,9 +28,8 @@ class Payment {
     private function payWithBoleto($userId, $transacao_id, $valor_final) {
         $userDAO = new UserDAO;
         $user = $userDAO->getUserById($userId);
-
-        $transacaoDAO = new TransacaoDAO;
-        $transacao = $transacaoDAO->getTransacaoById($transacao_id);
+        $genericDAO = new GenericDAO();
+        $transacao = $genericDAO->selectAll("Transaction", "id = ".$transacao_id);
 
         $sacado = new Agente(
             $user->get('nome'),
@@ -134,7 +132,7 @@ class Payment {
         $userDAO = new UserDAO;
         $user = $userDAO->getUserByID($userId);
 
-        $transacaoDAO = new TransacaoDAO;
+        $transacaoDAO = new TransactionDAO;
         $transacao = $transacaoDAO->getTransacaoById($transacao_id);
 
         $paypal_btn = '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="margin-top:20px;">';
@@ -188,22 +186,20 @@ class Payment {
         return $pagamento;
     }
 
-    private function payWithDeposito($userId, $transacao_id, $valor_final) {
+    private function payWithDeposito($userId, $transactionId, $valor_final) {
         $userDAO = new UserDAO;
         $user = $userDAO->getUserByID($userId);
+        $genericDAO = new GenericDAO;
+        $transaction = $genericDAO->selectAll("Transaction", "id = ".$transactionId);
 
-        $transacaoDAO = new TransacaoDAO;
-        $transacao = $transacaoDAO->getTransacaoById($transacao_id);
+        $transactionPayment = new TransactionPayment;
+        $transactionPayment->set('id_transaction', $transaction->get('id'));
+        $transactionPayment->set('type', 'DEP');
+        $transactionPayment->set('info', "");
+        $transactionPayment->set('obs', "");
 
-        $pagamento = new Pagamento;
-        $pagamento->set('id_transacao', $transacao->get('id'));
-        $pagamento->set('metodo_pagto', 'DEP');
-        $pagamento->set('info', "");
-        $pagamento->set('obs', "");
-
-        $pagamento_dao = new PagamentoDAO;
-        if (!$pagamento_dao->insert($pagamento)) {
-            $this->rollbackTransacaoAndItems($transacao);
+        if (!$genericDAO->insert($transactionPayment)) {
+            $this->rollbackTransacaoAndItems($transaction);
             Structure::redirWithMessage("Erro 304\nProblemas ao criar pagamento. Tente novamente, por favor.", "/dashboard");       
         }
 
@@ -211,7 +207,7 @@ class Payment {
         $subject = DEFAULT_EMAIL_SUBJECT;
         $message = DEFAULT_EMAIL_GREETING;
         $message .= "<p>Sua inscrição no ".APP_TITLE." foi realizada.</p>";
-        $message .= "<p>Você escolheu pagar utilizando Depósito Bancário. Por favor, realize o depósito para a conta abaixo e o comprovante para ".DEPOSITO_EMAIL.".</p>";
+        $message .= "<p>Você escolheu pagar utilizando Depósito Bancário. Por favor, realize o depósito em até 7 dias para a conta abaixo e envie o comprovante para ".DEPOSITO_EMAIL.".</p>";
         $message .= "<p>".DEPOSITO_BANCO."<br />";
         $message .= DEPOSITO_NOME."<br />";
         $message .= "CPF ".DEPOSITO_CPF."<br />";
@@ -227,7 +223,7 @@ class Payment {
         mail($to, $subject, $message, $additional_headers);
         
         $html = '<h1>Depósito Bancário</h1>';
-        $html .= "<p><strong>Você escolheu pagar utilizando Depósito Bancário. Por favor, realize o depósito para a conta abaixo e o comprovante para <em>".DEPOSITO_EMAIL."</em>.</strong></h2>";
+        $html .= "<p><strong>Você escolheu pagar utilizando Depósito Bancário. Por favor, realize o depósito em até 7 dias para a conta abaixo e envie o comprovante para <em>".DEPOSITO_EMAIL."</em>.</strong></h2>";
         $html .= "<h2>Dados Bancários</h2>";
         $html .= "<p>".DEPOSITO_BANCO."<br />";
         $html .= DEPOSITO_NOME."<br />";
@@ -236,7 +232,7 @@ class Payment {
         $html .= "Conta ".DEPOSITO_CONTA."<br />";
         $html .= '<h3>Valor Total: R$ '.$valor_final.'</h3>';
 
-        return $pagamento;
+        return $transactionPayment;
     }
 
     private function payWithPagSeguro($userId, $transactionId, $totalValue) {

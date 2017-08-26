@@ -38,7 +38,7 @@ function isMaxReached() {
             $transactionCount = $genericDAO->selectCount("Transaction", "id", "value_exemption = 0 && status <> 3 AND id IN ($inStr)");
             $count = $transactionCount;
         }
-        if ($count <= $max) {
+        if ($count < $max) {
             $isClosed = false;
         }
     }
@@ -72,7 +72,7 @@ function isMaxReachedByProd($idProduct) {
         $count = $transactionCount;
       }
       echo "\n<!-- $idProduct:$count/$max -->";
-      if ($count <= $max) {
+      if ($count < $max) {
         $isClosed = false;
       }
 

@@ -9,6 +9,7 @@
   $auxProducts = array();
   $products = $genericDAO->selectAll("Product", "1=1");
   if (!$products) throw new Exception('No product found.');
+  if (!is_array($products)) $products = array($products);
   for ($i = 0; $i < sizeof($products); $i++) {
     $auxProducts[$products[$i]->get('id')] = $products[$i];
   }
@@ -17,6 +18,7 @@
   $auxEditais = array();
   $editais = $genericDAO->selectAll("Edital", "1=1");
   if (!$editais) throw new Exception('No edital found.');
+  if (!is_array($editais)) $editais = array($editais);
   for ($i = 0; $i < sizeof($editais); $i++) {
     $auxEditais[$editais[$i]->get('id')] = $editais[$i];
   }
