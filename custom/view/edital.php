@@ -42,6 +42,7 @@
                         <p><strong>Cidade/UF: </strong><?=$editalUser->get('end_cidade')?> / <?=$editalUser->get('end_estado')?></p>
                         <p><strong>Ensino: </strong><?=$editalUser->get('inst_ens')?> / <?=$editalUser->get('curso')?> - Período: <?=$editalUser->get('periodo')?></p>
                         <p><strong>E-mail: </strong><?=$editalUser->get('email')?></p>
+                        <p><strong>Facebook: </strong><?=$editalUser->get('facebook')?></p>
                         <p><strong>Telefone Residencial: </strong><?=$editalUser->get('telefone_residencial')?></p>
                         <p><strong>Telefone Celular: </strong><?=$editalUser->get('telefone_celular')?></p>
                         <p><strong>Deficiência: </strong><?=strlen($editalUser->get('deficiencia')) == 0 ? "Nenhuma" : $editalUser->get('deficiencia')?></p>

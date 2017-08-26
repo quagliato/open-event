@@ -36,6 +36,12 @@
                             <input name="Edital-nome" type="text" id="nome" required="required"<?=$status == "UPDATING" ? ' value="'.$obj->get('nome').'"' : ''?>>
                         </div>
                     </div>
+                    <div class="input_line">    
+                        <div class="input_container half fnone">    
+                            <label for="document">Manual/Documento</label>   
+                            <input name="Edital-document" type="text" id="document" <?=$status == "UPDATING" ? ' value="'.$obj->get('document').'"' : ''?>>   
+                        </div>   
+                    </div>
 
                     <div class="input_line">
                         <div class="input_container full fnone">
