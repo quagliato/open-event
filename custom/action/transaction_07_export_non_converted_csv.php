@@ -17,10 +17,11 @@
 
   $auxEditais = array();
   $editais = $genericDAO->selectAll("Edital", "1=1");
-  if (!$editais) throw new Exception('No edital found.');
-  if (!is_array($editais)) $editais = array($editais);
-  for ($i = 0; $i < sizeof($editais); $i++) {
-    $auxEditais[$editais[$i]->get('id')] = $editais[$i];
+  if ($editais) {
+    if (!is_array($editais)) $editais = array($editais);
+    for ($i = 0; $i < sizeof($editais); $i++) {
+      $auxEditais[$editais[$i]->get('id')] = $editais[$i];
+    }
   }
   $editais = $auxEditais;
 
@@ -47,6 +48,7 @@
       if (!is_array($respostasEdital)) $respostasEdital = array($respostasEdital);
       for ($i = 0; $i < sizeof($respostasEdital); $i++) {
         $respostaEdital = $respostasEdital[$i];
+        if (!$editais[$respostaEdital->get('id_edital')]) continue;
         if (strlen($editaisAprovados) > 0) $editaisAprovados .= ', ';
         $editaisAprovados .= $editais[$respostaEdital->get('id_edital')]->get('nome');
       }

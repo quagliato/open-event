@@ -23,9 +23,9 @@
     // All paths in file config should have a slash at the end
 
     // The root URL for uploaded files
-    define('FILES_URL', APP_URL.'/uploads/');
+    define('FILES_URL', APP_URL.'/custom/uploads/');
     // The root URL for uploaded files with problems
-    define('FILES_URL_FAILSAFE', APP_URL.'/uploads/failsafe/');
+    define('FILES_URL_FAILSAFE', APP_URL.'/custom/uploads/failsafe/');
     // The full path to the directory where files will be uploaded
     define('FILES_DIR', '/full/path/to/dir/');
     // The same, but for failsafe
