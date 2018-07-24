@@ -6,14 +6,15 @@
 
   $genericDAO = new GenericDAO;
 
-  $auxProducts = array();
   $products = $genericDAO->selectAll("Product", "1=1");
-  if (!$products) throw new Exception('No product found.');
-  if (!is_array($products)) $products = array($products);
-  for ($i = 0; $i < sizeof($products); $i++) {
-    $auxProducts[$products[$i]->get('id')] = $products[$i];
+  if ($products) {
+    if (!is_array($products)) $products = array($products);
+    $auxProducts = array();
+    for ($i = 0; $i < sizeof($products); $i++) {
+      $auxProducts[$products[$i]->get('id')] = $products[$i];
+    }
+    $products = $auxProducts;
   }
-  $products = $auxProducts;
 
   $auxEditais = array();
   $editais = $genericDAO->selectAll("Edital", "1=1");
@@ -87,7 +88,7 @@
         if (!is_array($transactionItems)) $transactionItems = array($transactionItems);
         for ($i = 0; $i < sizeof($transactionItems); $i++) {
           $transactionItem = $transactionItems[$i];
-          if (!$products[$transactionItem->get('id_product')]) continue;
+          if (!$products || !$products[$transactionItem->get('id_product')]) continue;
           if (strlen($pacotes) > 0) $pacotes .= '<br>';
           $pacotes .= $products[$transactionItem->get('id_product')]->get('description');
 
