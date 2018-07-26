@@ -101,12 +101,15 @@
         "/admin/transaction/action/export" => "action/transaction_04_export_list.php",
         "/admin/transaction/full-export" => "action/transaction_05_export_list.php",
         "/admin/transaction/full-csv-export" => "action/transaction_06_export_list_csv.php",
+        "/admin/transaction/status/2/full-csv-export" => "action/transaction_08_export_status_2_list_csv.php",
         "/admin/transaction/non-converted-full-csv-export" => "action/transaction_07_export_non_converted_csv.php",
 
         "/admin/user/full-export" => "action/user_01_export_list.php",
         "/admin/user/full-csv-export" => "action/user_02_export_list_csv.php",
 
-        "/admin/custom_jobs" => "custom_jobs.php"
+        "/admin/custom_jobs" => "custom_jobs.php",
+
+        "/custom/request_upload" => "action/request_upload.php"
     );
 
 ?>

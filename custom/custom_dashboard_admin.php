@@ -48,6 +48,7 @@
                     <li><a href="<?=APP_URL?>/admin/transaction/full-export">Exportação completa</a></li>
                     <li><a href="<?=APP_URL?>/admin/transaction/full-csv-export">Exportação completa - CSV</a></li>
                     <li><a href="<?=APP_URL?>/admin/transaction/non-converted-full-csv-export">Exportação completa de não convertidos - CSV</a></li>
+                    <li><a href="<?=APP_URL?>/admin/transaction/status/2/full-csv-export">Exportação completa de credenciados- CSV</a></li>
                 </ul>
             </div>
         </div>
